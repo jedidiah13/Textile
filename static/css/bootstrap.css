@@ -5679,6 +5679,14 @@ button.close {
 }
 .affix {
   position: fixed;
+  width: 263px;
+}
+@media(max-width:767px){
+   .affix {
+     position: static;
+     width: auto;
+     top: 0;
+    }
 }
 @-ms-viewport {
   width: device-width;

@@ -3,6 +3,6 @@ from companion import views
 
 
 urlpatterns = patterns('',
-    url(r'^', views.companionView, name='companion.html')
+    url(r'^(?P<id>.*)/', views.companion, name='companion')
 
 )

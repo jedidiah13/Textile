@@ -14,12 +14,15 @@ body, h1, h2, h3, h4, h5, h6 {
 }
 
 .intro-header {
+	//height: 800px;
 	padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
 	padding-bottom: 50px;
 	color: white;
-	background: url(../img/intro-bg.jpg) no-repeat center center;
-	background-size: cover;
-	text-align: center;
+	//background: url(../images/img/version1_1287.jpg) no-repeat center center;
+	background-size: contain;
+	//text-align: center;
+	position: relative;
+	
 }
 
 .intro-message {
@@ -43,7 +46,25 @@ body, h1, h2, h3, h4, h5, h6 {
 .intro-message > h3 {
 	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
+.imgframe {
+    border: 1px solid #EAEAEA;
+    display: block;
+    margin: 8px;
+    text-align:center;
+}
 
+.imgframe img {
+    border: 1px solid #FFFFFF;
+    margin: 0;
+    background: #F6F6F6;
+    opacity: .3;
+    padding: 8px;
+    -moz-box-shadow: 2px 2px 5px #CCCCCC;
+    -webkit-box-shadow: 2px 2px 5px #CCCCCC;
+}
+.terms {
+text-align: center;
+}
 @media (max-width: 767px) {
 	.intro-message {
 		padding-bottom: 15%;
@@ -75,12 +96,17 @@ body, h1, h2, h3, h4, h5, h6 {
 	letter-spacing: 2px;
 }
 
+
+
 .content-section-a {
 	background-color: #f8f8f8;
 	padding: 50px 0;
+	
+		
 }
 
 .content-section-b {
+	background-color: #f8f8f8;
 	border-top: 1px solid #e7e7e7;
 	border-bottom: 1px solid #e7e7e7;
 	padding: 50px 0;
@@ -99,7 +125,7 @@ body, h1, h2, h3, h4, h5, h6 {
 .banner {
 	padding: 100px 0;
 	color: #f8f8f8;
-	background: url(../img/banner-bg.jpg) no-repeat center center;
+	background: url(../img/version1_1000.jpg) no-repeat center center;
 	background-size: cover;
 }
 
@@ -151,3 +177,99 @@ footer {
 p.copyright {
 	margin: 15px 0 0;
 }
+
+.header-unit {
+  height: 150px;
+  border: 2px solid #000;
+  border-right:none;
+  border-left: none;
+  position: relative;
+  padding: 20px;
+}
+#video-container {
+	position: absolute;
+}
+#video-container {
+	top:0%;
+	left:0%;
+	height:100%;
+	width:100%;
+	overflow: hidden;
+}
+video {
+	height:auto;
+	width:100%;
+	position:absolute;
+	z-index:0;
+}
+video.fillWidth {
+	width: 100%;
+}
+#fullscreen_video
+{
+background: #FF0000;
+position: fixed;
+top: 0px;
+left: 0px;
+z-index: -1000;
+}
+.col-lg-12{
+
+text-align: Left;
+
+}
+
+.font-thin {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 200;
+}
+
+.font-semibold {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 600;
+}
+
+.font-light {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 300;
+}
+
+
+.breaker {
+	clear: both;
+	font-size: 1px;
+	line-height: 1px;
+	height: 1px;
+}
+
+
+
+.justify-text {
+	text-align: justify;
+}
+
+
+
+.active-menu {
+	background-color: #4e4e4e;
+	content: '.';
+	display: block;
+	height: 5px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	transition: all .5 linear;
+	width: 1%;
+	z-index: 9;
+}
+
+.inv .active-menu {
+	background-color: #e4e6e5;
+}
+
+.special-active-menu {
+	z-index: 10;
+}
+
+
+

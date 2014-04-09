@@ -1,35 +1,131 @@
+import json
+import string 
+import random
+from jsonview.decorators import json_view
+from django.contrib.auth import authenticate, login, logout 
+from django.contrib.auth.models import User
+from django.core.context_processors import csrf
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from login.forms import PersonForm
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
+from crispy_forms.utils import render_crispy_form
+from crispy_forms.helper import FormHelper, FormHelpersException
+from crispy_forms.layout import Submit, Reset, Hidden, Button
+from login.forms import RegistrationForm, LoginForm
+from login.models import UserProfile
 
-
-def add_user(request):
-    # Get the context from the request.
+@csrf_exempt
+@json_view
+def registration(request):
+    
+    # Like before, get the request's context.
     context = RequestContext(request)
 
-    # A HTTP POST?
+    # A boolean value for telling the template whether the registration was successful.
+    # Set to False initially. Code changes value to True when registration succeeds.
+    registered = False
+
+    # If it's a HTTP POST, we're interested in processing form data.
     if request.method == 'POST':
-        form = PersonForm(request.POST)
+        # Attempt to grab information from the raw form information.
+        # Note that we make use of both UserForm and UserProfileForm.
+        user_form = RegistrationForm(request.POST)
+        
 
-        # Have we been provided with a valid form?
-        if form.is_valid():
-            # the user to the database
-            form.save(commit=True)
+        # If the two forms are valid...
+        if user_form.is_valid():
+            # Save the user's form data to the database.
+            user = user_form.save()
 
-            # Now call the index() view.
-            # The user will be shown the homepage.
-            return registration(request)
+            # Now we hash the password with the set_password method.
+            # Once hashed, we can update the user object.
+            user.set_password(user.password)
+            user.is_active = False 
+	    user.save()
+
+	    #Create And Send User Activation Email.
+            confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33)) 
+            p = UserProfile(user=user, confirmation_code=confirmation_code)      
+            p.save()
+	    title = "Textile Fabric Consultants, Inc. Account Activation"
+	    content = "Someone has recently registered at Textilefabric.com. We hope it was you. If so, please follow the link below. If not please disregard this email.\n" +"theftp.dyndns.org:8000/login/activate/" + str(p.confirmation_code) + "/" + user.username
+	    send_mail(title, content, 'no-reply@gsick.com', [user.email], fail_silently=False)
+	    # Update our variable to tell the template registration was successful.
+            registered = True
+            
+        # Invalid form or forms - mistakes or something else?
+        # Print problems to the terminal.
+        # They'll also be shown to the user.
         else:
-            # The supplied form contained errors - just print them to the terminal.
-            print form.errors
+            print user_form.errors
+            
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    
+    form = RegistrationForm(request.POST)
+    form_html = render_crispy_form(form)
+    result = {'success': registered, 'form_html': form_html}
+    return result
+ 
+@csrf_exempt
+@json_view
+def authenticateLogin(request):
+    context = RequestContext(request)
+    
+    username = request.POST['username']
+    password = request.POST['password']
+    
+    user = authenticate(username=username, password=password)
+    print user
+    if user is not None:
+       if user.is_active:
+          login(request, user)
+          
+         
+	  result  = { 'success':  True}
+	 
+	  
+
+          return result
+          
+       else:
+          
+	return HttpResponse("Your account is disabled.")
     else:
-        # If the request was not a POST, display the form to enter details.
-        form = PersonForm()
-
-    # Bad form (or form details), no form supplied...
-    # Render the form with error messages (if any).
-    return render_to_response('login/../templates/registration.html', {'form': form}, context)
+	
+        result = { 'success': False }
+        return result
 
 
-def registration(request):
-    return render_to_response('registration.html')
+@csrf_exempt
+@json_view   
+def authenticateUser(request):
+   if not request.user.is_authenticated():
+	print 'logged Out'
+        return {'success': False}
+   else:
+	print 'logged In'
+	return {'success': True}
+
+@csrf_exempt
+def activate(request, confirmation_code, username):
+		
+		user = User.objects.get(username=username[:-1])
+		profile = user.get_profile()
+		if profile.confirmation_code == confirmation_code:
+			user.is_active = True
+			user.save()
+			user.backend='django.contrib.auth.backends.ModelBackend' 
+			login(request,user)
+		return HttpResponseRedirect('/')
+	
+
+@login_required
+@csrf_exempt
+@json_view
+def logoutUser(request):
+    logout(request)
+    return {'success': True}		

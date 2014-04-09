@@ -1,12 +1,13 @@
+from django.contrib.auth.models import User
 from django.db import models
 from loginRouter import *
 
-class User(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    emailAddress = models.CharField(max_length=30)
-    password = models.CharField(max_length=30)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    confirmation_code = models.CharField(max_length=128)
+    def __unicode__(self):
+		return self.user.username    
+    
 
 
-class Companion(models.Model):
-    category = models.CharField(max_length=30)
+

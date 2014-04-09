@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+<!--JS-->
+<script type="text/javascript" src="{% static 'js/FitVids.js-master/jquery.fitvids.js' %}"></script>
+
+                <div id="video-container">
+                <video autoplay onended="window.location = '/frontend/***urlMapping Here***';">
+                <source  src="{% static 'version1.mp4' %}" type="video/mp4" />                      <!-- Change Color Video Source Here -->
+                <source  src="{% static 'version1.webmhd.webm' %}" type="video/webm" />		    <!--Change Color Video Source Here -->
+		<!-- OGG Format Here-->
+                </video>
+
+                <script>
+                        $("#video-container").fitVids();					<!--Possible to use jquery plugin? -->
+                        //var padding  = $("#video-container").height();			<!--Else iframe resize JS -->
+                        //console.log(padding)
+                        //$('.intro-header').css({"height":"padding"});
+                        //$("object, embed, .format-video iframe").each(function() {
+                        //var orig = $(this);
+                        //var ratio = orig.attr("height") / orig.attr("width");
+                        //var parWidth = orig.parents().find("p:last").width();
+                        //if(orig.attr("width")> parWidth) {
+                        //orig
+                        //.attr("width", parWidth)
+                        //.attr("height", (parWidth * ratio));
+                        //}
+                       // });
+                      
+                       
+                       
+                </script>
+                </div>

@@ -23,3 +23,6 @@ class StoreItem(models.Model):
 	def __unicode__(self):
 		return  self.itemName
 	
+#class Order(models.Model):
+#	item = models.ForeignKey(StoreItem)
+#	#how do we create a relation to a user now?

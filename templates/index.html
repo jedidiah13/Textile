@@ -2,55 +2,59 @@
 {% block content %}
 
 {% load staticfiles %}
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-
-</head>
 
 <script type="text/javascript" src="{% static 'js/FitVids.js-master/jquery.fitvids.js' %}"></script>
   
 <style type="text/css">
 
 </style>
-	   	<div class="intro-header"></div>
-		<div id="video-container">
-		<video autoplay >
-		<source  src="{% static 'version1.mp4' %}" type="video/mp4" />
-		<source  src="{% static 'version1.webmhd.webm' %}" type="video/webm" />
-		
-		</video>
-		
-		<script>
-			//$(".intro-header").fitVids();
-			//var padding  = $("#video-container").height();
-			//console.log(padding)
-			//$('.intro-header').css({"height":"padding"});
-			$("object, embed, .format-video iframe").each(function() {
-			var orig = $(this);
-			var ratio = orig.attr("height") / orig.attr("width");
-			var parWidth = orig.parents().find("p:last").width();
-			if(orig.attr("width")> parWidth) {
-			orig
-			.attr("width", parWidth)
-			.attr("height", (parWidth * ratio));
-			}
-			});
-			var paddings  = $("#video-container").height();
-			console.log(paddings)
-			$('.intro-header').css({"height":paddings});
-			var paddings  = $(".intro-header").height();
-			console.log(paddings)
-		</script>
-		</div>
-    		
-    <!-- /.container -->
+	<div class="intro-header">   	
+        <div class="container">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+              </ol>
+
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+                <div class="item active">
+                  <img src="{% static 'images/carousel/sewing.jpg' %}" alt="...">
+                  <div class="carousel-caption">
+                    ...
+                  </div>
+                </div>
+                <div class="item">
+                    <img src="{% static 'images/carousel/classic-interior-design-style.jpg' %}" alt="...">
+                    <div class="carousel-caption">
+                        ...
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="{% static 'images/carousel/classy-living-room-interior-design-styles.jpg' %}" alt="...">
+                    <div class="carousel-caption">
+                        ...
+                    </div>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+              </a>
+              <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+              </a>
+            </div>
 
 
-<!-- /.intro-header -->
+        </div>		
+        <!-- /.container -->
+
+    </div>
+    <!-- / .intro-header -->
 
 <div id="bottomDIV" class="content-section-a">
 

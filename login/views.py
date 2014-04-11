@@ -128,4 +128,17 @@ def activate(request, confirmation_code, username):
 @json_view
 def logoutUser(request):
     logout(request)
-    return {'success': True}		
+    return {'success': True}	
+
+
+def userInfo(request):
+    context = RequestContext(request)
+    return render_to_response('store/userInfo.html')
+
+def userInfoChange(request):
+    context = RequestContext(request)
+    return render_to_response('store/userInfoChange.html')
+
+def orderHistory(request):
+    context = RequestContext(request)
+    return render_to_response('store/orderHistory.html')	

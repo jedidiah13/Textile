@@ -6,5 +6,8 @@ urlpatterns = patterns('',
     url(r'^authenticate/$', views.authenticateLogin, name='index.html'),
     url(r'^authenticateUser/$', views.authenticateUser, name='index.html'),
     url(r'^activate/(?P<confirmation_code>[\w]+)/(?P<username>[\w]+/)$', views.activate, {}, 'activate'),
-    url(r'^logoutUser/$', views.logoutUser, name='logout')
+    url(r'^logoutUser/$', views.logoutUser, name='logout'),
+    url(r'^userInfo/$', views.userInfo, name='userInfo'),
+    url(r'^userInfoChange/$', views.userInfoChange, name='userInfoChange'),
+    url(r'^orderHistory/$', views.orderHistory, name='orderHistory')
 )

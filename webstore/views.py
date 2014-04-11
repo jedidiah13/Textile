@@ -52,6 +52,19 @@ def autocomplete(request):
     print "called auto complete"
     return HttpResponse(the_data, content_type='application/json')
 
+def userInfo(request):
+    context = RequestContext(request)
+    return render_to_response('store/userInfo.html')
+
+def userInfoChange(request):
+    context = RequestContext(request)
+    return render_to_response('store/userInfoChange.html')
+
+def orderHistory(request):
+    context = RequestContext(request)
+    return render_to_response('store/orderHistory.html')
+
+
 
 
 

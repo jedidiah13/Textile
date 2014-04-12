@@ -85,6 +85,20 @@
 </div>
 
 
+password = forms.CharField(widget=forms.PasswordInput(), required=False)
+    address_lineOne = forms.CharField(required=False)
+    address_lineTwo = forms.CharField(required=False)
+    city = forms.CharField(required=False)
+    zipCode = forms.CharField(required=False)
+    State = forms.CharField(required=False)
+
+<h5 style="margin-left:5%"><p class="text-success">First Name: </p>{{ user.first_name }} </h5><br>
+                      <h5 style="margin-left:5%"><p class="text-success">Last Name: </p>{{ user.last_name }} </h5><br>
+                      <h5 id="changeEmail" style="margin-left:5%"><p class="text-success">Email: </p>{{ user.email }}
+                      <button style="margin-right:2%" class="btn btn-default pull-right " href="#"><strong>change</strong></button></h5><br>
+                      <h5 id="changePass" style="margin-left:5%"><p class="text-success">Password: </p><button style="margin-right:2%" class="btn btn-default pull-right" href="#"><strong>change</strong></button></h5><br>
+                      <h5 id="change Address" style="margin-left:5%"><p class="text-success">Address: </p>{{ user.address_lineOne }}
+                      <button style="margin-right:2%" style="margin-bottom:5%" class="btn btn-default pull-right" href="#"><strong>change</strong></button></h5><br>
 
 
 {% endblock %}

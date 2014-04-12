@@ -20,6 +20,10 @@ class StoreItem(models.Model):
                                            processors=[ResizeToFill(250, 185)],
                                            format='JPEG',
                                            options={'quality': 60})
+	featured_picture = ProcessedImageField(upload_to='avatars',
+                                           processors=[ResizeToFill(800, 300)],
+                                           format='JPEG',
+                                           options={'quality': 60})
 	def __unicode__(self):
 		return  self.itemName
 	

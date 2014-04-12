@@ -59,7 +59,7 @@
                     </li>
 		    
 		    <li class="dropdown">
-                    <a id="dropDownLoggedIn" class="dropdown-toggle" data-toggle="dropdown" href="#" >{{user.username}}<b id="caret2" class="caret"></b></a>
+                    <a id="dropDownLoggedIn" class="dropdown-toggle" data-toggle="dropdown" href="#" ><span id="acctNameNav">{{user.username}}</span><b id="caret2" class="caret"></b></a>
                     <ul id="menu2" class="dropdown-menu" aria-labelledby="dropDownLoggedIn">
                     <li id="logOut"><a>Logout</a></li>
 		    <script>$( "#logOut" ).click(function(){
@@ -316,7 +316,7 @@ $(document).ready(function () {
 			
 			                 frm.hide();
              		       $("#loggedInMessage").show(); 
-			 
+			                 $("#acctNameNav").html("<span>{{user.username}}</span>");
 		                                  }
 		              else{
 		   
@@ -598,16 +598,8 @@ $(document).ready(function () {
 
                        </script>
                   </div><br></form>
-                
-                      <script type="text/javascript">
-                                $("#updateBtn").click(function(){
-                                          $("#userInfo").hide();
-                                          $("#acctChange").show();
-                                          
-
-                                  });
-
-                      </script>
+                      
+                    
               </div>
               
     </div>

@@ -24,6 +24,7 @@ class StoreItem(models.Model):
                                            processors=[ResizeToFill(800, 300)],
                                            format='JPEG',
                                            options={'quality': 60})
+	isFeatured = models.BooleanField(default=False)
 	def __unicode__(self):
 		return  self.itemName
 	

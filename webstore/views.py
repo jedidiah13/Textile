@@ -11,12 +11,20 @@ from haystack.query import SearchQuerySet
 def webstore(request,id):
     context = RequestContext(request)    
     #if request.method == 'GET':
-    ids = StoreCategory.objects.get(categoryName=id);
+    ids = StoreCategory.objects.get(categoryName=id)
     items = StoreItem.objects.filter(category_id=ids.id).all()
     item_categories = StoreCategory.objects.all();
     return render_to_response('store/shop-homepage.html', {'items': items, 'item_categories': item_categories, 'regform': RegistrationForm(),'loginform': LoginForm()},context)
 
-           
+def featured(request):
+    print "carousel"
+    context = RequestContext(request)
+    items = StoreItem.objects.all()
+    return render_to_response('index.html',{'success': True, 'items': items}, context)
+
+
+
+
     #return render_to_response('store/shop-homepage.html', {'items': items, 'item_categories': item_categories, 'regform': RegistrationForm(),'loginform': LoginForm()},context)
 def getImage(request, id, directory, image_name):
     imagelocation = directory + "/" + image_name

@@ -14,7 +14,7 @@ from django.http import HttpResponseRedirect
 from crispy_forms.utils import render_crispy_form
 from crispy_forms.helper import FormHelper, FormHelpersException
 from crispy_forms.layout import Submit, Reset, Hidden, Button
-from login.forms import RegistrationForm, LoginForm, updateInfoForm
+from login.forms import RegistrationForm, LoginForm, updateFirstName
 from login.models import UserProfile
 
 @csrf_exempt
@@ -139,17 +139,82 @@ def userInfo(request):
     
     return render_to_response('base.html',{'user': user})
 
-@login_required
+
 @json_view
 @csrf_exempt
-def userInfoChange(request):
+def changeFirstName(request):
      context = RequestContext(request)
      if request.method == 'POST':
+
+            user = User.objects.get(username=request.user.username)
+            first_name = request.POST.get('first_name')
+            user.first_name = first_name
+            user.save()
             
-            
-            print request.Post['email']
             return {'success': True}
-     
+     else: return {'success': False}
+
+@json_view
+@csrf_exempt
+def changeLastName(request):
+     context = RequestContext(request)
+     if request.method == 'POST':
+
+            user = User.objects.get(username=request.user.username)
+            last_name = request.POST.get('last_name')
+            user.last_name = last_name
+            user.save()
+            
+            return {'success': True}
+     else: return {'success': False}
+
+@json_view
+@csrf_exempt
+def changeEmail(request):
+     context = RequestContext(request)
+     if request.method == 'POST':
+
+            user = User.objects.get(username=request.user.username)
+            email = request.POST.get('email')
+            user.email = email
+            user.save()
+            
+            return {'success': True}
+     else: return {'success': False}
+
+@json_view
+@csrf_exempt
+def changePassword(request):
+     context = RequestContext(request)
+     if request.method == 'POST':
+
+            user = User.objects.get(username=request.user.username)
+            user.set_password(request.POST.get('password'))
+            user.save()
+            return {'success': True}
+     else: return {'success': False}
+
+@json_view
+@csrf_exempt
+def changeAddress(request):
+     context = RequestContext(request)
+     if request.method == 'POST':
+
+            user = User.objects.get(username=request.user.username)
+            address_lineOne = request.POST.get('addOne')
+            user.address_lineOne = address_lineOne
+            address_lineTwo = request.POST.get('addTwo')
+            user.address_lineTwo = address_lineTwo
+            city = request.POST.get('addThree')
+            user.city = city
+            State = request.POST.get('addFour')
+            user.State = State
+            zipCode = request.POST.get('addFive')
+            user.zipCode = zipCode
+            user.save()
+            
+            return {'success': True}
+     else: return {'success': False}
 
 def orderHistory(request):
     context = RequestContext(request)

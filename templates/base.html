@@ -364,8 +364,8 @@ $(document).ready(function () {
 </div><!-- /.modal -->
 
 <!-- Account Modal -->
-<div class="modal fade bs-example-modal-sm" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+<div class="modal fade " id="accountModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
     <div class="modal-content">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -506,12 +506,99 @@ $(document).ready(function () {
         
     <div>
               
-              <div style="text-align:Center">
-                      <h5>First Name: {{ user.first_name }}</h5><br>
-                      <h5>Last Name: {{ user.last_name }}</h5><br>
-                      <h5>Email: {{ user.email }}</h5><br>
-                      <h5>Address: {{ user.email }}</h5><br>
-                      <button type="button" class="btn btn btn-success" id="updateBtn" >Update</button>
+              <div >
+                      
+                 <div >   
+                
+                  <div class="input-group">
+                      <span class="input-group-btn">
+                      <button class="btn btn-success" type="button">Change</button>
+                      </span>
+                       <input type="text" class="form-control" placeholder="First Name: {{user.first_name}}">
+                  </div><br>
+                  <div class="input-group">
+                       <span class="input-group-btn">
+                      <button class="btn btn-success" type="button">Change</button>
+                      </span>
+                       <input type="text" class="form-control" placeholder="Last Name: {{user.last_name}}"><br>
+                  </div><br>
+                  <div class="input-group">
+                       <span class="input-group-btn">
+                      <button class="btn btn-success" type="button">Change</button>
+                      </span>
+                       <input type="text" class="form-control" placeholder="Email: {{user.email}}"><br>
+                  </div><br>
+                  <div class="input-group">
+                       <span class="input-group-btn">
+                      <button class="btn btn-success" type="button">Change</button>
+                      </span>
+                       <input type="text" class="form-control" placeholder="Password"><br>
+                  </div><br>
+                  <div class="input-group" style="margin-left:35%">
+                       
+                       <input type="text" class="form-control" placeholder="Address Line One: {{user.address_lineOne}}"><br><br>
+                       <input type="text" class="form-control" placeholder="Address Line Two: {{user.address_lineTwo}}"><br><br>
+                       <input type="text" class="form-control" placeholder="City: {{user.State}}"><br><br>
+                       <input type="text" class="form-control" placeholder="Zip Code: {{user.zipCode}}"><br><br>
+      <select class="btn btn-primary">
+        <option value="" disabled selected>State</option>
+        <option value="AL">Alabama</option>
+        <option value="AK">Alaska</option>
+        <option value="AZ">Arizona</option>
+        <option value="AR">Arkansas</option>
+        <option value="CA">California</option>
+        <option value="CO">Colorado</option>
+        <option value="CT">Connecticut</option>
+        <option value="DE">Delaware</option>
+        <option value="DC">District Of Columbia</option>
+        <option value="FL">Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="HI">Hawaii</option>
+        <option value="ID">Idaho</option>
+        <option value="IL">Illinois</option>
+        <option value="IN">Indiana</option>
+        <option value="IA">Iowa</option>
+        <option value="KS">Kansas</option>
+        <option value="KY">Kentucky</option>
+        <option value="LA">Louisiana</option>
+        <option value="ME">Maine</option>
+        <option value="MD">Maryland</option>
+        <option value="MA">Massachusetts</option>
+        <option value="MI">Michigan</option>
+        <option value="MN">Minnesota</option>
+        <option value="MS">Mississippi</option>
+        <option value="MO">Missouri</option>
+        <option value="MT">Montana</option>
+        <option value="NE">Nebraska</option>
+        <option value="NV">Nevada</option>
+        <option value="NH">New Hampshire</option>
+        <option value="NJ">New Jersey</option>
+        <option value="NM">New Mexico</option>
+        <option value="NY">New York</option>
+        <option value="NC">North Carolina</option>
+        <option value="ND">North Dakota</option>
+        <option value="OH">Ohio</option>
+        <option value="OK">Oklahoma</option>
+        <option value="OR">Oregon</option>
+        <option value="PA">Pennsylvania</option>
+        <option value="RI">Rhode Island</option>
+        <option value="SC">South Carolina</option>
+        <option value="SD">South Dakota</option>
+        <option value="TN">Tennessee</option>
+        <option value="TX">Texas</option>
+        <option value="UT">Utah</option>
+        <option value="VT">Vermont</option>
+        <option value="VA">Virginia</option>
+        <option value="WA">Washington</option>
+        <option value="WV">West Virginia</option>
+        <option value="WI">Wisconsin</option>
+        <option value="WY">Wyoming</option>
+      </select ><br><br>
+
+                      <button class="btn btn-success" type="button">Change</button>
+                      
+                  </div><br>
+                
                       <script type="text/javascript">
                                 $("#updateBtn").click(function(){
                                           $("#userInfo").hide();

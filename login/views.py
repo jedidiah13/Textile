@@ -145,8 +145,9 @@ def userInfo(request):
 def userInfoChange(request):
      context = RequestContext(request)
      if request.method == 'POST':
-            user_form = updateInfoForm(request.POST)
-            print user_form
+            
+            
+            print request.Post['email']
             return {'success': True}
      
 

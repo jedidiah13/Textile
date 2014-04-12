@@ -14,7 +14,7 @@ from django.http import HttpResponseRedirect
 from crispy_forms.utils import render_crispy_form
 from crispy_forms.helper import FormHelper, FormHelpersException
 from crispy_forms.layout import Submit, Reset, Hidden, Button
-from login.forms import RegistrationForm, LoginForm
+from login.forms import RegistrationForm, LoginForm, updateInfoForm
 from login.models import UserProfile
 
 @csrf_exempt
@@ -130,14 +130,25 @@ def logoutUser(request):
     logout(request)
     return {'success': True}	
 
-
+@csrf_exempt
 def userInfo(request):
     context = RequestContext(request)
-    return render_to_response('store/userInfo.html')
 
+   
+    user = request.user
+    
+    return render_to_response('base.html',{'user': user})
+
+@login_required
+@json_view
+@csrf_exempt
 def userInfoChange(request):
-    context = RequestContext(request)
-    return render_to_response('store/userInfoChange.html')
+     context = RequestContext(request)
+     if request.method == 'POST':
+            user_form = updateInfoForm(request.POST)
+            print user_form
+            return {'success': True}
+     
 
 def orderHistory(request):
     context = RequestContext(request)

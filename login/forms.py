@@ -51,3 +51,22 @@ class ContactForm(forms.ModelForm):
                 self.helper.form_method = 'post'
                 self.helper.form_action = '/contact/'
                 self.helper.add_input(Submit('submit', 'Submit'))
+
+
+
+class updateInfoForm(forms.ModelForm):
+    model = User
+    password = forms.CharField(widget=forms.PasswordInput(), required=False)
+    address_lineOne = forms.CharField(required=False)
+    address_lineTwo = forms.CharField(required=False)
+    city = forms.CharField(required=False)
+    zipCode = forms.CharField(required=False)
+    State = forms.CharField(required=False)
+    class Meta:
+        model = User
+        fields = ('email','address_lineOne','address_lineTwo','city','State','zipCode')
+        def __init__(self, *args, **kwargs):
+            super(updateInfoForm, self).__init__(*args, **kwargs)
+            self.helper = FormHelper()
+
+

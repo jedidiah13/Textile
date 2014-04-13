@@ -348,7 +348,7 @@ $(document).ready(function () {
         return false;
         }
  
-        
+
   
 });
 });
@@ -402,8 +402,7 @@ $(document).ready(function () {
 		</div>
     <div id="acctChange">
     <div class="btn-group btn-group-xs">
-                <button class="btn btn-default" type="button"  id="frmBackBtn">Back</button>
-                <button class="btn  btn-active" type="button"  >Update Info</button>
+                <button class="btn btn-default" type="button"  id="frmBackBtn"><i class="icon-white icon-step-backward"></i>Back</button>
                 <script type="text/javascript">
                 $("#frmBackBtn").click(function(){
                         $("#acctChange").hide();
@@ -418,9 +417,12 @@ $(document).ready(function () {
 
     </div>
     <div id="userInfo">
+        <div style="margin-bottom:10px; margin-right: 4px;">
+        <button class="btn btn-success btn-xs" type="button"  id="backBtnTwo"><i class="icon-white icon-arrow-left"></i> Back</button>
+        </div>
         <div class="btn-group btn-group-xs">
-                <button class="btn btn-default" type="button"  id="backBtnTwo">Back</button>
-                <button class="btn  btn-active" type="button"  >{{user.username}}'s Info</button>
+                
+                
                 <script type="text/javascript">
                     $("#backBtnTwo").click(function(){
                           $("#userInfo").hide();
@@ -433,10 +435,10 @@ $(document).ready(function () {
         
     <div>
               
-              <div >
+              <div>
                       
                  <div >   
-                  <form id="updateFirstName">
+                  <form id="updateFirstName" style="margin-right: 35px; margin-left: 25px;">
                   <div class="input-group">
                       <span class="input-group-btn">
                       <button class="btn btn-success" type="button" id="submit-firstName">Change</button>
@@ -458,7 +460,7 @@ $(document).ready(function () {
 
                        </script>
                   </div><br></form>
-                  <form id="updateLastName">
+                  <form id="updateLastName" style="margin-right: 35px; margin-left: 25px;">
                   <div class="input-group">
                        <span class="input-group-btn">
                       <button class="btn btn-success" id="submit-lastName"type="button">Change</button>
@@ -484,7 +486,7 @@ $(document).ready(function () {
 
                        <br>
                   </div><br></form>
-                  <form id="updateEmail">
+                  <form id="updateEmail" style="margin-right: 35px; margin-left: 25px;">
                   <div class="input-group">
                        <span class="input-group-btn">
                       <button class="btn btn-success" id="submit-email"type="button">Change</button>
@@ -507,7 +509,7 @@ $(document).ready(function () {
                        </script>
                        <br>
                   </div><br></form>
-                  <form id="updatePassword">
+                  <form id="updatePassword" style="margin-right: 35px; margin-left: 25px;">
                   <div class="input-group">
                        <span class="input-group-btn">
                       <button class="btn btn-success" id="submit-password"type="button">Change</button>
@@ -534,7 +536,7 @@ $(document).ready(function () {
                        <br>
                   </div><br></form>
                   <form id="updateAddress">
-                  <div class="input-group" style="margin-left:35%">
+                  <div class="input-group" style="margin-left:25px;">
                        
                        <input type="text" class="form-control" name="addOne" placeholder="Address Line One: {{user.address_lineOne}}"><br><br>
                        <input type="text" class="form-control" name="addTwo" placeholder="Address Line Two: {{user.address_lineTwo}}"><br><br>

@@ -427,14 +427,14 @@ $(document).ready(function () {
                       <span class="input-group-btn">
                       <button class="btn btn-success" type="button" id="submit-firstName">Change</button>
                       </span>
-                       <input type="text" class="form-control" id="id_firstname" name="first_name" placeholder="First Name: {{user.first_name}}">
+                       <input type="text" class="form-control" name="first_name" placeholder="First Name: {{user.first_name}}">
                        <script type="text/javascript">
                               $('#submit-firstName').click(function(){
 
                                       $.ajax({//begin
                                               type: 'POST', 
                                               url:  '/login/changeFirstName/', 
-                                              data: $('#updatefirstName').serialize(),    
+                                              data: $('#updateFirstName').serialize(),    
                                               success: function(result){
                                                       console.log('updateUsername');
                                               }

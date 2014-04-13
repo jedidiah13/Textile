@@ -4,6 +4,7 @@
 {% load staticfiles %}
 
 <script type="text/javascript" src="{% static 'js/FitVids.js-master/jquery.fitvids.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'owl-carousel/owl.carousel.css' %}">
 <link rel="stylesheet" href="{% static 'owl-carousel/owl.theme.css' %}">
 <script src="{% static 'owl-carousel/owl.carousel.js' %}"></script>
@@ -12,22 +13,45 @@ angular.module('myModule', ['ui.bootstrap']);
 
 </style>
 	<div class="intro-header">   	
-        <div class="owl-carousel">
+        <div id="id-carousel" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+            
+
                 {%for category in items%} 
                         
+                          
                             <div class="item"> <img src="{{category.picture}}"> </div>
-                       
+
+                          
                 {%endfor%}
-                    
+                 </div>   
   
         </div>
 
         <script type="text/javascript">
-        $(".owl-carousel").owlCarousel();
+        //$(".owl-carousel").owlCarousel();
+        $(document).ready(function(){
+
+        //
+        var owl = $("#id-carousel");
+ 
+            owl.owlCarousel({
+                    autoPlay : 3000,
+                    stopOnHover : true,
+                    navigation:true,
+                    paginationSpeed : 1000,
+                    goToFirstSpeed : 2000,
+                    //singleItem : true,
+                    autoHeight : true,
+                    
+            });
+        });
         </script>
         	
+
+        
+
         <!-- /.container -->
-                }
+                
 
     </div>
     <!-- / .intro-header -->
@@ -41,13 +65,36 @@ angular.module('myModule', ['ui.bootstrap']);
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
-                <h2 class="section-heading">Death to the Stock Photo:
-                    <br>Special Thanks</h2>
-                <p class="lead">A special thanks to Death to the Stock Photo for providing the photographs that you see in this template. <a target="_blank" href="http://join.deathtothestockphoto.com/">Visit their website</a> to become a member.</p>
+                <h2 class="section-heading">We Are Here To Help.
+                    <br>Contant Us Anytime, Anywhere:</h2>
+                <div class="col-sm-1 hidden-sm">&nbsp;</div>
+                <div class="col-12 col-sm-2 with-hover-text">
+                    <p><a target="_blank" href="/contact/"><i class="icon icon-phone"></i></a></p>
+                    <span class="hover-text font-light ">(800) 210-9394</span></a>
+                </div>
+                <div class="col-12 col-sm-2 with-hover-text">
+                    <p><a target="_blank" href="/contact/"><i class="icon icon-envelope"></i></a></p>
+                    <span class="hover-text font-light ">textilefc@textilefabric.com</span></a>
+                </div>
+                <div class="col-12 col-sm-2 with-hover-text">
+                    <p><a target="_blank" href="https://www.facebook.com/pages/Textile-Fabric-Consultants-Inc/35559560844"><i class="icon icon-facebook"></i></a></p>
+                    <span class="hover-text font-light ">facebook/textilefabric</span></a>
+                </div>
+                <div class="col-12 col-sm-2 with-hover-text">
+                    <p><a target="_blank" href="#"><i class="icon icon-twitter"></i></a></p>
+                    <span class="hover-text font-light ">@TextileFabric</span></a>
+                </div>
+
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                        <h3 class="section-heading">Quality Textile Education Products:<br></h3>
+                        <h4><li>Fabric Swatch Kits</li></h4><br>
+                        <h4><li>Fibers, Fabrics, & Materials</li></h4><br>
+                        <h4><li>Software</li></h4><br>
+                        <h4><li>And more</li></h4><br>
+                </div>
             </div>
-            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <img class="img-responsive" src="{% static 'images/img/ipad.png' %}" alt="">
-            </div>
+            
         </div>
 
     </div>
@@ -55,6 +102,59 @@ angular.module('myModule', ['ui.bootstrap']);
 
 </div>
 <!-- /.content-section-a -->
+<script>
+
+$(document).ready(function(e) {
+    $('.with-hover-text, .regular-link').click(function(e){
+        e.stopPropagation();
+    });
+    
+    /***************
+    * = Hover text *
+    * Hover text for the last slide
+    ***************/
+    $('.with-hover-text').hover(
+        function(e) {
+            $(this).css('overflow', 'visible');
+            $(this).find('.hover-text')
+                .show()
+                .css('opacity', 0)
+                .delay(200)
+                .animate(
+                    {
+                        paddingTop: '25px',
+                        opacity: 1
+                    },
+                    'fast',
+                    'linear'
+                );
+        },
+        function(e) {
+            var obj = $(this);
+            $(this).find('.hover-text')
+                .animate(
+                    {
+                        paddingTop: '0',
+                        opacity: 0
+                    },
+                    'fast',
+                    'linear',
+                    function() {
+                        $(this).hide();
+                        $( obj ).css('overflow', 'hidden');
+                    }
+                );
+        }
+    );
+    
+    var img_loaded = 0;
+    var j_images = [];
+    
+}); 
+
+
+</script>
+
 
 <div class="content-section-b">
 
@@ -64,12 +164,12 @@ angular.module('myModule', ['ui.bootstrap']);
             <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
-                <h2 class="section-heading">3D Device Mockups
-                    <br>by PSDCovers</h2>
-                <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by PSDCovers! <a target="_blank" href="http://www.psdcovers.com/">Visit their website</a> to download some of their awesome, free photoshop actions!</p>
+                <h3 class="section-heading">Our Dedicated Staff is Here For You.
+                    <br></h3>
+                <p class="lead">Your experience is important to us. We strive to set the industry standard in service to our customers.</p>
             </div>
             <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                <img class="img-responsive" src="{% static 'images/img/doge.png' %}" alt="">
+                <img class="img-responsive" src="{% static 'images/fabricTeam.jpg' %}" alt="">
             </div>
         </div>
 

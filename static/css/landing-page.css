@@ -271,5 +271,37 @@ text-align: Left;
 	z-index: 10;
 }
 
+#id-carousel .owl-item div{
+  padding:5px;
+}
+
+#id-carousel .item img{
+            display: block;
+  			width: 100%;
+  			height: auto;
+  			-webkit-border-radius: 3px;
+  			-moz-border-radius: 3px;
+  			border-radius: 3px;
+            }
+.with-hover-text span {
+	display: none;
+}
+
+@media (max-width: 767px) {
+	.with-hover-text{
+		margin-bottom: 2em;
+		margin-top: 1em;
+	}
+}
+
+.font-light {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 300;
+}
+
+.icon {
+		margin-right: 12px;
+		font-size: 3.5em;
+	}
 
 

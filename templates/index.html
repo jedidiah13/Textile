@@ -9,21 +9,45 @@
 <link rel="stylesheet" href="{% static 'owl-carousel/owl.theme.css' %}">
 <script src="{% static 'owl-carousel/owl.carousel.js' %}"></script>
 <style type="text/css">
-angular.module('myModule', ['ui.bootstrap']);
+#id-carousel .owl-item div{
+  background: #3fbf79;
+  padding: 1px 0px;
+  margin-left: 250px;
+  margin-right: 250px;
+  color: #FFF;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+#id-carousel .item img{
+            display: block;
+            width: 100%;
+            height: auto;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            text-align: center;
+            
+            }
 
 </style>
-	<div class="intro-header">   	
+	   	<div class="intro-header">
         <div id="id-carousel" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
-            
-
+                            <div class="item"> <img src="{% static 'logo.jpg' %}"> </div>
+                            <div class="item"> <img src="{% static 'testImage.jpg' %}"> </div>
                 {%for category in items%} 
                         
-                          
-                            <div class="item"> <img src="{{category.picture}}"> </div>
-
+                        {%if category.isFeatured%}  
+                            <div class="item"> <img src="{{category.featured_picture}}"> </div>
+                        {%endif%}
                           
                 {%endfor%}
                  </div>   
+                        
+                        
+                        
   
         </div>
 
@@ -37,11 +61,12 @@ angular.module('myModule', ['ui.bootstrap']);
             owl.owlCarousel({
                     autoPlay : 3000,
                     stopOnHover : true,
-                    navigation:true,
+                    //navigation:true,
                     paginationSpeed : 1000,
                     goToFirstSpeed : 2000,
-                    //singleItem : true,
+                    singleItem : true,
                     autoHeight : true,
+                    itemsDesktopSmall : [979,3]
                     
             });
         });
@@ -53,8 +78,10 @@ angular.module('myModule', ['ui.bootstrap']);
         <!-- /.container -->
                 
 
-    </div>
+   </div>
     <!-- / .intro-header -->
+
+
 
 <div id="bottomDIV" class="content-section-a">
 
@@ -169,7 +196,7 @@ $(document).ready(function(e) {
                 <p class="lead">Your experience is important to us. We strive to set the industry standard in service to our customers.</p>
             </div>
             <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                <img class="img-responsive" src="{% static 'images/fabricTeam.jpg' %}" alt="">
+                <img class="img-responsive" style="border-radius: 8px;"src="{% static 'images/fabricTeam.jpg' %}" alt="">
             </div>
         </div>
 
@@ -187,9 +214,9 @@ $(document).ready(function(e) {
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
-                <h2 class="section-heading">Google Web Fonts and
-                    <br>Font Awesome Icons</h2>
-                <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
+                <h2 class="section-heading">Owner of a Bookstore?
+                    <br>We offer discount pricing.</h2>
+                <p class="lead">Bookstores, colleges/universities, and high schools receive wholesale pricing.</p><p class="lead"> Please email us at textilefc@textilefabric.com, and we'll get you set up.</p>
             </div>
             <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                 <img class="img-responsive" src="{% static 'images/img/phones.png' %}" alt="">

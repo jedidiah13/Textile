@@ -59,8 +59,8 @@
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/webstore/category/Fiber%20Arts/">Store</a></li>
 		    <li class="dropdown">
-                    <a id="dropDownDefault" class="dropdown-toggle" data-toggle="dropdown" href="#">Login | Register<b class="caret"></b></a>
-                    <ul id="menu1" class="dropdown-menu" aria-labelledby="dropDownDefault">
+                    <a id="dropDownDefault" class="dropdown-toggle" data-toggle="dropdown"  href="#">Login | Register<b class="caret"></b></a>
+                    <ul id="menu1" class="dropdown-menu" style="margin-top: 5px; border-radius: 4px;" aria-labelledby="dropDownDefault">
                     <li><a data-toggle="modal" data-target="#myOtherModal" href="#log-in">Login</a></li>
                     <li class="divider"></li>
                     <li><a data-toggle="modal" data-target="#myModal" href="#log-in">Register</a></li>
@@ -69,7 +69,7 @@
 		    
 		    <li class="dropdown">
                     <a id="dropDownLoggedIn" class="dropdown-toggle" data-toggle="dropdown" href="#" ><span id="acctNameNav">{{user.username}}</span><b id="caret2" class="caret"></b></a>
-                    <ul id="menu2" class="dropdown-menu" aria-labelledby="dropDownLoggedIn">
+                    <ul id="menu2" class="dropdown-menu" style="margin-top: 5px; border-radius: 4px;" aria-labelledby="dropDownLoggedIn">
                     <li id="logOut"><a>Logout</a></li>
 		    <script>$( "#logOut" ).click(function(){
 				$.ajax({//begin
@@ -120,7 +120,7 @@
 			$('#caret2').hide()
 			$('#dropDownLoggedIn').hide();
 			$('#loggedInMessage').hide();
-             		  
+      
 		   }
 		   else{
 		   	console.log('called2')
@@ -130,6 +130,7 @@
 			$('#dropDownLoggedIn').show();
 			$('#acctChange').hide();
       $("#userInfo").hide();
+
 		   }
              	   }//end success
             
@@ -347,7 +348,7 @@ $(document).ready(function () {
         return false;
         }
  
-
+        
   
 });
 });

@@ -271,18 +271,7 @@ text-align: Left;
 	z-index: 10;
 }
 
-#id-carousel .owl-item div{
-  padding:5px;
-}
 
-#id-carousel .item img{
-            display: block;
-  			width: 100%;
-  			height: auto;
-  			-webkit-border-radius: 3px;
-  			-moz-border-radius: 3px;
-  			border-radius: 3px;
-            }
 .with-hover-text span {
 	display: none;
 }

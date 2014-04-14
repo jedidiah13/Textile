@@ -1,4 +1,5 @@
 from django.db import models
+from embed_video.fields import EmbedVideoField
 
 class Catagories(models.Model):
 	catagory = models.CharField(max_length=128)
@@ -20,5 +21,4 @@ class Fabrics(models.Model):
 	fabFinish = models.CharField(max_length=128)
 	fabDescription = models.CharField(max_length=1024) # is that enough text?
 	fabImage = models.ImageField(upload_to='images') # What does upload to do???????????
-		# not there yet, need some stuff for image uploading.
-	
+	fabVideo = EmbedVideoField()

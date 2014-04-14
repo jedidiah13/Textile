@@ -36,17 +36,11 @@ def home(request):
     context = RequestContext(request)
     return render_to_response('store/shop-homepage.html', {'regform': RegistrationForm(),'loginform': LoginForm()},context )
 
-def search(request):
-	
-	if request.method == 'POST':
-		context = RequestContext(request)
-        	query = request.POST['query'].strip()
-        	print "searching"
-        	
-
-	        result_list = StoreItem.objects.filter(itemName_contains="Fiber").all()
-        	    	
-        	return render_to_response('store/shop-homepage.html', {'result_list': result_list}, context)
+def searchStore(request):
+    context = RequestContext(request)
+	   
+    result_list = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))   	    	
+    return render_to_response('store/shop-homepage.html', {'result_list': result_list}, context)
 
 
 def autocomplete(request):

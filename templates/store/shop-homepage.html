@@ -28,10 +28,13 @@
 
             <div class="col-md-3">
                 <p class="lead">Textile Fabrics Consultants, Inc.</p>
-                <div class="list-group" data-spy="affix" data-offset-top="20">
-		    {% for category in item_categories %}
-                    <a href="/webstore/category/{{ category }}" class="list-group-item">{{ category }}</a>
+                <div class="list-group" data-spy="affix" data-offset-top="20" id="standard">
+		                {% for category in item_categories %}
+                            <a href="/webstore/category/{{ category }}" class="list-group-item">{{ category }}</a>
                     {% endfor %}
+                </div>
+                <div class="list-group" data-spy="affix" data-offset-top="20" id="SearchResults">
+                      
                 </div>
             </div>	
 
@@ -49,23 +52,24 @@
         </form>
 	<script>
 	
-
-
 	$('#searchBtn').click(function(){
                                 $.ajax({//begin
 
-
-                                         type: 'GET',
-					                               data: $("#searchForm").serialize(),
-                                         url:  '.',
+                                         dataType: 'html',
+                                         type: 'POST',
+					                               data: { 
+                                                'search_text' : $('#id_q').val(),
+                                                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+                                              },
+                                         url:  '/webstore/searchStore/',
                                         //beforeSend: function() {
                                         //alert.fadeOut();
                                         //.html('Serching....'); // change submit button text
                                         //},
                                         success: function(result){
 					                             if(result){
-                                                console.log("searched")
-						                            
+                                                
+						                                    
 						
 					                                    }
                                                

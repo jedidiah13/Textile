@@ -42,27 +42,32 @@
 	<form class="autocomplete-me" id="searchForm"  >
             {% csrf_token %}
             <!-- Display the search form elements here -->
-            <button id="searchBtn" class="btn btn-primary" type="submit" value="Search"><span class="glyphicon glyphicon-search"></span></button>
-	    <input type="text" size="50" name="q" value="" id="id_q" />
+            <input  id="searchBtn" class="btn btn-primary" value="search"></input>
+	           <input type="text" size="50" name="q" value="" id="id_q" />
           
             <br />
         </form>
 	<script>
 	
+
+
 	$('#searchBtn').click(function(){
                                 $.ajax({//begin
 
 
-                                        type: 'GET',
-					data: $("#searchForm").serialize(),
-                                        url:  '.',
+                                         type: 'GET',
+					                               data: $("#searchForm").serialize(),
+                                         url:  '.',
+                                        //beforeSend: function() {
+                                        //alert.fadeOut();
+                                        //.html('Serching....'); // change submit button text
+                                        //},
                                         success: function(result){
-					     if(result){
+					                             if(result){
                                                 console.log("searched")
-						$('#carousel-example-generic').hide();
-						$('.row-fluid').hide();
+						                            
 						
-					     }
+					                                    }
                                                
 
                                          }//end success
@@ -73,6 +78,7 @@
                                         });//end ajax
 
                                         });
+                                        
          </script>		
 
 <script type="text/javascript">

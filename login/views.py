@@ -201,18 +201,32 @@ def changeAddress(request):
      if request.method == 'POST':
 
             user = User.objects.get(username=request.user.username)
+            profile = user.get_profile()
+            print user.username
+            print profile.address_lineOne
             address_lineOne = request.POST.get('addOne')
-            user.address_lineOne = address_lineOne
+            print address_lineOne
+            profile.address_lineOne = address_lineOne
+            print user.address_lineOne
             address_lineTwo = request.POST.get('addTwo')
-            user.address_lineTwo = address_lineTwo
+            print address_lineTwo
+            profile.address_lineTwo = address_lineTwo
+            print user.address_lineTwo
             city = request.POST.get('addThree')
-            user.city = city
+            print city
+            profile.city = city
+            print user.city
             State = request.POST.get('addFour')
-            user.State = State
+            print State
+            profile.State = State
+            print user.State
             zipCode = request.POST.get('addFive')
-            user.zipCode = zipCode
+            print zipCode
+            profile.zipCode = zipCode
+            print user.zipCode
             user.save()
             
+
             return {'success': True}
      else: return {'success': False}
 

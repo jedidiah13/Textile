@@ -538,12 +538,12 @@ $(document).ready(function () {
                   <form id="updateAddress">
                   <div class="input-group" style="margin-left:25px;">
                        
-                       <input type="text" class="form-control" name="addOne" placeholder="Address Line One: {{user.address_lineOne}}"><br><br>
-                       <input type="text" class="form-control" name="addTwo" placeholder="Address Line Two: {{user.address_lineTwo}}"><br><br>
-                       <input type="text" class="form-control" name="addThree" placeholder="City: {{user.State}}"><br><br>
-                       <input type="text" class="form-control" name="addFour" placeholder="Zip Code: {{user.zipCode}}"><br><br>
+                       <input type="text" class="form-control" name="addOne" placeholder="Address Line One: {{user.get_profile.address_lineOne}}">
+                       <input type="text" class="form-control" name="addTwo" placeholder="Address Line Two: {{user.get_profile.address_lineTwo}}"><br><br>
+                       <input type="text" class="form-control" name="addThree" placeholder="City: {{user.get_profile.city}}"><br><br>
+                       <input type="text" class="form-control" name="addFour" placeholder="Zip Code: {{user.get_profile.zipCode}}"><br><br>
       <select class="btn btn-primary" name="addFive">
-        <option value="" disabled selected>State</option>
+        <option value="" disabled selected>{{user.get_profile.State}}</option>
         <option value="AL">Alabama</option>
         <option value="AK">Alaska</option>
         <option value="AZ">Arizona</option>

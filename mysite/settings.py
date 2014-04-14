@@ -46,8 +46,7 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-#User Profile Settings
-AUTH_PROFILE_MODULE = "login.UserProfile"
+
 
 # endless pagination
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS 
@@ -85,7 +84,8 @@ INSTALLED_APPS = (
     'haystack',
     'imagekit'
 )
-
+#User Profile Settings
+AUTH_PROFILE_MODULE = "login.UserProfile"
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -45,7 +45,7 @@
 	<form class="autocomplete-me" id="searchForm"  >
             {% csrf_token %}
             <!-- Display the search form elements here -->
-            <input  id="searchBtn" class="btn btn-primary" value="search"></input>
+            <a  id="searchBtn" class="btn btn-primary btn-xs" value="search"><span class="glyphicon glyphicon-search"></span></a>
 	           <input type="text" size="50" name="q" value="" id="id_q" />
           
             <br />
@@ -68,8 +68,8 @@
                                         //},
                                         success: function(result){
 					                             if(result){
-                                                
-						                                    
+                                                console.log("searched")
+						                                    //figure out how to show result
 						
 					                                    }
                                                

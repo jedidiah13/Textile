@@ -58,13 +58,25 @@
                     <li><a href="/contact/">Contact Us</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/webstore/category/Fiber%20Arts/">Store</a></li>
-		    <li class="dropdown">
-                    <a id="dropDownDefault" class="dropdown-toggle" data-toggle="dropdown"  href="#">Login | Register<b class="caret"></b></a>
-                    <ul id="menu1" class="dropdown-menu" style="margin-top: 5px; border-radius: 4px;" aria-labelledby="dropDownDefault">
-                    <li><a data-toggle="modal" data-target="#myOtherModal" href="#log-in">Login</a></li>
-                    <li class="divider"></li>
-                    <li><a data-toggle="modal" data-target="#myModal" href="#log-in">Register</a></li>
-		    </ul>
+                    <li class="dropdown">
+               <a data-toggle="dropdown" href="#">Help: View Mounted Swatches <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li><a href="{% static 'helpfiles/basic_mounted_swatches_2010.pdf' %}">Basic Mounted Swatches 2010 Edition</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% static 'helpfiles/b12mounted.pdf' %}">Basic Mounted Swatches 2012 Edition</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% static 'helpfiles/b13mounted.pdf' %}">Basic Mounted Swatches 2013 Edition></a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% static 'helpfiles/ind2011noans2.pdf' %}">Interior Design 2011 Edition</a></li>
+              </ul>
+            </li>
+		               <li class="dropdown">
+                      <a id="dropDownDefault" class="dropdown-toggle" data-toggle="dropdown"  href="#">Login | Register<b class="caret"></b></a>
+                      <ul id="menu1" class="dropdown-menu" style="margin-top: 5px; border-radius: 4px;" aria-labelledby="dropDownDefault">
+                      <li><a data-toggle="modal" data-target="#myOtherModal" href="#log-in">Login</a></li>
+                      <li class="divider"></li>
+                      <li><a data-toggle="modal" data-target="#myModal" href="#log-in">Register</a></li>
+                      </ul>
                     </li>
 		    
 		    <li class="dropdown">
@@ -98,9 +110,10 @@
 			
                     <li class="divider"></li>
                     <li><a data-toggle="modal" data-target="#accountModal" href="#">Account</a></li>
-		    </ul>
+		                </ul>
                     </li>
-                    </ul>
+            
+          </ul>
 		    
 		    <script> 
 	  changeNAV()<!--Important Need this call -->

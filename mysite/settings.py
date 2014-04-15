@@ -50,7 +50,10 @@ EMAIL_USE_TLS = True
 
 # endless pagination
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS 
-TEMPLATE_CONTEXT_PROCESSORS += ('django.core.context_processors.request',)
+TEMPLATE_CONTEXT_PROCESSORS += ('django.core.context_processors.request',
+                                'django.contrib.auth.context_processors.auth',
+                                'django.core.context_processors.request',
+                                )
 
 #search engine 
 HAYSTACK_CONNECTIONS = {
@@ -64,11 +67,7 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor' 
 
 
-#embedd video
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.request',
-)
+
 
 # Application definition
 

@@ -126,7 +126,7 @@ DATABASES = {
     },
    'webstore': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'webstoredb.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'userdb.sqlite3'),
 #        'USER': 'admin',
 #        'PASSWORD': 'password'
     },

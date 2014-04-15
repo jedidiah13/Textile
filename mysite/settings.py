@@ -63,6 +63,13 @@ HAYSTACK_CONNECTIONS = {
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor' 
 
+
+#embedd video
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request',
+)
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -82,7 +89,8 @@ INSTALLED_APPS = (
     'south',
     'endless_pagination',
     'haystack',
-    'imagekit'
+    'imagekit',
+    'embed_video',
 )
 #User Profile Settings
 AUTH_PROFILE_MODULE = "login.UserProfile"

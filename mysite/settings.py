@@ -41,8 +41,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 #Email Settings for account activation
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'pfunk897@gmail.com'
+EMAIL_HOST_PASSWORD = 'Groovy@2'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -50,10 +50,7 @@ EMAIL_USE_TLS = True
 
 # endless pagination
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS 
-TEMPLATE_CONTEXT_PROCESSORS += ('django.core.context_processors.request',
-                                'django.contrib.auth.context_processors.auth',
-                                'django.core.context_processors.request',
-                                )
+TEMPLATE_CONTEXT_PROCESSORS += ('django.core.context_processors.request',)
 
 #search engine 
 HAYSTACK_CONNECTIONS = {
@@ -67,7 +64,11 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor' 
 
 
-
+#embedd video
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request',
+)
 
 # Application definition
 
@@ -126,7 +127,7 @@ DATABASES = {
     },
    'webstore': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'userdb.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'webstoredb.sqlite3'),
 #        'USER': 'admin',
 #        'PASSWORD': 'password'
     },

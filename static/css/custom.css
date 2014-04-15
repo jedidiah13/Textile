@@ -39,4 +39,9 @@
 
 .post-heading{
 	text-align:center;
+	color:#428bca;
+}
+
+.post{
+	line-height: 2.5em;
 }

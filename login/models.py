@@ -4,27 +4,27 @@ from django.db import models
 from loginRouter import *
 from webstore.models import Order
 
-<<<<<<< HEAD
+
 class OrderTable(models.Model):
     orders = models.ForeignKey(Order)
 
     def __unicode__(self): 
         return unicode(self.orders)
-=======
+
 class ohno(models.Model):
     box = models.CharField(max_length=128)
->>>>>>> FETCH_HEAD
+
 
     def __unicode__(self): 
         return self.user.username    
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-<<<<<<< HEAD
+
     user_orders = models.OneToOneField(OrderTable, null=True)
-=======
+
     relation = models.OneToOneField(ohno, null=True)
->>>>>>> FETCH_HEAD
+
     confirmation_code = models.CharField(max_length=128)
     reset_code = models.CharField(max_length=128)
     address_lineOne = models.CharField(max_length=128)

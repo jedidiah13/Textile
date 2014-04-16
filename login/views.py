@@ -20,59 +20,6 @@ from login.models import UserProfile
 @csrf_exempt
 @json_view
 def registration(request):
-<<<<<<< HEAD
-    
-    # Like before, get the request's context.
-    context = RequestContext(request)
-
-    # A boolean value for telling the template whether the registration was successful.
-    # Set to False initially. Code changes value to True when registration succeeds.
-    registered = False
-
-    # If it's a HTTP POST, we're interested in processing form data.
-    if request.method == 'POST':
-        
-        user_form = RegistrationForm(request.POST)
-        
-
-        # If the two forms are valid...
-        if user_form.is_valid():
-            # Save the user's form data to the database.
-            user = user_form.save()
-
-            # Now we hash the password with the set_password method.
-            # Once hashed, we can update the user object.
-            user.set_password(user.password)
-            user.is_active = False 
-	    user.save()
-
-	    #Create And Send User Activation Email.
-            confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33)) 
-            p = UserProfile(user=user, confirmation_code=confirmation_code)      
-            p.save()
-            #user.get_profile().confirmation_code = confirmation_code
-            #user.save()
-            
-	    title = "Textile Fabric Consultants, Inc. Account Activation"
-	    content = "Someone has recently registered at Textilefabric.com. We hope it was you. If so, please follow the link below. If not please disregard this email.\n" +"theftp.dyndns.org:8000/login/activate/" + str(p.confirmation_code) + "/" + user.username
-	    send_mail(title, content, 'no-reply@gsick.com', [user.email], fail_silently=False)
-	     #Update our variable to tell the template registration was successful.
-            registered = True
-            
-        # Invalid form or forms - mistakes or something else?
-        # Print problems to the terminal.
-        # They'll also be shown to the user.
-        else:
-            print user_form.errors
-            
-    # Not a HTTP POST, so we render our form using two ModelForm instances.
-    # These forms will be blank, ready for user input.
-    
-    form = RegistrationForm(request.POST)
-    form_html = render_crispy_form(form)
-    result = {'success': registered, 'form_html': form_html}
-    return result
-=======
 	print "Registering"
 	# Like before, get the request's context.
 	context = RequestContext(request)
@@ -126,7 +73,6 @@ def registration(request):
 	form_html = render_crispy_form(form)
 	result = {'success': registered, 'form_html': form_html}
 	return result
->>>>>>> FETCH_HEAD
  
 @csrf_exempt
 @json_view

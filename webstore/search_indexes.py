@@ -8,6 +8,7 @@ class StoreIndex(indexes.SearchIndex, indexes.Indexable):
     text  = indexes.CharField(document=True, use_template=True)
     description = indexes.CharField(model_attr='description')
     itemName = indexes.CharField(model_attr='itemName')
+    categoryName = indexes.CharField(model_attr='category')
     content_auto = indexes.EdgeNgramField(model_attr='itemName')     
 
     def get_model(self):

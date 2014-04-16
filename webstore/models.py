@@ -1,7 +1,7 @@
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
-from login.models import UserProfile
+
 
 
 
@@ -10,7 +10,7 @@ from login.models import UserProfile
 class StoreCategory(models.Model):
 	categoryName = models.CharField(max_length=128)
 	def __unicode__(self):
-		return self.categoryName 
+		return unicode(self.categoryName)
 
 class StoreItem(models.Model):
 	
@@ -28,10 +28,10 @@ class StoreItem(models.Model):
 	featured_picture = ProcessedImageField(upload_to='avatars',
                                            processors=[ResizeToFill(800, 300)],
                                            format='JPEG',
-                                           options={'quality': 60})
+                                           options={'quality': 60}, blank=True)
 	isFeatured = models.BooleanField(default=False)
 	def __unicode__(self):
-		return  self.itemName
+		return  unicode(self.itemName)
 
 
 class OrderItem(models.Model):
@@ -40,11 +40,11 @@ class OrderItem(models.Model):
     # The key to a store item. Yep, that works to have a relation to another app
     itemID = models.OneToOneField(StoreItem)
     def __unicode__(self):
-        return  self.itemID.itemName
+        return  unicode(self.itemID.itemName)
 
 
 class Order(models.Model):
-    purchaser = models.OneToOneField(UserProfile)
+    
     orderDate = models.DateTimeField('Order Date')
     shippingCost = models.DecimalField(max_digits=16,decimal_places=2)
     totalCost = models.DecimalField(max_digits=16,decimal_places=2)

@@ -55,10 +55,10 @@
         </form>
 	<script>
 	
-	$('#searchBtn').click(function(){
+	$('#searchBtn').click(function(){   
                                 $.ajax({//begin
 
-                                         dataType: 'html',
+                                         dataType: 'json',
                                          type: 'POST',
 					                               data: { 
                                                 'search_text' : $('#id_q').val(),
@@ -70,11 +70,11 @@
                                         //.html('Serching....'); // change submit button text
                                         //},
                                         success: function(result){
-					                             if(result){
-                                                console.log("searched")
-						                                    //figure out how to show result
+					                                      //this works
+                                                console.log(result['result_list'])
+						                                    
 						
-					                                    }
+					                                    
                                                
 
                                          }//end success
@@ -194,7 +194,7 @@
 		  
 		{% endfor %}
 		
-                
+            
 		   
                 </div>
 	    <div class="row text-center">

@@ -49,7 +49,8 @@ def registration(request):
             confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33)) 
             p = UserProfile(user=user, confirmation_code=confirmation_code)      
             p.save()
-            
+            #user.get_profile().confirmation_code = confirmation_code
+            #user.save()
             
 	    title = "Textile Fabric Consultants, Inc. Account Activation"
 	    content = "Someone has recently registered at Textilefabric.com. We hope it was you. If so, please follow the link below. If not please disregard this email.\n" +"theftp.dyndns.org:8000/login/activate/" + str(p.confirmation_code) + "/" + user.username

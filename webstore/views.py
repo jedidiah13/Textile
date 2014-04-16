@@ -38,9 +38,13 @@ def home(request):
 
 def searchStore(request):
     context = RequestContext(request)
-	   
-    result_list = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))   	    	
-    return render_to_response('store/shop-homepage.html', {'result_list': result_list}, context)
+	
+
+    sqs = SearchQuerySet().filter(content=request.POST.get('search_text'))
+    result_list = [result.itemName for result in sqs]
+    
+    print json.dumps({'result_list': result_list})
+    return HttpResponse( json.dumps({'result_list': result_list}), content_type='application/json')
 
 
 def autocomplete(request):

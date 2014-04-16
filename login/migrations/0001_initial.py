@@ -8,15 +8,48 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding model 'OrderItem'
+        db.create_table(u'login_orderitem', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('itemCost', self.gf('django.db.models.fields.DecimalField')(max_digits=16, decimal_places=2)),
+            ('itemQuantity', self.gf('django.db.models.fields.IntegerField')()),
+            ('itemID', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['webstore.StoreItem'], unique=True)),
+        ))
+        db.send_create_signal(u'login', ['OrderItem'])
+
+        # Adding model 'Order'
+        db.create_table(u'login_order', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('orderDate', self.gf('django.db.models.fields.DateTimeField')()),
+            ('shippingCost', self.gf('django.db.models.fields.DecimalField')(max_digits=16, decimal_places=2)),
+            ('totalCost', self.gf('django.db.models.fields.DecimalField')(max_digits=16, decimal_places=2)),
+            ('item', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['login.OrderItem'])),
+        ))
+        db.send_create_signal(u'login', ['Order'])
+
         # Adding model 'UserProfile'
         db.create_table(u'login_userprofile', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
+            ('confirmation_code', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('reset_code', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('address_lineOne', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('address_lineTwo', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('city', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('State', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('zipCode', self.gf('django.db.models.fields.CharField')(max_length=10)),
+            ('orders', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['login.Order'])),
         ))
         db.send_create_signal(u'login', ['UserProfile'])
 
 
     def backwards(self, orm):
+        # Deleting model 'OrderItem'
+        db.delete_table(u'login_orderitem')
+
+        # Deleting model 'Order'
+        db.delete_table(u'login_order')
+
         # Deleting model 'UserProfile'
         db.delete_table(u'login_userprofile')
 
@@ -58,10 +91,51 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        u'login.order': {
+            'Meta': {'object_name': 'Order'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'item': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['login.OrderItem']"}),
+            'orderDate': ('django.db.models.fields.DateTimeField', [], {}),
+            'shippingCost': ('django.db.models.fields.DecimalField', [], {'max_digits': '16', 'decimal_places': '2'}),
+            'totalCost': ('django.db.models.fields.DecimalField', [], {'max_digits': '16', 'decimal_places': '2'})
+        },
+        u'login.orderitem': {
+            'Meta': {'object_name': 'OrderItem'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'itemCost': ('django.db.models.fields.DecimalField', [], {'max_digits': '16', 'decimal_places': '2'}),
+            'itemID': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['webstore.StoreItem']", 'unique': 'True'}),
+            'itemQuantity': ('django.db.models.fields.IntegerField', [], {})
+        },
         u'login.userprofile': {
             'Meta': {'object_name': 'UserProfile'},
+            'State': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'address_lineOne': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'address_lineTwo': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'city': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'confirmation_code': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
+            'orders': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['login.Order']"}),
+            'reset_code': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'}),
+            'zipCode': ('django.db.models.fields.CharField', [], {'max_length': '10'})
+        },
+        u'webstore.storecategory': {
+            'Meta': {'object_name': 'StoreCategory'},
+            'categoryName': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+        },
+        u'webstore.storeitem': {
+            'Meta': {'object_name': 'StoreItem'},
+            'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['webstore.StoreCategory']"}),
+            'description': ('django.db.models.fields.CharField', [], {'max_length': '2048'}),
+            'featured_picture': ('imagekit.models.fields.ProcessedImageField', [], {'max_length': '100'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'isFeatured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'itemName': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'itemNameid': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'picture': ('imagekit.models.fields.ProcessedImageField', [], {'max_length': '100'}),
+            'price': ('django.db.models.fields.DecimalField', [], {'max_digits': '16', 'decimal_places': '2'}),
+            'quantity': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         }
     }
 

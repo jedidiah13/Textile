@@ -30,8 +30,7 @@ def registration(request):
 
     # If it's a HTTP POST, we're interested in processing form data.
     if request.method == 'POST':
-        # Attempt to grab information from the raw form information.
-        # Note that we make use of both UserForm and UserProfileForm.
+        
         user_form = RegistrationForm(request.POST)
         
 
@@ -50,10 +49,12 @@ def registration(request):
             confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33)) 
             p = UserProfile(user=user, confirmation_code=confirmation_code)      
             p.save()
+            
+            
 	    title = "Textile Fabric Consultants, Inc. Account Activation"
 	    content = "Someone has recently registered at Textilefabric.com. We hope it was you. If so, please follow the link below. If not please disregard this email.\n" +"theftp.dyndns.org:8000/login/activate/" + str(p.confirmation_code) + "/" + user.username
 	    send_mail(title, content, 'no-reply@gsick.com', [user.email], fail_silently=False)
-	    # Update our variable to tell the template registration was successful.
+	     #Update our variable to tell the template registration was successful.
             registered = True
             
         # Invalid form or forms - mistakes or something else?
@@ -202,29 +203,28 @@ def changeAddress(request):
 
             user = User.objects.get(username=request.user.username)
             profile = user.get_profile()
-            print user.username
-            print profile.address_lineOne
+
             address_lineOne = request.POST.get('addOne')
-            print address_lineOne
+            
             profile.address_lineOne = address_lineOne
-            print user.address_lineOne
+            print profile.address_lineOne
             address_lineTwo = request.POST.get('addTwo')
-            print address_lineTwo
+            
             profile.address_lineTwo = address_lineTwo
-            print user.address_lineTwo
+            
             city = request.POST.get('addThree')
             print city
             profile.city = city
-            print user.city
+            
             State = request.POST.get('addFour')
             print State
             profile.State = State
-            print user.State
+            
             zipCode = request.POST.get('addFive')
             print zipCode
             profile.zipCode = zipCode
-            print user.zipCode
-            user.save()
+            
+            profile.save()
             
 
             return {'success': True}

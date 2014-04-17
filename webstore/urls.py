@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 from webstore import views
 from django.http import HttpResponseRedirect
 
@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     url(r'^category/(?P<id>.*)/$', views.webstore, name='webstore'),
     url(r'^category/(?P<id>[\w\s]+)/(?P<directory>[\w]+)/(?P<image_name>[\w]+\.[\w]+)$',views.getImage),
     url(r'^search/autocomplete/$', views.autocomplete, name='autocomplete'),
-    url(r'^searchStore/$',views.searchStore, name='searchStore')
+    url(r'^searchStore/$',views.searchStore, name='searchStore'),
+    url(r'^query/$', include('haystack.urls'))
     
 ) 

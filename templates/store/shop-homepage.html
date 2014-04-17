@@ -52,7 +52,7 @@
             
                 <a  id="searchBtn" class="btn btn-primary" value="search"><span class="glyphicon glyphicon-search"></span></a>
             
-	              <input type="text" class="form-control"   name="q" size="50" id="id_q" />
+	              <input type="text" class="form-control" autocomplete="off"  name="q" size="50" id="id_q" />
                 
             </div>  
             <br />
@@ -76,9 +76,9 @@
                                         //},
                                         success: function(result){
 					                                      //this works
-                                                console.log(result['result_list'])
-						                                    
-						
+                                                console.log(result['result_list']);
+						                                    queryDatabase(result);
+						          
 					                                    
                                                
 
@@ -90,7 +90,30 @@
                                         });//end ajax
 
                                         });
-                                        
+          
+
+
+          function queryDatabase(result){
+                  console.log('entered')
+                  $.ajax({
+                      dataType: 'json',
+                      type: 'POST',
+                      data: {'result_list': result,
+                             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()},
+                      url: '/webstore/query/',
+                      success: function(result){
+
+                          
+
+                      }
+
+
+
+                  });
+
+
+
+          }                            
          </script>		
 
 <script type="text/javascript">
@@ -272,14 +295,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Shopping Cart</h4>
       </div>
       <div class="modal-body">
         INSERT INFO HERE
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Check Out</button>
       </div>
     </div>
   </div>

@@ -53,7 +53,6 @@ def autocomplete(request):
     
     return HttpResponse(the_data, content_type='application/json')
 
-<<<<<<< HEAD
 
 def query(request):
     context = RequestContext(request)
@@ -79,7 +78,6 @@ def query(request):
 
 
 
-=======
 # The car is stored in the session as a dictionary of a dictionary that has
 # the primary key of an item and how many were added
 def addToCart(request, itemKey, quantity):
@@ -99,6 +97,6 @@ def removeFromCart(request, itemKey):
 def deleteCart(request):
     if 'cartList' in request.session:
         request.session.pop('cartList')
->>>>>>> FETCH_HEAD
+
 
 

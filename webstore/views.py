@@ -34,13 +34,17 @@ def home(request):
 
 def searchStore(request):
     context = RequestContext(request)
-
-    sqs = SearchQuerySet().filter(content=request.POST.get('search_text'))
-    result_list = [result.itemName for result in sqs]
     
-    #print json.dumps({'result_list': result_list})
-    return HttpResponse( json.dumps({'result_list': result_list}), content_type='application/json')
+    sqs = SearchQuerySet().filter(content=request.POST.get('search_text'))
+    #searchResults = StoreItem.objects.filter(itemName__icontains= sqs )
+    result_list = StoreItem.objects.filter(itemName__icontains= sqs )
+    #result_list = [result.itemName for result in sqs]
+    
+        
 
+    #print json.dumps({'result_list': result_list})
+    #return HttpResponse( json.dumps({'result_list': result_list}), content_type='application/json')
+    return render_to_response('store/shop-homepage.html',{'result_list': result_list}, context)
 
 def autocomplete(request):
     sqs = SearchQuerySet().autocomplete(content_auto=request.GET.get('q', ''))[:5]
@@ -56,9 +60,7 @@ def autocomplete(request):
 
 def query(request):
     context = RequestContext(request)
-    if request.is_ajax():
-        if request.method == 'POST':
-            print request.body
+    
             
 
     return render_to_response('store/shop-homepage.html',{'success': True},context)

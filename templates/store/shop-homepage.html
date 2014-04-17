@@ -63,7 +63,7 @@
 	$('#searchBtn').click(function(){   
                                 $.ajax({//begin
 
-                                         dataType: 'json',
+                                         //dataType: 'json',
                                          type: 'POST',
 					                               data: { 
                                                 'search_text' : $('#id_q').val(),
@@ -77,7 +77,7 @@
                                         success: function(result){
 					                                      //this works
                                                 console.log(result['result_list']);
-						                                    queryDatabase(result);
+						                                    //queryDatabase(result);
 						          
 					                                    
                                                
@@ -93,7 +93,7 @@
           
 
 
-          function queryDatabase(result){
+         /**************** function queryDatabase(result){
                   console.log('entered')
                   $.ajax({
                       dataType: 'json',
@@ -113,7 +113,7 @@
 
 
 
-          }                            
+          }   ***************/                         
          </script>		
 
 <script type="text/javascript">
@@ -222,6 +222,10 @@
 		  
 		{% endfor %}
 		
+
+
+
+
             
 		   
                 </div>

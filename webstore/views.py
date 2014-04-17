@@ -17,15 +17,11 @@ def webstore(request,id):
     return render_to_response('store/shop-homepage.html', {'items': items, 'item_categories': item_categories, 'regform': RegistrationForm(),'loginform': LoginForm()},context)
 
 def featured(request):
-    print "carousel"
+    
     context = RequestContext(request)
     items = StoreItem.objects.all()
     return render_to_response('index.html',{'success': True, 'items': items}, context)
 
-
-
-
-    #return render_to_response('store/shop-homepage.html', {'items': items, 'item_categories': item_categories, 'regform': RegistrationForm(),'loginform': LoginForm()},context)
 def getImage(request, id, directory, image_name):
     imagelocation = directory + "/" + image_name
     print imagelocation
@@ -39,7 +35,6 @@ def home(request):
 def searchStore(request):
     context = RequestContext(request)
 	
-
     sqs = SearchQuerySet().filter(content=request.POST.get('search_text'))
     result_list = [result.itemName for result in sqs]
     

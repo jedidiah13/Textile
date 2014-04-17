@@ -38,7 +38,7 @@ def searchStore(request):
     sqs = SearchQuerySet().filter(content=request.POST.get('search_text'))
     result_list = [result.itemName for result in sqs]
     
-    print json.dumps({'result_list': result_list})
+    #print json.dumps({'result_list': result_list})
     return HttpResponse( json.dumps({'result_list': result_list}), content_type='application/json')
 
 
@@ -50,8 +50,33 @@ def autocomplete(request):
     the_data = json.dumps({
         'results': suggestions
     })
-    print "called auto complete"
+    
     return HttpResponse(the_data, content_type='application/json')
+
+
+def query(request):
+    context = RequestContext(request)
+    if request.is_ajax():
+        if request.method == 'POST':
+            print request.body
+            
+
+    return render_to_response('store/shop-homepage.html',{'success': True},context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # The car is stored in the session as a dictionary of a dictionary that has
 # the primary key of an item and how many were added
@@ -72,5 +97,6 @@ def removeFromCart(request, itemKey):
 def deleteCart(request):
     if 'cartList' in request.session:
         request.session.pop('cartList')
+
 
 

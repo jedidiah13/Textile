@@ -52,7 +52,7 @@
             
                 <a  id="searchBtn" class="btn btn-primary" value="search"><span class="glyphicon glyphicon-search"></span></a>
             
-	              <input type="text" class="form-control"   name="q" size="50" id="id_q" />
+	              <input type="text" class="form-control" autocomplete="off"  name="q" size="50" id="id_q" />
                 
             </div>  
             <br />
@@ -76,9 +76,9 @@
                                         //},
                                         success: function(result){
 					                                      //this works
-                                                console.log(result['result_list'])
-						                                    
-						
+                                                console.log(result['result_list']);
+						                                    queryDatabase(result);
+						          
 					                                    
                                                
 
@@ -90,7 +90,30 @@
                                         });//end ajax
 
                                         });
-                                        
+          
+
+
+          function queryDatabase(result){
+                  console.log('entered')
+                  $.ajax({
+                      dataType: 'json',
+                      type: 'POST',
+                      data: {'result_list': result,
+                             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()},
+                      url: '/webstore/query/',
+                      success: function(result){
+
+                          
+
+                      }
+
+
+
+                  });
+
+
+
+          }                            
          </script>		
 
 <script type="text/javascript">
@@ -272,7 +295,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<<<<<<< HEAD
         <h4 class="modal-title" id="myModalLabel">Your Shopping Cart</h4>
+=======
+        <h4 class="modal-title" id="myModalLabel">Shopping Cart</h4>
+>>>>>>> FETCH_HEAD
       </div>
       <div class="modal-body">
         <div class="row">
@@ -318,8 +345,12 @@
         <p>Subtotal:
         $X.XX</p><!--Subtotal goes here-->
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<<<<<<< HEAD
         <button type="button" class="btn btn-primary">Update Cart</button>
         <button type="button" class="btn btn-success">Checkout</button>
+=======
+        <button type="button" class="btn btn-primary">Check Out</button>
+>>>>>>> FETCH_HEAD
       </div>
     </div>
   </div>

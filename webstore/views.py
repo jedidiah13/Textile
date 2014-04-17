@@ -58,23 +58,24 @@ def autocomplete(request):
     print "called auto complete"
     return HttpResponse(the_data, content_type='application/json')
 
+# The car is stored in the session as a dictionary of a dictionary that has
+# the primary key of an item and how many were added
+def addToCart(request, itemKey, quantity):
+    if quantity <= 0:
+        removeFromCart(request, itemKey)
+    if not 'cartList' in request.session:
+        request.session['cartList'] = {itemKey : {"quantity" : quantity}}
+        # make a new cart
+    else:
+        request.session['cartList'][itemKey] = {"quantity" : quantity}
+        # this works for modifying quantity as well as adding
 
+def removeFromCart(request, itemKey):
+    if 'cartList' in request.session and itemKey in request.session['cartList']:
+        request.session['cartList'].pop(itemKey)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def deleteCart(request):
+    if 'cartList' in request.session:
+        request.session.pop('cartList')
 
 

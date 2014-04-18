@@ -8,8 +8,9 @@ urlpatterns = patterns('',
     url(r'^search/autocomplete/$', views.autocomplete, name='autocomplete'),
     url(r'^searchStore/$',views.searchStore, name='searchStore'),
     url(r'^query/$', include('haystack.urls')),
-    url(r'^addToCart/(?P<itemKey>[\d]+)/(?P<quantity>[\d]+)$',views.addToCart,name='addToCart'),
+    url(r'^addToCart/(?P<itemKey>[\w]+)/(?P<quantity>[\w]+)$',views.addToCart,name='addToCart'),
     url(r'^removeFromCart/(?P<itemKey>[\d]+)$',views.removeFromCart,name='removeFromCart'),
-	url(r'^deleteCart/$', views.deleteCart, name='deleteCart'),
+    url(r'^deleteCart/$', views.deleteCart, name='deleteCart'),
+    url(r'^buttonTest/$', views.buttonTest, name='buttonTest'),
 
 ) 

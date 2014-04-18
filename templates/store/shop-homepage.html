@@ -414,7 +414,28 @@ $(document).ready(function () {
       <div class="modal-footer">
 	
      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Add To Cart</button>
+        <a  id="{{ category.itemNameid }}addtocart" class="btn btn-primary">Add To Cart</a>
+        <script type="text/javascript">
+          $('#{{ category.itemNameid }}addtocart').click(function(){   
+            $.ajax({
+
+               type: 'POST',
+               data: { 
+                      'notmuch' : 'stuff',
+                      'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+                    },
+               url:  '{% url "addToCart" category.itemNameid 1 %}',
+
+              success: function(result){
+                      console.log('added to cart');
+                      //this works
+                      //console.log(result['success']);
+                      //queryDatabase(result);
+               }//end success
+
+              });//end ajax
+            });              
+        </script>
       </div>
     </div>
   </div>
@@ -439,6 +460,11 @@ $(document).ready(function () {
        
 
       </div>
+      {% for itemName in cart %}
+          <p>
+            {{ itemName }}
+          </p>
+        {% endfor %}
       <div class="modal-body">
         <div class="row">
           <div class="col-lg-3">

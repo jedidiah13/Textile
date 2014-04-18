@@ -17,10 +17,10 @@ class Topics(models.Model):
 class Fabrics(models.Model):
 	fabTopic = models.ForeignKey(Topics)
 	fabName = models.CharField(max_length=128)
-	fabContent = models.CharField(max_length=128)
-	fabWeave = models.CharField(max_length=128)
-	fabDye = models.CharField(max_length=128)
-	fabFinish = models.CharField(max_length=128)
+	fabContent = models.CharField(max_length=128, blank=True)
+	fabWeave = models.CharField(max_length=128, blank=True)
+	fabDye = models.CharField(max_length=128, blank=True)
+	fabFinish = models.CharField(max_length=128, blank=True)
 	fabDescription = models.CharField(max_length=8192) 
 	fabImage = ProcessedImageField(upload_to='avatars',
                                            processors=[ResizeToFill(250, 185)],
@@ -30,5 +30,8 @@ class Fabrics(models.Model):
                                            processors=[ResizeToFill(500, 370)],
                                            format='JPEG',
                                            options={'quality': 60},blank=True)
-	fabVideo = EmbedVideoField()
-	isPremium = models.BooleanField(default=False)  
+	fabVideo = EmbedVideoField(blank=True)
+	fabVideoURL = models.URLField(blank=True)
+	isPremium = models.BooleanField(default=False)
+	def __unicode__(self):
+		return self.fabName  

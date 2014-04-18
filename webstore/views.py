@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from webstore.bing_search import run_query
 import simplejson as json
 from haystack.query import SearchQuerySet
+from copy import deepcopy
 
 def webstore(request,id):
     context = RequestContext(request)    
@@ -65,24 +66,18 @@ def query(request):
 
     return render_to_response('store/shop-homepage.html',{'success': True},context)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # The car is stored in the session as a dictionary of a dictionary that has
 # the primary key of an item and how many were added
+def buttonTest(request):
+    print "pressed button"
+    context = RequestContext(request)
+    return render_to_response('store/shop-homepage.html',{'success': True}, context)
+
 def addToCart(request, itemKey, quantity):
+    print itemKey
+    context = RequestContext(request)
+    print request.session.keys()
+
     if quantity <= 0:
         removeFromCart(request, itemKey)
     if not 'cartList' in request.session:
@@ -91,14 +86,19 @@ def addToCart(request, itemKey, quantity):
     else:
         request.session['cartList'][itemKey] = {"quantity" : quantity}
         # this works for modifying quantity as well as adding
+    cart = deepcopy(request.session['cartList']) # wondering if this is needed...
+    print cart.keys()
+    return render_to_response('store/shop-homepage.html',{'cart':cart,'success': True},context)
 
 def removeFromCart(request, itemKey):
+    context = RequestContext(request)
     if 'cartList' in request.session and itemKey in request.session['cartList']:
         request.session['cartList'].pop(itemKey)
+    return render_to_response('store/shop-homepage.html',{'success': True},context)
 
 def deleteCart(request):
+    context = RequestContext(request)
     if 'cartList' in request.session:
         request.session.pop('cartList')
-
-
+    return render_to_response('store/shop-homepage.html',{'success': True},context)
 

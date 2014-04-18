@@ -23,10 +23,18 @@
             <div class="col-md-3">
                 <p class="lead">Textile Fabrics Consultants, Inc.</p>
                 <div class="list-group">
-		    {% for fabCatagory in fab_categories %}
-                    <a href="/companion/{{ fabCatagory }}" class="list-group-item">{{ fabCatagory }}</a>
-                    {% endfor %}
+		              {% for fabCatagory in fab_categories %}
+                             <a href="/companion/category/{{ fabCatagory }}" class="list-group-item">{{ fabCatagory }}</a>
+                      {% endfor %}
+           
                 </div>
+            <div class="list-group">
+
+                      {%for fabCatagory in topics %}
+                            <a href="/companion/category/{{ fabCatagory }}" class="list-group-item">{{ fabCatagory.topic }}</a>
+                      {% endfor %}
+            </div>
+            
             </div>
 	   <script>
 	//	$(window).off('.affix')
@@ -75,7 +83,7 @@
 		
                 <div class="row-fluid">
 		
-		{% for category in items %}
+		<!--Fabric
                     
 		  <div  class="col-sm-4 col-lg-4 col-md-4">
                         <div  class="thumbnail">
@@ -89,7 +97,7 @@
                         </div>
                     </div>
 		  
-		{% endfor %}
+		-->
 		
                 
 		   

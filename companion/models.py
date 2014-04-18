@@ -9,12 +9,12 @@ class Catagories(models.Model):
 		return self.catagory 
 
 class Topics(models.Model):
+	fabCatagory = models.ForeignKey(Catagories)
 	topic = models.CharField(max_length=128)
 	def __unicode__(self):
 		return self.topic 
 
 class Fabrics(models.Model):
-	fabCatagory = models.ForeignKey(Catagories)
 	fabTopic = models.ForeignKey(Topics)
 	fabName = models.CharField(max_length=128)
 	fabContent = models.CharField(max_length=128)
@@ -31,4 +31,4 @@ class Fabrics(models.Model):
                                            format='JPEG',
                                            options={'quality': 60},blank=True)
 	fabVideo = EmbedVideoField()
-	isPremium = models.BooleanField(default=False)
+	isPremium = models.BooleanField(default=False)  

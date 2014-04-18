@@ -137,8 +137,13 @@ DATABASES = {
 #        'USER': 'admin',
 #        'PASSWORD': 'password'
     },
+}
 
-
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'CacheTable',
+    }
 }
 
 #templete absolute path def

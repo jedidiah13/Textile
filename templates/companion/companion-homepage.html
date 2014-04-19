@@ -98,13 +98,18 @@
 			
     			
 
-	<form class="form-signin span8" id="searchForm" method="POST" >
+	<form class="autocomplete-me form-inline" role="form" id="searchForm">
             {% csrf_token %}
             <!-- Display the search form elements here -->
-            <input type="text" size="50" name="query" value="" id="query" />
-            <button id="searchBtn" class="btn btn-primary" type="button"  value="Search">Search</button>
+           <div class="form-group" style="width:100%">
+            
+                <a  id="searchBtn" class="btn btn-primary" value="search"><span class="glyphicon glyphicon-search"></span></a>
+            
+                  <input type="text" class="form-control" autocomplete="off"  name="q" size="50" id="id_q" />
+                
+            </div>  
             <br />
-        </form>
+  </form>
 	<script>
 	
 	$('#searchBtn').click(function(){

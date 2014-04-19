@@ -30,24 +30,57 @@
   <div class="panel panel-primary">
     <div class="panel-heading"> 
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" data-target="#{{fabCatagory}}" > 
+        <a data-toggle="collapse" data-parent="#accordion" data-target="#{{fabCatagory.categoryId}}" id="{{fabCatagory.categoryId}}btn"> 
           {{fabCatagory}}
         </a>
       </h4>
+                <script type="text/javascript">
+                        $("#{{fabCatagory.categoryId}}btn").on('click', function(event){
+
+                                
+                                                       
+                                            $.ajax({
+                                                 dataType: 'json',
+                                                 type: 'GET',
+                                                 url: '/companion/topic/{{fabCatagory}}/',
+                                                 
+                                                 success: function(result){
+                                                        for(var i=0; i < result.topics.length; i++){
+                                                           $("#{{fabCatagory.categoryId}}topics").append(
+
+                                                            "<a id='result.topics[i].topicId' class='list-group-item'>"+result.topics[i].topic+"</a>"
+
+                                                            );
+                                                        } 
+
+                                                },
+                                                 
+                                            });
+
+
+
+
+                                                $( this ).off( event );
+                        });
+
+
+
+                </script>
+
+
+
     </div>
-    <div id="{{fabCatagory}}" class="panel-collapse collapse">
+    <div id="{{fabCatagory.categoryId}}" class="panel-collapse collapse">
       <div class="panel-body">
         
-             <div class="list-group">
-
-                      {%for fabCatagory in topics %}
+             <div id="{{fabCatagory.categoryId}}topics" class="list-group">
+                
                                     
                                     
-                                    <a href="/companion/category/{{ fabCatagory }}" class="list-group-item">{{ fabCatagory.topic }}</a>
-                                    
+                        <!--Ajax Data Goes Here-->
                                 
                                 
-                      {% endfor %}
+                
             </div>       
         
       </div>

@@ -5,12 +5,14 @@ from imagekit.processors import ResizeToFill
 
 class Catagories(models.Model):
 	catagory = models.CharField(max_length=128)
+	categoryId = models.CharField(max_length=128)
 	def __unicode__(self):
 		return self.catagory 
 
 class Topics(models.Model):
 	fabCatagory = models.ForeignKey(Catagories)
 	topic = models.CharField(max_length=128)
+	topicId = models.CharField(max_length=128)
 	def __unicode__(self):
 		return self.topic 
 

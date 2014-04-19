@@ -91,6 +91,7 @@ INSTALLED_APPS = (
     'haystack',
     'imagekit',
     'embed_video',
+    'annoying',
 )
 #User Profile Settings
 AUTH_PROFILE_MODULE = "login.UserProfile"

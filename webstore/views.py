@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from webstore.bing_search import run_query
 import simplejson as json
 from haystack.query import SearchQuerySet
+from django.forms.models import model_to_dict
 from copy import deepcopy
 
 def webstore(request,id):

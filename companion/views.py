@@ -10,8 +10,8 @@ def companion(request, id):
     context = RequestContext(request)
     ids = Catagories.objects.get(catagory=id)
     
-    topics = Topics.objects.filter(fabCatagory_id=ids.id).all()
-
+    #topics = Topics.objects.filter(fabCatagory_id=ids.id).all()
+    topics = Topics.objects.all()
     #fabrics = Fabrics.objects.filter(fabTop=)
     fab_categories = Catagories.objects.all()
     

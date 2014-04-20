@@ -10,17 +10,11 @@ from django.http import HttpResponse
 from django.forms.models import model_to_dict
 
 def companion(request, id):
+    context = RequestContext(request)
+    	
+    fab_categories = Catagories.objects.all()
     
-    
-    	context = RequestContext(request)
-    	ids = Catagories.objects.get(catagory=id)
-    
-    	topics = Topics.objects.filter(fabCatagory_id=ids.id).all()
-    	#topics = Topics.objects.all()
-    	#fabrics = Fabrics.objects.filter(fabTop=)
-    	fab_categories = Catagories.objects.all()
-    
-    	return render_to_response('companion/companion-homepage.html', { 'fab_categories': fab_categories},context)
+    return render_to_response('companion/companion-homepage.html', { 'fab_categories': fab_categories},context)
     
 
 def getImage(request, id, directory, image_name):
@@ -37,3 +31,6 @@ def topic(request, id):
         print topics
         topic_list = json.dumps({'topics':topics})
         return HttpResponse(topic_list, content_type='application/json')
+
+
+

@@ -35,8 +35,8 @@
         </a>
       </h4>
                 <script type="text/javascript">
-                        $("#{{fabCatagory.categoryId}}btn").on('click', function(event){
-
+                        //$("#{{fabCatagory.categoryId}}btn").on('click', function(event){
+                            $(document).ready(function(){
                                 
                                                        
                                             $.ajax({
@@ -48,9 +48,11 @@
                                                         for(var i=0; i < result.topics.length; i++){
                                                            $("#{{fabCatagory.categoryId}}topics").append(
 
-                                                            "<a id="+result.topics[i].topicId+" class='list-group-item'>"+result.topics[i].topic+"</a>"
+                        "<a id='"+result.topics[i].topicId+"' class='list-group-item' ><li>"+result.topics[i].topic+"</li></a>"
 
-                                                            );
+                                                            );//end append
+
+
                                                         } 
 
                                                 },
@@ -60,10 +62,10 @@
 
 
 
-                                                $( this ).off( event );
-                        });
+                                                //$( this ).off( event ); //prevent function from being launched by the same button
+                                            });
 
-
+                                            
 
                 </script>
 
@@ -74,22 +76,35 @@
       <div class="panel-body">
         
              <div id="{{fabCatagory.categoryId}}topics" class="list-group">
-                
-                                    
-                                    
-                        <!--Ajax Data Goes Here-->
-                                
-                                
+                    <!--Ajax Data Goes Here-->
+                              
+                              
                 
             </div>       
-        
+                         
       </div>
     </div>
   </div>
   {%endfor%}
 </div>
 
-    
+     <script type="text/javascript">         
+                         var topicLinkId = $(".list-group").attr('id');
+                        $("#" + topicLinkId ).on('click', function(){ 
+                                    $.ajax({
+                                                 dataType: 'json',
+                                                 type: 'GET',
+                                                 url: '/companion/topic/{{fabCatagory}}/',
+                                                 success: function(result){
+                                                        for(var i=0; i < result.topics.length; i++){
+                                                           $("#{{fabCatagory.categoryId}}topics").append(
+
+                                                                "<a id='"+result.topics[i].topicId+"' class='list-group-item' ><li>"+result.topics[i].topic+"</li></a>"
+
+                                                            );
+        }) ;         
+                        
+     </script>
 
 
             </div>
@@ -141,11 +156,11 @@
 		
                 <div class="row-fluid">
 		
-		<!--Fabric
+		
                     
 		  <div  class="col-sm-4 col-lg-4 col-md-4">
                         <div  class="thumbnail">
-                            <img src="{{ category.picture }}" alt="">
+                            <img src="https://i.imgur.com/8ux49gm.jpg" alt="">
                             <div class="caption">
                                 <h4 class="pull-right">${{ category.price }}</h4>
                                 <h4><a  data-toggle="modal" data-target="#{{ category.itemNameid }}">{{ category.itemName }}</a>
@@ -155,7 +170,7 @@
                         </div>
                     </div>
 		  
-		-->
+		
 
 		
                 

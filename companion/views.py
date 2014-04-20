@@ -26,7 +26,7 @@ def getImage(request, id, directory, image_name):
 
 def topic(request, id):   
         
-        id = id.replace("amp; "," ") #This line is needed to remove generated & character encoding "amp;""
+        id = id.replace("amp; "," ") #This line is needed to remove generated '&' character encoding, "amp;"
         
         ids = Catagories.objects.get(catagory=id)
         topics = [model_to_dict(topic) for topic in Topics.objects.filter(fabCatagory_id=ids.id)]

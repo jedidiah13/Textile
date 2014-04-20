@@ -1,5 +1,4 @@
 from django.db import models
-from embed_video.fields import EmbedVideoField
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
@@ -32,7 +31,7 @@ class Fabrics(models.Model):
                                            processors=[ResizeToFill(500, 370)],
                                            format='JPEG',
                                            options={'quality': 60},blank=True)
-	fabVideo = EmbedVideoField(blank=True)
+	
 	fabVideoURL = models.URLField(blank=True)
 	isPremium = models.BooleanField(default=False)
 	def __unicode__(self):

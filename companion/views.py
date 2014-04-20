@@ -19,16 +19,18 @@ def companion(request, id):
 
 def getImage(request, id, directory, image_name):
     imagelocation = directory + "/" + image_name
-    print imagelocation
+    
     image_data = open(imagelocation, "rb").read()
     return HttpResponse(image_data, mimetype="image/png")  
 
 
 def topic(request, id):   
-        print id
+        
+        id = id.replace("amp; "," ") #This line is needed to remove generated & character encoding "amp;""
+        
         ids = Catagories.objects.get(catagory=id)
         topics = [model_to_dict(topic) for topic in Topics.objects.filter(fabCatagory_id=ids.id)]
-        print topics
+        
         topic_list = json.dumps({'topics':topics})
         return HttpResponse(topic_list, content_type='application/json')
 

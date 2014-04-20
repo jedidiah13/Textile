@@ -36,8 +36,7 @@
     <script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/html5shiv.js' %}"></script>
 
-    <!--eldarion ajax-->
-    <script type="text/javascript" src="{% static 'js/eldarion/eldarion-ajax.js' %}"></script>
+    
     
     <!--bootstrap Javascript-->
     <script src="{% static 'js/bootstrap.js' %}"></script>
@@ -135,7 +134,7 @@
 		    
                        
              	   if(!result['success']){
-			console.log('called1')			
+					
 			$('#dropDownDefault').show();
 			$('#caret2').hide()
 			$('#dropDownLoggedIn').hide();
@@ -143,7 +142,7 @@
       
 		   }
 		   else{
-		   	console.log('called2')
+		   	
 			
 			$('#dropDownDefault').hide();
 			$('#caret2').show();

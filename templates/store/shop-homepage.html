@@ -52,7 +52,7 @@
             
                 <a  id="searchBtn" class="btn btn-primary" value="search"><span class="glyphicon glyphicon-search"></span></a>
             
-	              <input type="text" class="form-control" autocomplete="off"  name="q" size="50" id="id_q" />
+	              <input type="text" class="form-control" autocomplete="off"  name="q" size="50" id="id_q" placeholder="Search Store" />
                 
             </div>  
             <br />
@@ -513,7 +513,16 @@ $(document).ready(function () {
         <button type="button" class="btn btn-primary">Update Cart</button>
         <button type="button" class="btn btn-success">Checkout</button>
 
-        
+        <form action="/charge" method="POST">
+		  <script
+			src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+			data-key="pk_test_yD655evWLtvSxwTJv5S6OxV0"
+			data-image="/store_images/product_150.jpg"
+			data-name="Tektiles"
+			data-description="Fabrics ($10.00)"
+			data-amount="1000">
+		  </script>
+		</form>
 
       </div>
     </div>

@@ -45,18 +45,16 @@
                                                  url: '/companion/topic/{{fabCatagory}}/',
                                                  
                                                  success: function(result){
+                                                    
                                                         for(var i=0; i < result.topics.length; i++){
                                                            $("#{{fabCatagory.categoryId}}topics").append(
 
                         "<a id='"+result.topics[i].topicId+"' class='list-group-item' ><li>"+result.topics[i].topic+"</li></a>"
 
-                                                            );//end append
+                                                            );
 
-
-                                                        } 
-
-                                                },
-                                                 
+                                                }
+                                             },    
                                             });
 
 
@@ -78,7 +76,7 @@
              <div id="{{fabCatagory.categoryId}}topics" class="list-group">
                     <!--Ajax Data Goes Here-->
                               
-                              
+                                 
                 
             </div>       
                          
@@ -87,23 +85,26 @@
   </div>
   {%endfor%}
 </div>
+            <!--Event Handler for dynamically created links -->
+     <script type="text/javascript">
 
-     <script type="text/javascript">         
-                         var topicLinkId = $(".list-group").attr('id');
-                        $("#" + topicLinkId ).on('click', function(){ 
-                                    $.ajax({
+            $(document).on('click', '.list-group-item', function(e){
+                    myTopic = $(this).attr('id') 
+                    $.ajax({
                                                  dataType: 'json',
                                                  type: 'GET',
-                                                 url: '/companion/topic/{{fabCatagory}}/',
+                                                 url: '/companion/fabric/' + myTopic,
+                                                 
                                                  success: function(result){
-                                                        for(var i=0; i < result.topics.length; i++){
-                                                           $("#{{fabCatagory.categoryId}}topics").append(
+                                                   //<img src="https://i.imgur.com/8ux49gm.jpg" alt="">  
+                                                      
+                                                    console.log(result[0].fields.fabName)
+                                                
+                                             },    
+                                            });//end ajax
 
-                                                                "<a id='"+result.topics[i].topicId+"' class='list-group-item' ><li>"+result.topics[i].topic+"</li></a>"
+                });//end event handler 
 
-                                                            );
-        }) ;         
-                        
      </script>
 
 
@@ -160,7 +161,10 @@
                     
 		  <div  class="col-sm-4 col-lg-4 col-md-4">
                         <div  class="thumbnail">
-                            <img src="https://i.imgur.com/8ux49gm.jpg" alt="">
+                            <div id="imageBlock">
+                            
+
+                            </div>
                             <div class="caption">
                                 <h4 class="pull-right">${{ category.price }}</h4>
                                 <h4><a  data-toggle="modal" data-target="#{{ category.itemNameid }}">{{ category.itemName }}</a>

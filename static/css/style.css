@@ -28,3 +28,8 @@ body {
 .modExample .btn{
     margin: 4px 8px 4px 0;
 }
+
+#companion-image{
+  border:0px solid white !important;
+  border-radius:20px !important;
+}

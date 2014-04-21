@@ -96,14 +96,57 @@
                                                  url: '/companion/fabric/' + myTopic,
                                                  
                                                  success: function(result){
-                                                   //<img src="https://i.imgur.com/8ux49gm.jpg" alt="">  
-                                                      
-                                                    console.log(result[0].fields.fabName)
-                                                
-                                             },    
-                                            });//end ajax
+                                                    for(var i = 0; i < result.length;i++){
+                                                    //thumbnail objects dynamic creation.  
+                                                    $("#blockContent").append("<div  class='col-sm-4 col-lg-4 col-md-4'>"+
+                                                                                    "<div  class='thumbnail'>"+
+                                                                                        "<img src="+result[i].fields.fabImage+" alt=''>"+
+                                                                                    "<div class='caption'>"+
+                                                                                            "<h4>"+
+                                "<a  data-toggle='modal' data-target='#"+ "modal-target-"+ i +"' >"+ result[i].fields.fabName +"</a>"+
+                                                                                            "</h4>"+
+                                                                                    "</div>"+
 
-                });//end event handler 
+                                                                                    "</div>"+
+                                                                                 "</div>");
+
+
+//modal dynamic Creatation 
+$("#dynamicModals").append(
+    "<div class='modal fade' id='"+ "modal-target-"+ i +"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"+
+        "<div class='modal-dialog'>"+
+            "<div class='modal-content'>"+
+                "<div class='modal-header'>"+
+                    "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"+
+                        "<h4 class='modal-title' id='myModalLabel'><span class='label label-success'>"+result[i].fields.fabName+"</span></h4>"+
+                "</div>"+
+            "<div class='modal-body row'>"+
+                "<div class='span6'>"+
+                    "<div class='row text-center'>"+
+                        "<img data-toggle='magnify' src='"+result[i].fields.fabImage+"' alt=''>"+
+                    "</div>"+
+                "</div>"+
+                "<div class='span6'>"+
+    
+                    result[i].fields.fabDescription+
+
+                "</div>"+
+                "</div>"+
+            "<div class='modal-footer'>"+
+                "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
+            "</div>"+
+        "</div>"+
+    "</div>"+
+"</div>");
+
+
+
+                                                    
+                                                    }//end for 
+                                                },//end success    
+                    });//end ajax
+
+            });//end event handler 
 
      </script>
 
@@ -155,24 +198,12 @@
          </script>		
 
 		
-                <div class="row-fluid">
+                <div id="blockContent" class="row-fluid">
 		
 		
-                    
-		  <div  class="col-sm-4 col-lg-4 col-md-4">
-                        <div  class="thumbnail">
-                            <div id="imageBlock">
-                            
+          <!-- Add For Loop Here to Create Multiple --> 
 
-                            </div>
-                            <div class="caption">
-                                <h4 class="pull-right">${{ category.price }}</h4>
-                                <h4><a  data-toggle="modal" data-target="#{{ category.itemNameid }}">{{ category.itemName }}</a>
-                                </h4>
-                            </div>
-
-                        </div>
-                    </div>
+		  
 		  
 		
 
@@ -212,35 +243,12 @@
     
 
 </body>
-{% for category in items %}
-<!-- Modal -->
-<div class="modal fade" id="{{ category.itemNameid }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-       <h4 class="modal-title" id="myModalLabel"><span class="label label-success">{{ category.itemName }}</span></h4>
-      </div>
-      <div class="modal-body row">
-	 <div class="span6">
-       
-   		<div class="row text-center">
-        		<img data-toggle="magnify" src="{{ category.picture }}" alt="">
-		</div>
-	</div>
-	<div class="span6">
-	
-    		{{ category.description }}
-  	</div>
-         
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Add To Cart</button>
-      </div>
-    </div>
-  </div>
+<!-- Modal -->
+<div id="dynamicModals">
+    
+    <!--modals will be dynamically created Here -->
+
 </div>
 
 <script type="text/javascript">
@@ -372,6 +380,6 @@ https://github.com/marcaube/bootstrap-magnify
 
 } ( window.jQuery );
 </script>
-{% endfor %}
+
 {% endblock %}
 

@@ -87,19 +87,35 @@
 </div>
             <!--Event Handler for dynamically created links -->
      <script type="text/javascript">
+           $(document).ready(function(event){
+            
+            var lastClicked
 
             $(document).on('click', '.list-group-item', function(e){
                     myTopic = $(this).attr('id') 
+                    //initialize last clicked item
+                    
+                    
+
+                    
                     $.ajax({
                                                  dataType: 'json',
                                                  type: 'GET',
                                                  url: '/companion/fabric/' + myTopic,
                                                  
                                                  success: function(result){
+
+                                                if(lastClicked != myTopic){
+
+                                                    //clear last content
+                                                    $("#blockContent").empty();
+                                                    $('#dynamicModals').empty();
+
+                                                    //create content
                                                     for(var i = 0; i < result.length;i++){
+                                                    
                                                     //thumbnail objects dynamic creation.  
-                                                    $("#blockContent").append("<div  class='col-sm-4 col-lg-4 col-md-4'>"+
-                                                                                    "<div  class='thumbnail'>"+
+                                                    $("#blockContent").append("<div  class='thumbnail'>"+
                                                                                         "<img src="+result[i].fields.fabImage+" alt=''>"+
                                                                                     "<div class='caption'>"+
                                                                                             "<h4>"+
@@ -107,8 +123,9 @@
                                                                                             "</h4>"+
                                                                                     "</div>"+
 
-                                                                                    "</div>"+
-                                                                                 "</div>");
+                                                                                    "</div>");
+                                                                                 
+                                                                                    
 
 
 //modal dynamic Creatation 
@@ -140,14 +157,17 @@ $("#dynamicModals").append(
 "</div>");
 
 
-
+                                            
                                                     
                                                     }//end for 
-                                                },//end success    
+                                                    lastClicked = myTopic
+                                                    }//end if 
+                                                },//end success  
+
                     });//end ajax
-
+                                      
             });//end event handler 
-
+            });
      </script>
 
 
@@ -198,10 +218,10 @@ $("#dynamicModals").append(
          </script>		
 
 		
-                <div id="blockContent" class="row-fluid">
+                <div class="row-fluid" style="padding-top:3%;">
+		            <div id="blockContent"  class='col-sm-4 col-lg-4 col-md-4'>
 		
-		
-          <!-- Add For Loop Here to Create Multiple --> 
+           
 
 		  
 		  
@@ -209,7 +229,7 @@ $("#dynamicModals").append(
 
 		
                 
-		   
+		            </div>
                 </div>
 
                 <!-- Pagenation Still Needs to be taken Care Of -->
@@ -249,7 +269,7 @@ $("#dynamicModals").append(
     
     <!--modals will be dynamically created Here -->
 
-</div>
+
 
 <script type="text/javascript">
   
@@ -380,6 +400,6 @@ https://github.com/marcaube/bootstrap-magnify
 
 } ( window.jQuery );
 </script>
-
+</div>
 {% endblock %}
 

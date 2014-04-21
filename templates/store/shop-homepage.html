@@ -401,16 +401,16 @@ $(document).ready(function () {
 
 
 });</script>   
-		</div>
-	</div>
-	<div class="col-lg-8 col-lg-offset-2 center-text">
-	
-    		{{ category.description }}
-  	</div>
+    </div>
+  </div>
+  <div class="span6">
+  
+        {{ category.description }}
+    </div>
          
       </div>
       <div class="modal-footer">
-	
+  
      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <a  id="{{ category.itemNameid }}addtocart" class="btn btn-primary">Add To Cart</a>
         <script type="text/javascript">
@@ -426,9 +426,37 @@ $(document).ready(function () {
 
               success: function(result){
                       console.log('added to cart');
-                      //this works
-                      //console.log(result['success']);
-                      //queryDatabase(result);
+                      console.log(result.cart);
+
+                      $("#cartModalItems").empty(); // clear the display of the cart
+                      for(var i = 0; i < result.cart.length; i++){
+                        console.log("item: " + result.cart[i][0]);
+                        console.log("item: " + result.cart[i][1]);
+                        var bigstring =  "<div class='row individual-item'>" + "<div class='col-lg-3'>" + "<p align=center>" + result.cart[i][0] + "</p>" +"</div>" + "<div class='col-lg-3'>" + "</div>" + "<div class='col-lg-3'>"+ "<input type='text' placeholder='" + result.cart[i][1] + "' />" + "</div>" + "</div>";
+                        $("#cartModalItems").append(bigstring);
+                       /* $("#cartModalItems").append(
+          <div class="row individual-item">
+            <div class="col-lg-3"><!--Item Picture/Description-->
+              <p>" + result.cart[i][0] + "</p>
+              <!--<img class="cart-item" src="" + {% static 'images/carousel/sewing.jpg' %} + "">-->
+            </div>
+            <div class="col-lg-3"><!-- Price Per Item-->
+              <p align=center>$" + "X.XX" + "</p>
+            </div>
+            <div class="col-lg-3"><!--Quantity (Updatable box)-->
+              <input type="text" placeholder=" + result.cart[i][1] + ">
+            </div>
+            <div class="col-lg-3"><!--Item Total (Price per item * Quantity)-->
+              <p align=center>$" + "X.XX" + "</p>
+            </div>
+          </div>
+
+                      "); // end append */
+                      }
+                      // OKAY. Ajax has cooler ways to do this. I get it.
+                      //var cartModal = document.getElementById("cartModalContent").innerHTML;
+                      //cartModal = "<p>TEST</p>";
+
                }//end success
 
               });//end ajax
@@ -458,12 +486,7 @@ $(document).ready(function () {
        
 
       </div>
-      {% for itemName in cart %}
-          <p>
-            {{ itemName }}
-          </p>
-        {% endfor %}
-      <div class="modal-body">
+      <div class="modal-body" id="cartModalContent">
         <div class="row">
           <div class="col-lg-3">
               <p align=center>Item</p>
@@ -486,6 +509,7 @@ $(document).ready(function () {
                 Add Checkout button to bottom as well as subtotal
           -->
         <!--Everything from here to the next comment is a template for each indivual item. Should be dynamically loaded-->
+        <div id="cartModalItems">
           <div class="row individual-item">
             <div class="col-lg-3"><!--Item Picture/Description-->
               <img class="cart-item" src="{% static 'images/carousel/sewing.jpg' %}">
@@ -500,6 +524,7 @@ $(document).ready(function () {
               <p align=center>$X.XX</p>
             </div>
           </div>
+        </div>
         <!-- End of template for individual item -->
 
       </div>
@@ -511,16 +536,7 @@ $(document).ready(function () {
         <button type="button" class="btn btn-primary">Update Cart</button>
         <button type="button" class="btn btn-success">Checkout</button>
 
-        <form action="/charge" method="POST">
-		  <script
-			src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-			data-key="pk_test_yD655evWLtvSxwTJv5S6OxV0"
-			data-image="/store_images/product_150.jpg"
-			data-name="Tektiles"
-			data-description="Fabrics ($10.00)"
-			data-amount="1000">
-		  </script>
-		</form>
+        
 
       </div>
     </div>
@@ -528,4 +544,3 @@ $(document).ready(function () {
 </div>
 
 {% endblock %}
-

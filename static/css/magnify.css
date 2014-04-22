@@ -4,13 +4,15 @@ https://github.com/marcaube/bootstrap-magnify
 */
 
 .mag {
-    width:700px;
+    width:50%;
     margin: 0 auto;
     float: none;
 }
     
 .mag img {
     max-width: 100%;
+    border:0px solid white;
+    border-radius:15px;
 }
         
   

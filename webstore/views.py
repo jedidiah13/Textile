@@ -132,4 +132,3 @@ def deleteCart(request):
         request.session.pop('cartList')
     request.session.save()
     return render_to_response('store/shop-homepage.html',{'success': True},context)
-

@@ -90,6 +90,7 @@ INSTALLED_APPS = (
     'endless_pagination',
     'haystack',
     'imagekit',
+    'embed_video',
     'annoying',
 )
 #User Profile Settings

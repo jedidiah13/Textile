@@ -45,3 +45,18 @@
 .post{
 	line-height: 2.5em;
 }
+
+#companion-image img{
+  border:0px solid white !important;
+  border-radius:20px !important;
+}
+
+#companion-description{
+	margin-top:2%;
+}
+
+
+
+
+
+

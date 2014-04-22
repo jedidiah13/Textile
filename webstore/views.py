@@ -75,6 +75,9 @@ def buttonTest(request):
     return render_to_response('store/shop-homepage.html',{'success': True}, context)
 
 def addToCart(request, itemKey, quantity):
+    #print "FLUSHING THE SESSION"
+    #request.session.flush()
+
     print itemKey
     context = RequestContext(request)
     print request.session.keys()
@@ -82,24 +85,51 @@ def addToCart(request, itemKey, quantity):
     if quantity <= 0:
         removeFromCart(request, itemKey)
     if not 'cartList' in request.session:
-        request.session['cartList'] = {itemKey : {"quantity" : quantity}}
+        #request.session['cartList'] = {itemKey : {"quantity" : quantity}}
+        print "making a new cart"
+        print [itemKey, quantity]
+        request.session['cartList'] = []
+        request.session['cartList'].append([itemKey, quantity])
         # make a new cart
     else:
-        request.session['cartList'][itemKey] = {"quantity" : quantity}
+        print "inserting to cart"
+        print [itemKey, quantity]
+        alreadydone = False
+        for index in xrange(len(request.session['cartList'])):
+            print "at index ", index 
+            print "looking at ", request.session['cartList'][index]
+            if itemKey == request.session['cartList'][index][0]: # already in list
+                print "already in cart, updating quantity"
+                request.session['cartList'][index][1] = quantity
+                alreadydone = True
+                break
+        if not alreadydone: # append the new item to the cart
+            print "appending to cart"
+            request.session['cartList'].append([itemKey, quantity])
         # this works for modifying quantity as well as adding
+    print "printing session cart before save"
+    print request.session['cartList']
+    request.session.save()
     cart = deepcopy(request.session['cartList']) # wondering if this is needed...
-    print cart.keys()
-    return render_to_response('store/shop-homepage.html',{'cart':cart,'success': True},context)
+    print "printing cart list"
+    print cart
+
+    sendlist = json.dumps({'cart':cart})
+    return HttpResponse(sendlist, content_type='application/json')
+    #return render_to_response('store/shop-homepage.html',{'cart':cart,'success': True},context)
 
 def removeFromCart(request, itemKey):
     context = RequestContext(request)
     if 'cartList' in request.session and itemKey in request.session['cartList']:
-        request.session['cartList'].pop(itemKey)
+        pass
+        #request.session['cartList'].pop(itemKey)
+    request.session.save()
     return render_to_response('store/shop-homepage.html',{'success': True},context)
 
 def deleteCart(request):
     context = RequestContext(request)
     if 'cartList' in request.session:
         request.session.pop('cartList')
+    request.session.save()
     return render_to_response('store/shop-homepage.html',{'success': True},context)
 

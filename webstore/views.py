@@ -39,14 +39,8 @@ def searchStore(request):
     context = RequestContext(request)
     
     sqs = SearchQuerySet().filter(content=request.POST.get('search_text'))
-    #searchResults = StoreItem.objects.filter(itemName__icontains= sqs )
     result_list = serializers.serialize('json', StoreItem.objects.filter(itemName__icontains= request.POST.get('search_text') ), fields=('category','itemName','itemNameid','description','price','picture'))
-    #result_list = [result.itemName for result in sqs] 
-    print result_list
-        
-
-    #result_list = json.dumps({'result_list': result_list})
-    #return HttpResponse( json.dumps({'result_list': result_list}), content_type='application/json')
+    
     return HttpResponse(result_list, content_type='application/json')
 
 def autocomplete(request):

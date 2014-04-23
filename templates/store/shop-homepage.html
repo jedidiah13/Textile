@@ -63,7 +63,7 @@
 	$('#searchBtn').click(function(){   
                                 $.ajax({//begin
 
-                                         //dataType: 'json',
+                                         dataType: 'json',
                                          type: 'POST',
 					                               data: { 
                                                 'search_text' : $('#id_q').val(),
@@ -76,8 +76,47 @@
                                         //},
                                         success: function(result){
 					                                      //this works
-                                                console.log(result['result_list']);
-						                                    //queryDatabase(result);
+                                                $('#blockContent').empty();
+                                                
+						                                    for(var i = 0; i < result.length;i++){
+
+
+                                                    $('#blockContent').append(
+
+
+                                                  "<div  class='col-sm-4 col-lg-4 col-md-4>"+
+                                                    "<div  class='thumbnail'>"+
+                                                        "<img src='"+result[i].fields.picture+"' alt=''>"+
+                                                    "<div class='caption'>"+
+                                                            "<h4 class='pull-right'>$"+result[i].fields.price+"</h4>"+
+                                                              "<h4><a data-toggle='modal' data-target='#{{ category.itemNameid }}'>"+result[i].fields.itemName+"</a>"+
+                                                               "</h4>"+
+                                                    "</div>"+
+
+                                                    "</div>"+
+                                                    "</div>");
+
+
+
+
+
+
+
+                                                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                }//end for
 						          
 					                                    
                                                
@@ -204,7 +243,7 @@
   </script>
                 
 		
-    <div class="row-fluid" style="padding-top:3%">
+    <div id="blockContent" class="row-fluid" style="padding-top:3%">
 		
 		{% for category in items %}
                     

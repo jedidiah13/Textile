@@ -9,6 +9,7 @@ import simplejson as json
 from haystack.query import SearchQuerySet
 from django.forms.models import model_to_dict
 from copy import deepcopy
+from django.core import serializers
 
 def webstore(request,id):
     context = RequestContext(request)    
@@ -39,14 +40,14 @@ def searchStore(request):
     
     sqs = SearchQuerySet().filter(content=request.POST.get('search_text'))
     #searchResults = StoreItem.objects.filter(itemName__icontains= sqs )
-    result_list = StoreItem.objects.filter(itemName__icontains= sqs )
-    #result_list = [result.itemName for result in sqs]
-    
+    result_list = serializers.serialize('json', StoreItem.objects.filter(itemName__icontains= request.POST.get('search_text') ), fields=('category','itemName','itemNameid','description','price','picture'))
+    #result_list = [result.itemName for result in sqs] 
+    print result_list
         
 
-    #print json.dumps({'result_list': result_list})
+    #result_list = json.dumps({'result_list': result_list})
     #return HttpResponse( json.dumps({'result_list': result_list}), content_type='application/json')
-    return render_to_response('store/shop-homepage.html',{'result_list': result_list}, context)
+    return HttpResponse(result_list, content_type='application/json')
 
 def autocomplete(request):
     sqs = SearchQuerySet().autocomplete(content_auto=request.GET.get('q', ''))[:5]

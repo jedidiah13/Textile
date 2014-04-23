@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load staticfiles %}
+
+ <div class="modal-header">
+        <button type="button" class="btn btn-primary pull-right">Back to Store</button>
+
+        <h4 class="modal-title" id="myModalLabel">{% if user.is_authenticated %}
+                                                  {{user.username}}'s Shopping Cart</h4>
+                                                  {%else%}
+                                                  Shopping Cart</h4>
+                                                  {% endif %}
+
+                                                  <!----Need to update Via Java Script --> 
+       
+
+      </div>
+      <div class="modal-body" id="cartModalContent">
+        <div class="row">
+          <div class="col-lg-3">
+              <p align=center>Item</p>
+          </div>
+          <div class="col-lg-3">
+              <p align=center>Price (per item)</p>
+          </div>
+          <div class="col-lg-3">
+              <p align=center>Quantity</p>
+          </div>
+          <div class="col-lg-3">
+              <p align=center>Item Total</p>
+          </div>
+        </div>
+        <!-- Things to have in the item point:
+                Item (Picture/Description)
+                Price per Item
+                Quantity
+                Item Total (Price per * Quantity)
+                Add Checkout button to bottom as well as subtotal
+          -->
+        <!--Everything from here to the next comment is a template for each indivual item. Should be dynamically loaded-->
+        <div id="cartModalItems">
+          <div class="row individual-item">
+            <div class="col-lg-3"><!--Item Picture/Description-->
+              
+            </div>
+            <div class="col-lg-3"><!-- Price Per Item-->
+              
+            </div>
+            <div class="col-lg-3"><!--Quantity (Updatable box)-->
+              
+            </div>
+            <div class="col-lg-3"><!--Item Total (Price per item * Quantity)-->
+              
+            </div>
+          </div>
+        </div>
+        <!-- End of template for individual item -->
+
+      </div>
+      <div class="modal-footer">
+        <p>Subtotal:
+        $X.XX</p><!--Subtotal goes here-->
+        <button type="button" class="btn btn-success">Continue to Payment</button>
+
+        
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+{% endblock %}

@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^removeFromCart/(?P<itemKey>[\d]+)$',views.removeFromCart,name='removeFromCart'),
     url(r'^deleteCart/$', views.deleteCart, name='deleteCart'),
     url(r'^buttonTest/$', views.buttonTest, name='buttonTest'),
+    url(r'^checkout/$', views.checkout, name='checkout'),
 
 ) 

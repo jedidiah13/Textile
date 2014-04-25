@@ -33,16 +33,19 @@ body {
 
 .thumbnail img {
   width: 100%;
+  cursor: pointer;
 }
 
 
 .thumbnail {
   padding: 0;
+  cursor: pointer;
 }
 
 .thumbnail .caption-full {
   padding: 9px;
   color: #333;
+  cursor: pointer;
 }
 
 footer {

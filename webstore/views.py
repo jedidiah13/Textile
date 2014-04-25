@@ -57,9 +57,6 @@ def autocomplete(request):
 
 def query(request):
     context = RequestContext(request)
-    
-            
-
     return render_to_response('store/shop-homepage.html',{'success': True},context)
 
 # The car is stored in the session as a dictionary of a dictionary that has
@@ -127,3 +124,13 @@ def deleteCart(request):
         request.session.pop('cartList')
     request.session.save()
     return render_to_response('store/shop-homepage.html',{'success': True},context)
+
+
+def checkout(request):
+    context = RequestContext(request)
+    return render_to_response('store/checkout.html',{'success': True},context)
+
+
+
+
+

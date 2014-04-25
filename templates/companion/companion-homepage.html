@@ -131,10 +131,60 @@
                                                                                     "</div>"+"</div>");
                                                      
                                                     
-                                                                                 
+if(result[i].fields.fabVideoURL){                                                                                 
                                                                                     
-if(result[i].fields.fabImage_secondary){
-   //modal dynamic Creatation 
+    if(result[i].fields.fabImage_secondary){
+       //modal dynamic Creatation 
+        $("#dynamicModals").append(
+            "<div class='modal fade' id='"+ "modal-target-"+ i +"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"+
+                "<div class='modal-dialog'>"+
+                    "<div class='modal-content'>"+
+                        "<div class='modal-header'>"+
+                            "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"+
+                                "<h4 class='modal-title' id='myModalLabel'><span class='label label-success'>"+result[i].fields.fabName+"</span></h4>"+
+                        "</div>"+
+                    "<div class='modal-body row'>"+
+                        "<ul class='nav nav-tabs'>"+
+                          "<li class='active'><a href='#description' data-toggle='tab'>Description</a></li>"+
+                          "<li><a href='#video' data-toggle='tab'>Video</a></li>"+
+                        "</ul>"+
+                        "<div class='tab-content'>"+
+                            "<div class='tab-pane active' id='description' style='margin-top:2%'>"+
+                                "<div class='col-lg-6'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<img data-toggle='magnify' src='"+result[i].fields.fabImage+"' alt=''>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='col-lg-6'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<img data-toggle='magnify' src='"+result[i].fields.fabImage_secondary+"' alt='' width='250px' height='185px'>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='col-lg-8 col-lg-offset-2' id='companion-description'>"+
+                    
+                                    result[i].fields.fabDescription+
+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='tab-pane' id='video' style='margin-top:2%'>"+
+                                "<div class='col-lg-6 col-lg-offset-2'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<iframe width='420' height='315' src='" + result[i].fields.fabVideoURL + "' frameborder='0' allowfullscreen></iframe>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"+
+                    "</div>"+
+                    "<div class='modal-footer'>"+
+                        "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
+                    "</div>"+
+                "</div>"+
+            "</div>"+
+        "</div>");
+
+    }
+    else{
+    //modal dynamic Creatation 
     $("#dynamicModals").append(
         "<div class='modal fade' id='"+ "modal-target-"+ i +"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"+
             "<div class='modal-dialog'>"+
@@ -144,14 +194,90 @@ if(result[i].fields.fabImage_secondary){
                             "<h4 class='modal-title' id='myModalLabel'><span class='label label-success'>"+result[i].fields.fabName+"</span></h4>"+
                     "</div>"+
                 "<div class='modal-body row'>"+
-                    "<div class='col-lg-6'>"+
+                    "<ul class='nav nav-tabs'>"+
+                          "<li class='active'><a href='#description' data-toggle='tab'>Description</a></li>"+
+                          "<li><a href='#video' data-toggle='tab'>Video</a></li>"+
+                        "</ul>"+
+                        "<div class='tab-content'>"+
+                            "<div class='tab-pane active' id='description' style='margin-top:2%'>"+
+                                "<div class='col-lg-6'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<img data-toggle='magnify' src='"+result[i].fields.fabImage+"' alt=''>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='col-lg-6'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<img data-toggle='magnify' src='"+result[i].fields.fabImage_secondary+"' alt='' width='250px' height='185px'>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='tab-pane' id='video' style='margin-top:2%'>"+
+                                "<div class='col-lg-6 col-lg-offset-2'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<iframe width='420' height='315' src='" + result[i].fields.fabVideoURL + "' frameborder='0' allowfullscreen></iframe>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"+
+                "</div>"+
+                "<div class='modal-footer'>"+
+                    "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
+                "</div>"+
+            "</div>"+
+        "</div>"+
+    "</div>");
+    }
+}
+else{
+        if(result[i].fields.fabImage_secondary){
+       //modal dynamic Creatation 
+        $("#dynamicModals").append(
+            "<div class='modal fade' id='"+ "modal-target-"+ i +"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"+
+                "<div class='modal-dialog'>"+
+                    "<div class='modal-content'>"+
+                        "<div class='modal-header'>"+
+                            "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"+
+                                "<h4 class='modal-title' id='myModalLabel'><span class='label label-success'>"+result[i].fields.fabName+"</span></h4>"+
+                        "</div>"+
+                    "<div class='modal-body row'>"+
+                        "<div class='col-lg-6'>"+
+                            "<div class='row text-center' id='companion-image'>"+
+                                "<img data-toggle='magnify' src='"+result[i].fields.fabImage+"' alt=''>"+
+                            "</div>"+
+                        "</div>"+
+                        "<div class='col-lg-6'>"+
+                            "<div class='row text-center' id='companion-image'>"+
+                                "<img data-toggle='magnify' src='"+result[i].fields.fabImage_secondary+"' alt='' width='250px' height='185px'>"+
+                            "</div>"+
+                        "</div>"+
+                        "<div class='col-lg-8 col-lg-offset-2' id='companion-description'>"+
+            
+                            result[i].fields.fabDescription+
+
+                        "</div>"+
+                        "</div>"+
+                    "<div class='modal-footer'>"+
+                        "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
+                    "</div>"+
+                "</div>"+
+            "</div>"+
+        "</div>");
+
+    }
+    else{
+    //modal dynamic Creatation 
+    $("#dynamicModals").append(
+        "<div class='modal fade' id='"+ "modal-target-"+ i +"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"+
+            "<div class='modal-dialog'>"+
+                "<div class='modal-content'>"+
+                    "<div class='modal-header'>"+
+                        "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"+
+                            "<h4 class='modal-title' id='myModalLabel'><span class='label label-success'>"+result[i].fields.fabName+"</span></h4>"+
+                    "</div>"+
+                "<div class='modal-body row'>"+
+                    "<div class='col-lg-6 col-lg-offset-3'>"+
                         "<div class='row text-center' id='companion-image'>"+
                             "<img data-toggle='magnify' src='"+result[i].fields.fabImage+"' alt=''>"+
-                        "</div>"+
-                    "</div>"+
-                    "<div class='col-lg-6'>"+
-                        "<div class='row text-center' id='companion-image'>"+
-                            "<img data-toggle='magnify' src='"+result[i].fields.fabImage_secondary+"' alt='' width='250px' height='185px'>"+
                         "</div>"+
                     "</div>"+
                     "<div class='col-lg-8 col-lg-offset-2' id='companion-description'>"+
@@ -166,37 +292,10 @@ if(result[i].fields.fabImage_secondary){
             "</div>"+
         "</div>"+
     "</div>");
+    }
 
 }
-else{
-//modal dynamic Creatation 
-$("#dynamicModals").append(
-    "<div class='modal fade' id='"+ "modal-target-"+ i +"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"+
-        "<div class='modal-dialog'>"+
-            "<div class='modal-content'>"+
-                "<div class='modal-header'>"+
-                    "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"+
-                        "<h4 class='modal-title' id='myModalLabel'><span class='label label-success'>"+result[i].fields.fabName+"</span></h4>"+
-                "</div>"+
-            "<div class='modal-body row'>"+
-                "<div class='col-lg-6 col-lg-offset-3'>"+
-                    "<div class='row text-center' id='companion-image'>"+
-                        "<img data-toggle='magnify' src='"+result[i].fields.fabImage+"' alt=''>"+
-                    "</div>"+
-                "</div>"+
-                "<div class='col-lg-8 col-lg-offset-2' id='companion-description'>"+
-    
-                    result[i].fields.fabDescription+
 
-                "</div>"+
-                "</div>"+
-            "<div class='modal-footer'>"+
-                "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
-            "</div>"+
-        "</div>"+
-    "</div>"+
-"</div>");
-}
 
 
                                             

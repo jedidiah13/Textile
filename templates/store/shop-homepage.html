@@ -275,14 +275,52 @@
 		{% for category in items %}
                     
 		  <div  class="col-sm-4 col-lg-4 col-md-4">
-                        <div  class="thumbnail">
-                            <img src="{{ category.picture }}" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">${{ category.price }}</h4>
-                                <h4><a data-toggle="modal" data-target="#{{ category.itemNameid }}">{{ category.itemName }}</a>
-                                </h4>
-                            </div>
 
+                        <div  class="thumbnail">
+                        <h4><a data-toggle="modal" data-target="#{{ category.itemNameid }}" style="cursor: pointer;">{{ category.itemName }} </a>
+                                </h4>
+
+                            <img src="{{ category.picture }}" alt="" data-toggle="modal" data-target="#{{ category.itemNameid }}" style="cursor: pointer;">
+                            
+                                <div class="caption">
+                                  
+                                <h4 class="pull-left">${{ category.price }}</h4>
+                                
+                                <div class="pull-right"><a  id="{{ category.itemNameid }}addtocartgrid" class="btn btn-primary btn-sm ">Add To Cart</a>
+
+                                  <script type="text/javascript">
+                                      $('#{{ category.itemNameid }}addtocartgrid').click(function(){   
+                                        $.ajax({
+
+                                        type: 'POST',
+                                         data: { 
+                                              'notmuch' : 'stuff',
+                                              'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+                                          },
+                                         url:  '{% url "addToCart" category.itemNameid 1 %}',
+
+                                           success: function(result){
+                                            console.log('added to cart');
+                                            console.log(result.cart);
+
+                                              $("#cartModalItems").empty(); // clear the display of the cart
+                                                for(var i = 0; i < result.cart.length; i++){
+                                                    console.log("item: " + result.cart[i][0]);
+                                                    console.log("item: " + result.cart[i][1]);
+                                                    var bigstring =  "<div class='row individual-item'>" + "<div class='col-lg-3'>" + "<p align=center>" + result.cart[i][0] + "</p>" +"</div>" + "<div class='col-lg-3'>" + "</div>" + "<div class='col-lg-3'>"+ "<input type='text' placeholder='" + result.cart[i][1] + "' />" + "</div>" + "</div>";
+                                              $("#cartModalItems").append(bigstring);
+            
+                      }
+                      
+
+                                              }//end success
+
+                                            });//end ajax
+                                      });              
+                                    </script>
+
+                                  </div>
+                            </div>
                         </div>
                     </div>
 		  
@@ -476,7 +514,7 @@ $(document).ready(function () {
          
       </div>
       <div class="modal-footer">
-  
+    <h4>Price: ${{ category.price }}</h4>
      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <a  id="{{ category.itemNameid }}addtocart" class="btn btn-primary">Add To Cart</a>
         <script type="text/javascript">
@@ -578,16 +616,16 @@ $(document).ready(function () {
         <div id="cartModalItems">
           <div class="row individual-item">
             <div class="col-lg-3"><!--Item Picture/Description-->
-              <img class="cart-item" src="{% static 'images/carousel/sewing.jpg' %}">
+              
             </div>
             <div class="col-lg-3"><!-- Price Per Item-->
-              <p align=center>$X.XX</p>
+              
             </div>
             <div class="col-lg-3"><!--Quantity (Updatable box)-->
-              <input type="text" placeholder="0">
+              
             </div>
             <div class="col-lg-3"><!--Item Total (Price per item * Quantity)-->
-              <p align=center>$X.XX</p>
+              
             </div>
           </div>
         </div>
@@ -600,7 +638,7 @@ $(document).ready(function () {
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
         <button type="button" class="btn btn-primary">Update Cart</button>
-        <button type="button" class="btn btn-success">Checkout</button>
+        <button type="button" class="btn btn-success"><a href="webstore/checkout/">Checkout</a></button>
 
         
 

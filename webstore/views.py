@@ -69,7 +69,8 @@ def buttonTest(request):
 def addToCart(request, itemKey, quantity):
     #print "FLUSHING THE SESSION"
     #request.session.flush()
-
+    thisitemName = StoreItem.objects.get(itemNameid=itemKey)
+    print thisitemName.itemName
     print itemKey
     context = RequestContext(request)
     print request.session.keys()
@@ -81,7 +82,7 @@ def addToCart(request, itemKey, quantity):
         print "making a new cart"
         print [itemKey, quantity]
         request.session['cartList'] = []
-        request.session['cartList'].append([itemKey, quantity])
+        request.session['cartList'].append([thisitemName.itemName, quantity]) 
         # make a new cart
     else:
         print "inserting to cart"
@@ -97,7 +98,7 @@ def addToCart(request, itemKey, quantity):
                 break
         if not alreadydone: # append the new item to the cart
             print "appending to cart"
-            request.session['cartList'].append([itemKey, quantity])
+            request.session['cartList'].append([thisitemName.itemName, quantity])
         # this works for modifying quantity as well as adding
     print "printing session cart before save"
     print request.session['cartList']

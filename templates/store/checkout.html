@@ -31,6 +31,9 @@
               <p align=center>Item Total</p>
           </div>
         </div>
+        
+
+        
         <!-- Things to have in the item point:
                 Item (Picture/Description)
                 Price per Item
@@ -39,10 +42,11 @@
                 Add Checkout button to bottom as well as subtotal
           -->
         <!--Everything from here to the next comment is a template for each indivual item. Should be dynamically loaded-->
+        {% for item in items %}
         <div id="cartModalItems">
           <div class="row individual-item">
             <div class="col-lg-3"><!--Item Picture/Description-->
-              
+              <p>{{ item.itemID.itemName }}</p>
             </div>
             <div class="col-lg-3"><!-- Price Per Item-->
               
@@ -55,6 +59,7 @@
             </div>
           </div>
         </div>
+        {% endfor %}
         <!-- End of template for individual item -->
 
       </div>

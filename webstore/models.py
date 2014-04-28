@@ -4,9 +4,6 @@ from imagekit.processors import ResizeToFill
 
 
 
-
-
-
 class StoreCategory(models.Model):
 	categoryName = models.CharField(max_length=128)
 	def __unicode__(self):
@@ -22,37 +19,43 @@ class StoreItem(models.Model):
 	quantity = models.IntegerField(default=0) 
 	#picture = models.ImageField(upload_to='store_images', blank=False)
 	picture = ProcessedImageField(upload_to='avatars',
-                                           processors=[ResizeToFill(250, 185)],
-                                           format='JPEG',
-                                           options={'quality': 60})
+								processors=[ResizeToFill(250, 185)],
+								format='JPEG',
+								options={'quality': 60})
 	featured_picture = ProcessedImageField(upload_to='avatars',
-                                           processors=[ResizeToFill(800, 300)],
-                                           format='JPEG',
-                                           options={'quality': 60}, blank=True)
+								processors=[ResizeToFill(800, 300)],
+								format='JPEG',
+								options={'quality': 60}, blank=True)
 	isFeatured = models.BooleanField(default=False)
+	
+	canCalcShipping = models.BooleanField(default=False)
+	weightPerItem = models.FloatField(default=0)
+	numberPerBox = models.IntegerField(default=0)
+	boxWidth = models.IntegerField(default=0)
+	boxDepth = models.IntegerField(default=0)
+	boxHeight = models.IntegerField(default=0)
+
 	def __unicode__(self):
 		return  unicode(self.itemName)
 
 
-class OrderItem(models.Model):
-    itemCost = models.DecimalField(max_digits=16,decimal_places=2)
-    itemQuantity = models.IntegerField()
-    # The key to a store item. Yep, that works to have a relation to another app
-    itemID = models.OneToOneField(StoreItem)
-    def __unicode__(self):
-        return  unicode(self.itemID.itemName)
-
-
-class Order(models.Model):
-    
-    orderDate = models.DateTimeField('Order Date')
-    shippingCost = models.DecimalField(max_digits=16,decimal_places=2)
-    totalCost = models.DecimalField(max_digits=16,decimal_places=2)
-    # need to have total cost be calculated automatically based on the items in the order
-    item = models.ForeignKey(OrderItem)
-    def __unicode__(self):
-        return  unicode(self.item)
+class Order(models.Model): # b
+	# Many Orders can be related with a single user
+	purchaser = models.ForeignKey('login.UserProfile', null=True)
+	orderDate = models.DateTimeField('Order Date')
+	shippingCost = models.DecimalField(max_digits=16,decimal_places=2)
+	totalCost = models.DecimalField(max_digits=16,decimal_places=2)
+	# need to have total cost be calculated automatically based on the items in the order
+	# item = models.ForeignKey(OrderItem)
+	def __unicode__(self):
+			return  unicode(self.orderDate)
 	
-#class Order(models.Model):
-#	item = models.ForeignKey(StoreItem)
-#	#how do we create a relation to a user now?
+class OrderItemCorrect(models.Model):
+	itemCost = models.DecimalField(max_digits=16,decimal_places=2)
+	itemQuantity = models.IntegerField()
+	# Many order Items are related with one order.
+	order = models.ForeignKey(Order, null=True) # e
+	# Many orderitems can refer to a single store item
+	itemID = models.ForeignKey(StoreItem, null=True)
+	def __unicode__(self):
+			return unicode(self.itemID.itemName)

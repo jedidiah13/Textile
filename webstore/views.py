@@ -2,7 +2,8 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from login.forms import RegistrationForm
 from login.forms import LoginForm
-from webstore.models import StoreItem, StoreCategory
+from webstore.models import StoreItem, StoreCategory, Order, OrderItemCorrect
+from login.models import UserProfile
 from django.http import HttpResponse
 from webstore.bing_search import run_query
 import simplejson as json
@@ -10,7 +11,9 @@ from haystack.query import SearchQuerySet
 from django.forms.models import model_to_dict
 from copy import deepcopy
 from django.core import serializers
+from django.utils import timezone
 
+#### need to initialize the cart here so it is accesible initially
 def webstore(request,id):
     context = RequestContext(request)    
     #if request.method == 'GET':
@@ -69,8 +72,7 @@ def buttonTest(request):
 def addToCart(request, itemKey, quantity):
     #print "FLUSHING THE SESSION"
     #request.session.flush()
-    thisitemName = StoreItem.objects.get(itemNameid=itemKey)
-    print thisitemName.itemName
+
     print itemKey
     context = RequestContext(request)
     print request.session.keys()
@@ -82,7 +84,7 @@ def addToCart(request, itemKey, quantity):
         print "making a new cart"
         print [itemKey, quantity]
         request.session['cartList'] = []
-        request.session['cartList'].append([thisitemName.itemName, quantity]) 
+        request.session['cartList'].append([itemKey, quantity])
         # make a new cart
     else:
         print "inserting to cart"
@@ -98,7 +100,7 @@ def addToCart(request, itemKey, quantity):
                 break
         if not alreadydone: # append the new item to the cart
             print "appending to cart"
-            request.session['cartList'].append([thisitemName.itemName, quantity])
+            request.session['cartList'].append([itemKey, quantity])
         # this works for modifying quantity as well as adding
     print "printing session cart before save"
     print request.session['cartList']
@@ -126,12 +128,48 @@ def deleteCart(request):
     request.session.save()
     return render_to_response('store/shop-homepage.html',{'success': True},context)
 
-
+# How this works:
+# loop through the item names that are in the cart.
+# Fetch the matching storeitem
+# link that into an orderitem (an order item has a seperate price field and quantity field)
+    # that price will just be the same for now. In the future, that might allow
+    # for bookstore pricing or promotions to be figured in here.
+    # quantity is just how many of the item are being ordered
+# link each of those orderitems into a new order object
+# save and return that order object to use it for filling in the template
 def checkout(request):
+
     context = RequestContext(request)
-    return render_to_response('store/checkout.html',{'success': True},context)
+    cart = request.session['cartList']
+    myOrder = Order() # we have an order object now
+    myOrder.orderDate = timezone.now() # date for the order is now
+    # these will need to come after probably - I just want to save it
+    myOrder.shippingCost = 1
+    myOrder.totalCost = 2
+    myOrder.save()
 
 
-
-
+    for itemlist in cart: # remember that cart is an array of arrays that have name, quantity, price
+        #orderItem = OrderItemCorrect()
+        #print "cleaning the order item model"
+        # orderItem.full_clean()
+        storeItem = StoreItem.objects.get(itemNameid=itemlist[0])
+        orderItem = OrderItemCorrect(
+            order = myOrder,
+            itemID = storeItem,
+            itemCost = storeItem.price,
+            itemQuantity = int(itemlist[1])
+        )
+        orderItem.save(force_insert=True)
+    
+    itemsInOrder = myOrder.orderitemcorrect_set.all()
+    # subtotal = 0
+    #for orderItem in order.item: # loop through a foreign key?
+    #    subtotal += orderItem.itemCost
+    # print "Subtotal for order: ", subtotal
+    # order.shippingCost = 0 # insert shipping calc here... maybe?
+    # order.totalCost = order.shippingCost + subtotal
+    # order.save()
+    # associate order with user
+    return render_to_response('store/checkout.html',{'order':myOrder, 'items':itemsInOrder, 'success': True},context)
 

@@ -9,7 +9,9 @@ from jsonview.decorators import json_view
 from django.http import HttpResponse
 from django.forms.models import model_to_dict
 from django.core import serializers
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/')
 def companion(request, id):
     context = RequestContext(request)
     	

@@ -42,6 +42,7 @@
                 Add Checkout button to bottom as well as subtotal
           -->
         <!--Everything from here to the next comment is a template for each indivual item. Should be dynamically loaded-->
+
         {% for item in items %}
         <div id="cartModalItems">
           <div class="row individual-item">
@@ -65,8 +66,20 @@
       </div>
       <div class="modal-footer">
         <p>Subtotal:
-        $X.XX</p><!--Subtotal goes here-->
+        {{ order.totalCost }}</p><!--Subtotal goes here-->
         <button type="button" class="btn btn-success">Continue to Payment</button>
+
+        <form action="{% url 'payment' %}" method="POST">{% csrf_token %}
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+          data-amount= {{ cents }}
+          data-name="Demo Site"
+          data-description= {{ order.totalCost }}
+          data-image="/128x128.png">
+        </script>
+
+        </form>
 
         
 

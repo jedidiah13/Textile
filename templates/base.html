@@ -86,23 +86,25 @@
                     </li>
 		    
 		    <li class="dropdown">
-                    <a id="dropDownLoggedIn" class="dropdown-toggle" data-toggle="dropdown" href="#" ><span id="acctNameNav">{{user.username}}</span><b id="caret2" class="caret"></b></a>
+                    <a id="dropDownLoggedIn" class="dropdown-toggle" data-toggle="dropdown" href="#" ><span id="acctNameNav"></span><b id="caret2" class="caret"></b></a>
                     <ul id="menu2" class="dropdown-menu" style="margin-top: 5px; border-radius: 4px;" aria-labelledby="dropDownLoggedIn">
                     <li id="logOut"><a>Logout</a></li>
-		    <script>$( "#logOut" ).click(function(){
+		   
+
+        <script>$( "#logOut" ).click(function(){
 				$.ajax({//begin
             
 	    			
 	    				type: 'POST', 
             				url:  '/login/logoutUser/', 
             				success: function(result){
-		    				console.log('test')
+		    				
 						
-						$('#logoutModal').modal('show');
+						        $('#logoutModal').modal('show');
              		  			changeNAV();
-						$("#loggedInMessage").hide()
-		  				$('#id-loginform').show()
-		   			
+						        $("#loggedInMessage").hide()
+		  				      $('#id-loginform').show()
+		   			        
              	  			 }//end success
             
                 
@@ -131,26 +133,26 @@
 	    		type: 'POST', 
             		url:  '/login/authenticateUser/', 
             		success: function(result){
-		    
+		            console.log("called comapnion")
                        
              	   if(!result['success']){
 					
-			$('#dropDownDefault').show();
-			$('#caret2').hide()
-			$('#dropDownLoggedIn').hide();
-			$('#loggedInMessage').hide();
-      
-		   }
-		   else{
-		   	
+			                 $('#dropDownDefault').show();
+			                 $('#caret2').hide()
+			                 $('#dropDownLoggedIn').hide();
+			                 $('#loggedInMessage').hide();
+                       console.log("called comapnion1")
+		                                    }
+		              else{
+		   	              console.log("called comapnion2")
 			
-			$('#dropDownDefault').hide();
-			$('#caret2').show();
-			$('#dropDownLoggedIn').show();
-			$('#acctChange').hide();
-      $("#userInfo").hide();
+			                 $('#dropDownDefault').hide();
+			                 $('#caret2').show();
+			                 $('#dropDownLoggedIn').show();
+			                 $('#acctChange').hide();
+                        $("#userInfo").hide();
 
-		   }
+		                  }
              	   }//end success
             
                 
@@ -189,11 +191,11 @@
        
 		    <button type="button" id="privacy" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-content="Privacy Policy">Privacy Policy </button>
                     <script>$(function (){
-				 $('#terms').popover();
-				 $('#privacy').popover();
+				                    $('#terms').popover();
+				                    $('#privacy').popover();
 
-		 	   });</script>   
-		 </div>
+		 	              });</script>   
+		        </div>
                 </div>
             </div>
         </div>
@@ -234,7 +236,7 @@
 <script>
 $(document).ready(function () {
       var frm = $('#id-registration');
-      
+      $("#userInfo").hide();
      frm.validate({
                 
    		rules: {
@@ -318,7 +320,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
       var frm = $('#id-loginform');
-
+      $("#acctNameNav").html("<span>{{user.username}}</span>");
      frm.validate({
 
                 rules: {
@@ -340,7 +342,7 @@ $(document).ready(function () {
                url:  frm.attr('action'),         
                data: frm.serialize(),    
                success: function(result){
-		    
+		              
                        
              	   if(result['success']){
 					
@@ -349,7 +351,12 @@ $(document).ready(function () {
 			
 			                 frm.hide();
              		       $("#loggedInMessage").show(); 
-			                 $("#acctNameNav").html("<span>{{user.username}}</span>");
+                       //show user's account name in address bar 
+                       $('#acctNameNav').empty();
+			                 $("#acctNameNav").append("<span>"+result['username']+"</span>");
+                       //show user's account name in account modal window
+                       $('#acctTitle').empty();
+                       $('#acctTitle').append("<span>"+result['username']+"'s Account</span>");
 		                                  }
 		              else{
 		   
@@ -403,7 +410,7 @@ $(document).ready(function () {
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     
-		<h3 class="modal-title" id="acctTitle" style="text-align:center">{{user.username}}'s Account</h3>
+		<h3 class="modal-title" id="acctTitle" style="text-align:center">'s Account</h3>
 	</div>
 		<div class="modal-body" >
     
@@ -421,7 +428,7 @@ $(document).ready(function () {
 		</div>
     <div id="acctChange">
     <div class="btn-group btn-group-xs">
-                <button class="btn btn-default" type="button"  id="frmBackBtn"><i class="icon-white icon-step-backward"></i>Back</button>
+                
                 <script type="text/javascript">
                 $("#frmBackBtn").click(function(){
                         $("#acctChange").hide();

@@ -34,6 +34,7 @@
 				521 Huntly Industrial Drive<br>
 				Smyrna, TN 37167<br>
 			</p>
+			<div id="formID">
 			<form id="contactForm" style="margin-top:30px">
 				<div class="form-group">
                     <label>First Name</label>
@@ -57,7 +58,7 @@
                 </div>
                 <a id="contact"type="submit" class="btn btn-default">Submit</a>
 			</form>
-
+			</div>
 			<script type="text/javascript">
 
 			$(document).ready(function(){
@@ -72,7 +73,10 @@
 							
 							success: function(result){
 
-									console.log('returned');
+									cntFRM.hide();
+									$("#formID").append(
+										"<div class='alert alert-success'>The Message Has Been Sent!</div>"
+										);
 							},
 
 

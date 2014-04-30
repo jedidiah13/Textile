@@ -87,7 +87,7 @@ def authenticateLogin(request):
 	if user is not None:
 		if user.is_active:
 			login(request, user)
-			result  = { 'success':  True}
+			result  = { 'success':  True,  'username':username}
 			return result
 		else:
 			return HttpResponse("Your account is disabled.")

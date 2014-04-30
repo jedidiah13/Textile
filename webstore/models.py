@@ -27,7 +27,7 @@ class StoreItem(models.Model):
 								format='JPEG',
 								options={'quality': 60}, blank=True)
 	isFeatured = models.BooleanField(default=False)
-	
+
 	canCalcShipping = models.BooleanField(default=False)
 	weightPerItem = models.FloatField(default=0)
 	numberPerBox = models.IntegerField(default=0)
@@ -59,3 +59,5 @@ class OrderItemCorrect(models.Model):
 	itemID = models.ForeignKey(StoreItem, null=True)
 	def __unicode__(self):
 			return unicode(self.itemID.itemName)
+	def combinedPrice(self):
+		return unicode(self.itemCost * self.itemQuantity)

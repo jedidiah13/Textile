@@ -155,7 +155,7 @@ def checkout(request):
 	myOrder = Order() # we have an order object now
 	myOrder.orderDate = timezone.now() # date for the order is now
 	# these will need to come after probably - I just want to save it
-	myOrder.shippingCost = 1
+	myOrder.shippingCost = 0
 	myOrder.totalCost = 2
 	myOrder.save()
 
@@ -177,13 +177,80 @@ def checkout(request):
 	
 	subtotal = 0
 	for items in itemsInOrder:
-		subtotal += items.itemCost
-	myOrder.totalCost = subtotal + myOrder.shippingCost
+		subtotal += items.combinedPrice()
+	boxDimensions = boxFit(itemsInOrder)
+	needToEmail = False
+	weight = 0
+	if boxDimensions == (0, 0, 0): # determined that it needs to be a manual order
+		needToEmail = True 
+	else:
+		weight = getWeight(itemsInOrder) # calculate weight if it can be shipped
+	myOrder.totalCost = subtotal + myOrder.shippingCost # shipping cost is figured out at a later point
 	myOrder.save()
 	cents = myOrder.totalCost * 100
 
 
-	return render_to_response('store/checkout.html',{'cents':cents,'order':myOrder, 'items':itemsInOrder, 'success': True},context)
+	return render_to_response('store/checkout.html',{'weight':weight,'boxW':boxDimensions[0],'boxH':boxDimensions[1],'boxD':boxDimensions[2],'needToEmail':needToEmail,'cents':cents,'order':myOrder, 'items':itemsInOrder, 'success': True},context)
+
+# determine the box size needed
+def boxFit(itemsInOrder):
+	numSwatchKits = 0
+	numFeltingKits = 0
+	numSmallItems = 0 # things that could go in a padded mailer
+	numFabrics = 0 # if any of these, need to do manual order
+	# add up how many of each and return if not shippable.
+	for item in itemsInOrder:
+		if not item.itemID.canCalcShipping: # items must be marked
+			print "Shipping can't be calculated for", item.itemID.itemName 
+			return (0,0,0)
+		if item.itemID.isFabric: # we'll figure out how to ship fabrics later on
+			return (0,0,0)
+		elif item.itemID.isSmallItem:
+			numSmallItems += item.itemQuantity
+		elif item.itemID.isSwatchKit:
+			numSwatchKits += item.itemQuantity
+		elif item.itemID.isFeltingKit:
+			numFeltingKits += item.itemQuantity 
+		else: # not marked as anything?
+			print "Check to make sure the right fields are marked for", item.itemID.itemName 
+			return (0,0,0)
+	# now, based on how many of each, determine the right box
+	# first check for errors...
+	if numFeltingKits > 1:
+		print "This order would require more than one box"
+		return (0,0,0)
+	if numFeltingKits == 1 and numSwatchKits > 0:
+		print "This order would require more than one box"
+		return (0,0,0)
+	if numSwatchKits > 14:
+		print "Bulk order, do as an email order"
+		return (0,0,0)
+	if numSmallItems > 10: # 10 is an abitrary number.
+		# just want to make sure they fit in with the rest of the order
+		print "Lots of small items, not sure how to handle that"
+		return (0,0,0)
+	# I think that covers all of the cases we can't do. 
+	if numSwatchKits >= 9 or numFeltingKits == 1:
+		return (18,12,12)
+	if numSwatchKits >= 3:
+		return (12,13,9)
+	if numSwatchKits == 2:
+		return (12,10,5)
+	if numSwatchKits == 1:
+		return (12,10,3)
+	# at this point, the only thing that could be left is an order of just small items
+	if numSmallItems > 5:
+		return (5, 6, 3) ############ I'm making these up #######################
+	if numSmallItems > 0:
+		return (4, 5, 2) ############ how to calculate for a bubble mailer? #####
+	# if we get here, error
+
+
+def getWeight(itemsInOrder):
+	weight = 0
+	for item in itemsInOrder:
+		weight += item.itemID.weightPerItem * item.itemQuantity 
+	return weight
 
 def payment(request):
 	context = RequestContext(request)
@@ -232,5 +299,6 @@ def payment(request):
 	except Exception, e:
 		# Something else happened, completely unrelated to Stripe
 		pass
-
-	return render_to_response('store/checkout.html',{'success' : True},context)
+	request.session.flush()
+	#return render_to_response('store/shop-homepage.html',{'success' : True},context)
+	return webstore(request, "featured")

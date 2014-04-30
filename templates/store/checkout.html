@@ -47,16 +47,16 @@
         <div id="cartModalItems">
           <div class="row individual-item">
             <div class="col-lg-3"><!--Item Picture/Description-->
-              <p>{{ item.itemID.itemName }}</p>
+              <p align='center'>{{ item.itemID.itemName }}</p>
             </div>
             <div class="col-lg-3"><!-- Price Per Item-->
-              
+              <p align='center'>{{ item.itemCost }}</p>
             </div>
             <div class="col-lg-3"><!--Quantity (Updatable box)-->
-              
+              <input type="text" placeholder="{{ item.itemQuantity }}">
             </div>
             <div class="col-lg-3"><!--Item Total (Price per item * Quantity)-->
-              
+              <p align='center'>{{ item.combinedPrice }}</p>
             </div>
           </div>
         </div>
@@ -72,12 +72,14 @@
         <form action="{% url 'payment' %}" method="POST">{% csrf_token %}
         <script
           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+          data-key="pk_test_uzufHOKwdTefqr8GRf55S7Z4"
           data-amount= {{ cents }}
           data-name="Demo Site"
           data-description= {{ order.totalCost }}
           data-image="/128x128.png">
         </script>
+		<!-- temporary ugly way of sending cents -->
+		<input type="hidden" name="amount_in_cents" value = {{ cents }}>
 
         </form>
 

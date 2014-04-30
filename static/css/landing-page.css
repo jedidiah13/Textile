@@ -337,4 +337,16 @@ https://github.com/marcaube/bootstrap-magnify
              border-radius: 100%
 }
 
+.with-hover-text a:hover{
+	text-decoration:none;
+}
+
+td,th{
+	padding-top:10px;
+	padding-left:20px;
+	font-size:1.4em;
+}
+
+
+
 

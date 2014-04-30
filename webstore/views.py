@@ -20,7 +20,10 @@ def webstore(request,id):
 	ids = StoreCategory.objects.get(categoryName=id)
 	items = StoreItem.objects.filter(category_id=ids.id).all()
 	item_categories = StoreCategory.objects.all();
-	return render_to_response('store/shop-homepage.html', {'items': items, 'item_categories': item_categories, 'regform': RegistrationForm(),'loginform': LoginForm()},context)
+
+	initialcart = buildCartDetail(request.session['cartList'])
+	subtotal = getSubtotal(initialcart)
+	return render_to_response('store/shop-homepage.html', {'initialcart':initialcart, 'subtotal':subtotal, 'items': items, 'item_categories': item_categories, 'regform': RegistrationForm(),'loginform': LoginForm()},context)
 
 def featured(request):
 	
@@ -69,30 +72,37 @@ def buttonTest(request):
 	context = RequestContext(request)
 	return render_to_response('store/shop-homepage.html',{'success': True}, context)
 
+def buildCartDetail(sessionCart):
+	cartDetails = []
+	for itemlist in sessionCart: # sessionCart is a list with elements of [name, quantity]
+		item = StoreItem.objects.get(itemNameid = itemlist[0])
+		cartDetails.append([item.itemName,item.price,item.quantity,item.quantity * item.price])
+	return cartDetails
+
+def getSubtotal(cartDetails):
+	sub = 0
+	for itemlist in cartDetails:
+		sub += itemlist[1]
+	return sub
+
 def addToCart(request, itemKey, quantity):
+	print "Adding", itemKey, "to cart."
 	#print "FLUSHING THE SESSION"
 	#request.session.flush()
 
-	print itemKey
 	context = RequestContext(request)
-	print request.session.keys()
 
 	if quantity <= 0:
 		removeFromCart(request, itemKey)
 	if not 'cartList' in request.session:
-		#request.session['cartList'] = {itemKey : {"quantity" : quantity}}
 		print "making a new cart"
-		print [itemKey, quantity]
 		request.session['cartList'] = []
 		request.session['cartList'].append([itemKey, quantity])
 		# make a new cart
 	else:
-		print "inserting to cart"
 		print [itemKey, quantity]
 		alreadydone = False
 		for index in xrange(len(request.session['cartList'])):
-			print "at index ", index 
-			print "looking at ", request.session['cartList'][index]
 			if itemKey == request.session['cartList'][index][0]: # already in list
 				print "already in cart, updating quantity"
 				request.session['cartList'][index][1] = quantity
@@ -102,11 +112,9 @@ def addToCart(request, itemKey, quantity):
 			print "appending to cart"
 			request.session['cartList'].append([itemKey, quantity])
 		# this works for modifying quantity as well as adding
-	print "printing session cart before save"
-	print request.session['cartList']
+
 	request.session.save()
-	cart = deepcopy(request.session['cartList']) # wondering if this is needed...
-	print "printing cart list"
+	cart = buildCartDetail(request.session['cartList']) # wondering if this is needed...
 	print cart
 
 	sendlist = json.dumps({'cart':cart})
@@ -175,19 +183,22 @@ def checkout(request):
 	return render_to_response('store/checkout.html',{'cents':cents,'order':myOrder, 'items':itemsInOrder, 'success': True},context)
 
 def payment(request):
+	context = RequestContext(request)
 	import stripe
 	# Set your secret key: remember to change this to your live secret key in production
 	# See your keys here https://manage.stripe.com/account
-	stripe.api_key = "sk_test_BQokikJOvBiI2HlWgH4olfQ2"
+	stripe.api_key = "sk_test_5LSNQ19L2N0gk7euXWWfWsPO"
 
 	# Get the credit card details submitted by the form
 	token = request.POST['stripeToken']
+	# Slightly ugly, but functional way of getting value from stripe checkout gui
+	cents = int(float(request.POST['amount_in_cents']))
 	try:
 		charge = stripe.Charge.create(
-      	amount=1000, # amount in cents, again
+      	amount=cents, # amount in cents, again
       	currency="usd",
       	card=token,
-      	description="payinguser@example.com"
+      	description="payinguser@example.com" #need to deal with this
   		)
 		pass
 	except stripe.error.CardError, e:
@@ -219,4 +230,4 @@ def payment(request):
 		# Something else happened, completely unrelated to Stripe
 		pass
 
-	return True 
+	return render_to_response('store/checkout.html',{'success' : True},context)

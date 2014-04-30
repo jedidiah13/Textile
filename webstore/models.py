@@ -35,6 +35,11 @@ class StoreItem(models.Model):
 	boxDepth = models.IntegerField(default=0)
 	boxHeight = models.IntegerField(default=0)
 
+	isFabric = models.BooleanField(default=False)
+	isSmallItem = models.BooleanField(default=False)
+	isSwatchKit = models.BooleanField(default=False)
+	isFeltingKit = models.BooleanField(default=False)
+
 	def __unicode__(self):
 		return  unicode(self.itemName)
 

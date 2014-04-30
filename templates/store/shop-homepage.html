@@ -308,19 +308,30 @@
                                             console.log(result.cart);
 
                                               $("#cartModalItems").empty(); // clear the display of the cart
+                                                var sub = 0;
                                                 for(var i = 0; i < result.cart.length; i++){
                                                     console.log("item: " + result.cart[i][0]);
                                                     console.log("item: " + result.cart[i][1]);
-                                                    var bigstring =  "<div class='row individual-item'>" + "<div class='col-lg-3'>" + "<p align=center>" + result.cart[i][0] + "</p>" +"</div>" + "<div class='col-lg-3'>" + "</div>" + "<div class='col-lg-3'>"+ "<input type='text' placeholder='" + result.cart[i][1] + "' />" + "</div>" + "</div>";
-                                              $("#cartModalItems").append(bigstring);
-            
-                      }
-                      
+                                                    var bigstring =  "<div class='row individual-item'>" + "<div class='col-lg-3'>" + "<p align=center>" + result.cart[i][0] + "</p>" +"</div>" + "<div class='col-lg-3'>" + "<p align=center>" + result.cart[i][1] + "</p>" + "</div>" + "<div class='col-lg-3'>"+ "<input type='text'  placeholder='" + result.cart[i][2] + "' />" + "</div>" + "<div class='col-lg-3'>" + "<p align=center>" + result.cart[i][3] + "</p>" + "</div>" + "</div>";
+                                                    $("#cartModalItems").append(bigstring);
+                                                    sub += result.cart[i][3]  
+                                                }
+                                                $("#subtotal").empty();
+                                                $("#subtotal").append("Subtotal: $" + sub);        
 
-                                              }//end success
+                                          }//end success
 
-                                            });//end ajax
+                                          });//end ajax
                                       });              
+                                      $( "#cartModalItems" ).load(function(){
+                                        var bigstring = "";
+                                        {% for cartitem in initialcart %}
+                                          {% for specific in cartitem %}
+                                            bigstring += "<p>{{ specific }}</p>";
+                                          {% endfor %}
+                                        {% endfor %}
+                                        $("#cartModalItems").append(bigstring);
+                                      });
                                     </script>
 
                                   </div>
@@ -537,11 +548,16 @@ $(document).ready(function () {
                       console.log(result.cart);
 
                       $("#cartModalItems").empty(); // clear the display of the cart
+                      var sub = 0;
                       for(var i = 0; i < result.cart.length; i++){
                         console.log("item: " + result.cart[i][0]);
                         console.log("item: " + result.cart[i][1]);
-                        var bigstring =  "<div class='row individual-item'>" + "<div class='col-lg-3'>" + "<p align=center>" + result.cart[i][0] + "</p>" +"</div>" + "<div class='col-lg-3'>" + "</div>" + "<div class='col-lg-3'>"+ "<input type='text' placeholder='" + result.cart[i][1] + "' />" + "</div>" + "</div>";
+                        var bigstring =  "<div class='row individual-item'>" + "<div class='col-lg-3'>" + "<p align=center>" + result.cart[i][0] + "</p>" +"</div>" + "<div class='col-lg-3'>" + "<p align=center>" + result.cart[i][1] + "</p>" + "</div>" + "<div class='col-lg-3'>"+ "<input type='text'  placeholder='" + result.cart[i][2] + "' />" + "</div>" + "<div class='col-lg-3'>" + "<p align=center>" + result.cart[i][3] + "</p>" + "</div>" + "</div>";
                         $("#cartModalItems").append(bigstring);
+                        sub += result.cart[i][3]  
+                      }
+                      $("#subtotal").empty();`
+                      $("#subtotal").append("Subtotal: $" + sub);
                        /* $("#cartModalItems").append(
           <div class="row individual-item">
             <div class="col-lg-3"><!--Item Picture/Description-->
@@ -560,10 +576,7 @@ $(document).ready(function () {
           </div>
 
                       "); // end append */
-                      }
-                      // OKAY. Ajax has cooler ways to do this. I get it.
-                      //var cartModal = document.getElementById("cartModalContent").innerHTML;
-                      //cartModal = "<p>TEST</p>";
+
 
                }//end success
 
@@ -618,27 +631,22 @@ $(document).ready(function () {
           -->
         <!--Everything from here to the next comment is a template for each indivual item. Should be dynamically loaded-->
         <div id="cartModalItems">
+          {% for cartitem in initialcart %}
           <div class="row individual-item">
+            {% for specific in cartitem %}
             <div class="col-lg-3"><!--Item Picture/Description-->
-              
+              <p align='center'>{{ specific }}</p>
             </div>
-            <div class="col-lg-3"><!-- Price Per Item-->
-              
-            </div>
-            <div class="col-lg-3"><!--Quantity (Updatable box)-->
-              
-            </div>
-            <div class="col-lg-3"><!--Item Total (Price per item * Quantity)-->
-              
-            </div>
+            {% endfor %}
           </div>
+          {% endfor %}         
         </div>
         <!-- End of template for individual item -->
 
       </div>
       <div class="modal-footer">
-        <p>Subtotal:
-        $X.XX</p><!--Subtotal goes here-->
+        <p id="subtotal">Subtotal:
+        ${{ subtotal }}</p><!--Subtotal goes here-->
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
         <button type="button" class="btn btn-primary">Update Cart</button>

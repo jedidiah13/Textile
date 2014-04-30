@@ -20,7 +20,10 @@ def webstore(request,id):
 	ids = StoreCategory.objects.get(categoryName=id)
 	items = StoreItem.objects.filter(category_id=ids.id).all()
 	item_categories = StoreCategory.objects.all();
-	return render_to_response('store/shop-homepage.html', {'items': items, 'item_categories': item_categories, 'regform': RegistrationForm(),'loginform': LoginForm()},context)
+
+	initialcart = buildCartDetail(request.session['cartList'])
+	subtotal = getSubtotal(initialcart)
+	return render_to_response('store/shop-homepage.html', {'initialcart':initialcart, 'subtotal':subtotal, 'items': items, 'item_categories': item_categories, 'regform': RegistrationForm(),'loginform': LoginForm()},context)
 
 def featured(request):
 	
@@ -69,30 +72,37 @@ def buttonTest(request):
 	context = RequestContext(request)
 	return render_to_response('store/shop-homepage.html',{'success': True}, context)
 
+def buildCartDetail(sessionCart):
+	cartDetails = []
+	for itemlist in sessionCart: # sessionCart is a list with elements of [name, quantity]
+		item = StoreItem.objects.get(itemNameid = itemlist[0])
+		cartDetails.append([item.itemName,item.price,item.quantity,item.quantity * item.price])
+	return cartDetails
+
+def getSubtotal(cartDetails):
+	sub = 0
+	for itemlist in cartDetails:
+		sub += itemlist[1]
+	return sub
+
 def addToCart(request, itemKey, quantity):
+	print "Adding", itemKey, "to cart."
 	#print "FLUSHING THE SESSION"
 	#request.session.flush()
 
-	print itemKey
 	context = RequestContext(request)
-	print request.session.keys()
 
 	if quantity <= 0:
 		removeFromCart(request, itemKey)
 	if not 'cartList' in request.session:
-		#request.session['cartList'] = {itemKey : {"quantity" : quantity}}
 		print "making a new cart"
-		print [itemKey, quantity]
 		request.session['cartList'] = []
 		request.session['cartList'].append([itemKey, quantity])
 		# make a new cart
 	else:
-		print "inserting to cart"
 		print [itemKey, quantity]
 		alreadydone = False
 		for index in xrange(len(request.session['cartList'])):
-			print "at index ", index 
-			print "looking at ", request.session['cartList'][index]
 			if itemKey == request.session['cartList'][index][0]: # already in list
 				print "already in cart, updating quantity"
 				request.session['cartList'][index][1] = quantity
@@ -102,11 +112,9 @@ def addToCart(request, itemKey, quantity):
 			print "appending to cart"
 			request.session['cartList'].append([itemKey, quantity])
 		# this works for modifying quantity as well as adding
-	print "printing session cart before save"
-	print request.session['cartList']
+
 	request.session.save()
-	cart = deepcopy(request.session['cartList']) # wondering if this is needed...
-	print "printing cart list"
+	cart = buildCartDetail(request.session['cartList']) # wondering if this is needed...
 	print cart
 
 	sendlist = json.dumps({'cart':cart})
@@ -167,7 +175,6 @@ def checkout(request):
 	subtotal = 0
 	for items in itemsInOrder:
 		subtotal += items.itemCost
-	#calculate shipping cost, temporary placeholder
 	myOrder.totalCost = subtotal + myOrder.shippingCost
 	myOrder.save()
 	cents = myOrder.totalCost * 100

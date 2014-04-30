@@ -495,7 +495,7 @@
     "is_active": true, 
     "is_superuser": true, 
     "is_staff": true, 
-    "last_login": "2014-04-27T16:03:28.615Z", 
+    "last_login": "2014-04-30T14:24:23.668Z", 
     "groups": [], 
     "user_permissions": [], 
     "password": "pbkdf2_sha256$12000$IGweLRpxbSib$xvUVB+tNX/0BH+z6FWnnQdML9dIO007gt/t7tO8xMWs=", 
@@ -531,7 +531,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-27T15:48:57.294Z", 
+    "last_login": "2014-04-30T14:24:04.232Z", 
     "groups": [], 
     "user_permissions": [], 
     "password": "pbkdf2_sha256$12000$jRcxFOaa4WI3$X9chGbdN/zzlZaX8jkPb2CVnkJBFUYOMht/nqnNGRoA=", 
@@ -566,10 +566,9 @@
     "confirmation_code": "TMiaORDCJa4pY15SVZZoFczkEdvbl8Cao", 
     "zipCode": "", 
     "address_lineOne": "", 
+    "appExpiryDate": null, 
     "State": "", 
-    "relation": null, 
     "user": 2, 
-    "user_orders": null, 
     "reset_code": ""
   }
 },
@@ -582,10 +581,9 @@
     "confirmation_code": "kVcDpNGZytPJ9vW8FYaYW6Bju79Bf0v8l", 
     "zipCode": "", 
     "address_lineOne": "", 
+    "appExpiryDate": null, 
     "State": "", 
-    "relation": null, 
     "user": 3, 
-    "user_orders": null, 
     "reset_code": ""
   }
 },
@@ -598,10 +596,9 @@
     "confirmation_code": "vAIy8tzRIiCSEYW01bxd4Kye6dryMYBt6", 
     "zipCode": "", 
     "address_lineOne": "", 
+    "appExpiryDate": null, 
     "State": "", 
-    "relation": null, 
     "user": 4, 
-    "user_orders": null, 
     "reset_code": ""
   }
 },
@@ -999,7 +996,7 @@
   "fields": {
     "fabCatagory": 5, 
     "topic": "Plain Weaves", 
-    "topicId": "0"
+    "topicId": "PlainWeaves"
   }
 },
 {
@@ -1440,7 +1437,7 @@
   "fields": {
     "fabCatagory": 13, 
     "topic": "Out-Of-Register Printing", 
-    "topicId": "Out-Of-RegisterPrinting"
+    "topicId": "OutOfRegisterPrinting"
   }
 },
 {
@@ -1458,7 +1455,7 @@
   "fields": {
     "fabCatagory": 13, 
     "topic": "Off-Grain Printing", 
-    "topicId": "Off-GrainPrinting"
+    "topicId": "OffGrainPrinting"
   }
 },
 {
@@ -1467,7 +1464,7 @@
   "fields": {
     "fabCatagory": 14, 
     "topic": "Dyeing & Printing Equipment", 
-    "topicId": "Dyeing&PrintingEquipment"
+    "topicId": "DyeingPrintingEquipment"
   }
 },
 {
@@ -4311,12 +4308,18 @@
   "fields": {
     "category": 1, 
     "picture": "avatars/product_150_5.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": "Banana fiber is a natural bast fiber. It has its own physical and chemical characteristics and many other properties that make it a fine quality fiber.Small pieces of these trunks are put through a softening process for mechanical extraction of the fibers, and then bleaching, and drying. The fiber obtained thus has appearance similar to silk which has become popular as banana silk fiber yarn. ", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "9.95", 
     "itemNameid": "bananafiber", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Banana Fiber ", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4326,12 +4329,18 @@
   "fields": {
     "category": 1, 
     "picture": "avatars/product_153.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": "Cashmere is characterized by its fine, soft fibers. It provides a natural light-weight insulation without bulk. Fibers are highly adaptable and easily spun into yarns and light to heavy-weight fabrics. The original undyed or natural colors of cashmere wool are various shades of grey, brown and white.", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "12.95", 
     "itemNameid": "CashmereFiber", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Cashmere Fiber", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4341,12 +4350,18 @@
   "fields": {
     "category": 1, 
     "picture": "avatars/product_157.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": " Contact us for color choices or for ordering pounds! ($40/lb)", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "3.5", 
     "itemNameid": "CorriedaleWoolFiber", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Corriedale Wool Fiber", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4356,12 +4371,18 @@
   "fields": {
     "category": 1, 
     "picture": "avatars/product_156.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": "Contact us for color choices and for ordering pounds! ($45/lb)  Merino wool is finely crimped and soft. Staples are commonly 65 \u2013 100 mm (2.5 - 4 inches) long.", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "4.25", 
     "itemNameid": "MerinoWoolFiber", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Merino Wool Fiber", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4371,12 +4392,18 @@
   "fields": {
     "category": 1, 
     "picture": "avatars/product_155.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": "The nettle plant is found naturally in the wild in remote mountainous areas. The fibers are processed and spun by hand. The resulting yarn has a natural and rustic appeal. Nettle yarn has a texture similar to natural linen and like linen will soften with wear. Nettle is a natural moth repellent and is often used in Nepal for backing wool carpets.", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "6.5", 
     "itemNameid": "NettleYarn", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Nettle Yarn", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4386,12 +4413,18 @@
   "fields": {
     "category": 1, 
     "picture": "avatars/product_152.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": "SeaCell\u00aepure is a cellulose fiber containing seaweed (e.g. ascophyllum nodosum). The idea behind SeaCell\u00aepure is actually quite simple: The natural raw materials cellulose and seaweed represent the basis for the manufacture of the SeaCell\u00aepure fiber, employing the \"Lyocell Process\". The cellulose fibers act as functional substrate for the seaweed", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "9.95", 
     "itemNameid": "SeacellFiber", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Seacell Fiber", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4401,12 +4434,18 @@
   "fields": {
     "category": 1, 
     "picture": "avatars/product_154.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": "14\" x 59\"   8mm 100% silk, hemmed edges", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "6.5", 
     "itemNameid": "SilkScarf", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Silk Scarf", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4416,12 +4455,18 @@
   "fields": {
     "category": 1, 
     "picture": "avatars/product_151.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": "A manufactured fiber in which the fiberforming substance is composed of any regenerated, naturally occurring soybean protein.", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "6", 
     "itemNameid": "SoybeanFiber", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Soybean Fiber", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4431,12 +4476,18 @@
   "fields": {
     "category": 1, 
     "picture": "avatars/product_162.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": "\tStudents can learn the basics of felting with our latest product, The Felting Kit!   The Felting Kit will encourage students\u2019 creativity in a unique way by creating usable and wearable works of art!   Felting is a skill that can be enjoyed for many years!   10 Felting Assignments Uniquely Felt by Christine White** Easy to Follow Instructions All Needed Materials for Felting Wool Fiber Provided for Each Assignment Images of Assignments Provided to Students Images & Videos Provided to Instructors Complimentary Scarf for a Bonus Assignment Additional Images of Felted Examples   ISBN: 978-1-936480-01-2 *Complimentary instructor kit with orders of 10+     The Felting Kit includes   1.\tPlastic tote 2.\tWooden dowel 3.\tBubble packaging squares (2) 4.\tWhite chiffon fabric 5.\tWaterproof apron 6.\tMeasuring tape 7.\tRubber bands for wooden dowel (4) 8.\tPin back and leather sample (2) 9.\tBonus silk scarf 10.\tGlass beads and small rubber bands (5) 11.\tSoap 12.\tWool roving (11 bags) 13.\tSmall plastic bowl 14.\tUniquely Felt textbook   *\"Textbook is provided for supplemental reading and additional knowledge of felting. Assignments in The Felting Kit are not found in Uniquely Felt. ", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "89.95", 
     "itemNameid": "TheFeltingKit", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "The Felting Kit", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4446,12 +4497,18 @@
   "fields": {
     "category": 2, 
     "picture": "avatars/product_115_3.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": " The Fiber Samples Packet contains 25 different fibers and a burn test chart.  Fox Fibre Cotton Flax Ramie Hemp Silk Wool Mohair Alpaca Angora Yak Camel's Hair Rayon Acetate Lyocell Nylon Polyester Olefin Acrylic Modacrylic Spandex Aramid Glass Vinyon PLA/Ingeo\u2122", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "16.95", 
     "itemNameid": "FiberSamplesPacket", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Fiber Samples Packet", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4461,12 +4518,18 @@
   "fields": {
     "category": 2, 
     "picture": "avatars/product_116.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": " Fiber Contents Consist Of:  Spun Diacetate SEF (modacrylic) Filament Acetate Bleached Cotton Creslan 61 (acrylic) Dacron 54 (polyester) Dacron 64 (polyester)  Nylon 66 (polyamide)  Orlon 75 (acrylic)  Spun Silk Polypropylene (polyolefin) Viscose (rayon) Wool (worsted)   5\" Wide Sold by the yard. Multifiber fabric used in testing and analysis of fiber contents.", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "6", 
     "itemNameid": "MultifiberFabric13Fibers", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Multifiber Fabric (13 Fibers)", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4476,12 +4539,18 @@
   "fields": {
     "category": 2, 
     "picture": "avatars/product_117_1.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": " Multifiber Fabric used for testing and analysis of fiber contents. Fiber Contents Consist Of:  Spun Diacetate Bleached Cotton Spun Polyamide (Nylon 6.6) Spun Polyester (Dacron 54) Spun Polyacryle (Orlon 75) Worsted Wool  4\" wide Sold by the yard.", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "6", 
     "itemNameid": "MultifiberFabric6Fibers", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Multifiber Fabric (6 Fibers)", 
+    "weightPerItem": 0.0, 
     "quantity": 1
   }
 },
@@ -4491,12 +4560,18 @@
   "fields": {
     "category": 2, 
     "picture": "avatars/product_114.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": " 123 - 2.5\" Warp x 2\" Filling Apparel and Interior Fabric Swatches 16 Fiber clusters representing all fiber classifications (for classroom orders fibers are sent to instructor for distribution) 21 Yarn Lengths representing various classes and constructions (for classrooms orders yarns are sent to instructor for distribution) Lab Manual complete with identification guidelines and mounting sheets organized in the the following Six Exercises: Textile Structure Identification Fiber Identification Yarn Identification Fabric Construction Identification Colored Fabric Identification Finish Identification Students are challenged to discover the identity of the items in the collection because the specific names/identities are not revealed Corresponds directly to Textile Science by Kathryn Hatch", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "68.95", 
     "itemNameid": "TextileIdManualTextileCollection", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "Textile Id Manual & Textile Collection", 
+    "weightPerItem": 0.0, 
     "quantity": 0
   }
 },
@@ -4506,13 +4581,109 @@
   "fields": {
     "category": 3, 
     "picture": "avatars/product_122.jpg", 
+    "boxDepth": 0, 
+    "boxHeight": 0, 
+    "canCalcShipping": false, 
     "description": " The High School Textile Swatch Kit was designed exclusively for high school level fashion and interior design courses. This kit was developed from feedback of our recent survey taken by high school educators.  48 4\" Warp x 3\" Filling Apparel and Interior Fabric Swatches Mounting Sheets Master List (includes fabric name, description and fiber content) Three Ring Binder for Organization *Complimentary Instructor Swatch Kit with a classroom order of swatch kits.*  Instructor Swatch Kit Includes: Student Swatch Kit Manual Containing Detailed Information Including: Yarn Type Fabric Description Dye/Print Method Finish Color Guide and Yarn Count Suggested End Uses", 
     "isFeatured": false, 
     "featured_picture": "", 
     "price": "35.95", 
     "itemNameid": "HighSchoolTextileSwatchKit", 
+    "boxWidth": 0, 
+    "numberPerBox": 0, 
     "itemName": "High School Textile Swatch Kit", 
+    "weightPerItem": 0.0, 
     "quantity": 1
+  }
+},
+{
+  "pk": 1, 
+  "model": "webstore.order", 
+  "fields": {
+    "purchaser": null, 
+    "totalCost": "2", 
+    "orderDate": "2014-04-28T18:04:31.104Z", 
+    "shippingCost": "1"
+  }
+},
+{
+  "pk": 2, 
+  "model": "webstore.order", 
+  "fields": {
+    "purchaser": null, 
+    "totalCost": "10.95", 
+    "orderDate": "2014-04-29T22:45:07.791Z", 
+    "shippingCost": "1"
+  }
+},
+{
+  "pk": 3, 
+  "model": "webstore.order", 
+  "fields": {
+    "purchaser": null, 
+    "totalCost": "10.95", 
+    "orderDate": "2014-04-30T13:44:20.954Z", 
+    "shippingCost": "1"
+  }
+},
+{
+  "pk": 4, 
+  "model": "webstore.order", 
+  "fields": {
+    "purchaser": null, 
+    "totalCost": "10.95", 
+    "orderDate": "2014-04-30T13:45:27.872Z", 
+    "shippingCost": "1"
+  }
+},
+{
+  "pk": 1, 
+  "model": "webstore.orderitemcorrect", 
+  "fields": {
+    "itemID": 4, 
+    "itemCost": "9.95", 
+    "order": 1, 
+    "itemQuantity": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "webstore.orderitemcorrect", 
+  "fields": {
+    "itemID": 5, 
+    "itemCost": "12.95", 
+    "order": 1, 
+    "itemQuantity": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "webstore.orderitemcorrect", 
+  "fields": {
+    "itemID": 4, 
+    "itemCost": "9.95", 
+    "order": 2, 
+    "itemQuantity": 1
+  }
+},
+{
+  "pk": 4, 
+  "model": "webstore.orderitemcorrect", 
+  "fields": {
+    "itemID": 4, 
+    "itemCost": "9.95", 
+    "order": 3, 
+    "itemQuantity": 1
+  }
+},
+{
+  "pk": 5, 
+  "model": "webstore.orderitemcorrect", 
+  "fields": {
+    "itemID": 4, 
+    "itemCost": "9.95", 
+    "order": 4, 
+    "itemQuantity": 1
   }
 }
 ]

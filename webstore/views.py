@@ -1,5 +1,5 @@
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from login.forms import RegistrationForm
 from login.forms import LoginForm
 from webstore.models import StoreItem, StoreCategory, Order, OrderItemCorrect
@@ -301,4 +301,5 @@ def payment(request):
 		pass
 	request.session.flush()
 	#return render_to_response('store/shop-homepage.html',{'success' : True},context)
-	return webstore(request, "Fiber Arts")
+	#return webstore(request, "Fiber Arts")
+	return redirect('webstore', id='Fiber Arts')

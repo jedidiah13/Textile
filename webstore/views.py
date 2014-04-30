@@ -167,6 +167,7 @@ def checkout(request):
 	subtotal = 0
 	for items in itemsInOrder:
 		subtotal += items.itemCost
+	#calculate shipping cost, temporary placeholder
 	myOrder.totalCost = subtotal + myOrder.shippingCost
 	myOrder.save()
 	cents = myOrder.totalCost * 100
@@ -175,19 +176,22 @@ def checkout(request):
 	return render_to_response('store/checkout.html',{'cents':cents,'order':myOrder, 'items':itemsInOrder, 'success': True},context)
 
 def payment(request):
+	context = RequestContext(request)
 	import stripe
 	# Set your secret key: remember to change this to your live secret key in production
 	# See your keys here https://manage.stripe.com/account
-	stripe.api_key = "sk_test_BQokikJOvBiI2HlWgH4olfQ2"
+	stripe.api_key = "sk_test_5LSNQ19L2N0gk7euXWWfWsPO"
 
 	# Get the credit card details submitted by the form
 	token = request.POST['stripeToken']
+	# Slightly ugly, but functional way of getting value from stripe checkout gui
+	cents = int(float(request.POST['amount_in_cents']))
 	try:
 		charge = stripe.Charge.create(
-      	amount=1000, # amount in cents, again
+      	amount=cents, # amount in cents, again
       	currency="usd",
       	card=token,
-      	description="payinguser@example.com"
+      	description="payinguser@example.com" #need to deal with this
   		)
 		pass
 	except stripe.error.CardError, e:
@@ -219,4 +223,4 @@ def payment(request):
 		# Something else happened, completely unrelated to Stripe
 		pass
 
-	return True 
+	return render_to_response('store/checkout.html',{'success' : True},context)

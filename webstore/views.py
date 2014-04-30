@@ -177,7 +177,7 @@ def checkout(request):
 	
 	subtotal = 0
 	for items in itemsInOrder:
-		subtotal += items.combinedPrice()
+		subtotal += items.itemCost * items.itemQuantity
 	boxDimensions = boxFit(itemsInOrder)
 	needToEmail = False
 	weight = 0
@@ -301,4 +301,4 @@ def payment(request):
 		pass
 	request.session.flush()
 	#return render_to_response('store/shop-homepage.html',{'success' : True},context)
-	return webstore(request, "featured")
+	return webstore(request, "Fiber Arts")

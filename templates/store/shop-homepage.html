@@ -323,15 +323,7 @@
 
                                           });//end ajax
                                       });              
-                                      $( "#cartModalItems" ).load(function(){
-                                        var bigstring = "";
-                                        {% for cartitem in initialcart %}
-                                          {% for specific in cartitem %}
-                                            bigstring += "<p>{{ specific }}</p>";
-                                          {% endfor %}
-                                        {% endfor %}
-                                        $("#cartModalItems").append(bigstring);
-                                      });
+                                   
                                     </script>
 
                                   </div>
@@ -348,17 +340,7 @@
             
 		   
                 </div>
-	    <div class="row text-center">
-		<ul class="pagination">
-  			<li><a href="#">&laquo;</a></li>
-  			<li><a href="#">1</a></li>
-  			<li><a href="#">2</a></li>
-  			<li><a href="#">3</a></li>
-  			<li><a href="#">4</a></li>
-  			<li><a href="#">5</a></li>
-  			<li><a href="#">&raquo;</a></li>
-		</ul>
-	    </div>
+	    
             </div>
 
         </div>
@@ -556,7 +538,7 @@ $(document).ready(function () {
                         $("#cartModalItems").append(bigstring);
                         sub += result.cart[i][3]  
                       }
-                      $("#subtotal").empty();`
+                      $("#subtotal").empty();
                       $("#subtotal").append("Subtotal: $" + sub);
                        /* $("#cartModalItems").append(
           <div class="row individual-item">

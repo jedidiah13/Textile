@@ -21,6 +21,9 @@ def webstore(request,id):
 	items = StoreItem.objects.filter(category_id=ids.id).all()
 	item_categories = StoreCategory.objects.all();
 
+	if not 'cartList' in request.session: # if there is no cart, make one then get its details
+		print "making a new cart"
+		request.session['cartList'] = []
 	initialcart = buildCartDetail(request.session['cartList'])
 	subtotal = getSubtotal(initialcart)
 	return render_to_response('store/shop-homepage.html', {'initialcart':initialcart, 'subtotal':subtotal, 'items': items, 'item_categories': item_categories, 'regform': RegistrationForm(),'loginform': LoginForm()},context)

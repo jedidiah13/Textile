@@ -18,6 +18,13 @@ def companion(request, id):
     fab_categories = Catagories.objects.all()
     
     return render_to_response('companion/companion-homepage.html', { 'fab_categories': fab_categories},context)
+
+def app(request, id):
+    context = RequestContext(request)
+        
+    fab_categories = Catagories.objects.all()
+    
+    return render_to_response('companion/companionSub.html', { 'fab_categories': fab_categories},context)
     
 
 def getImage(request, id, directory, image_name):

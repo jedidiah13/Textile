@@ -62,24 +62,42 @@
         </div>
         {% endfor %}
         <!-- End of template for individual item -->
+        <hr />
+        <h4>Calculate Shipping</h4>
+        <label style:"margin-right:15px;">Zip code: </label>
+        <input type="text" id="zipCode" style="margin-right:30px;"/>
+        <button id="calcShipping" type="button" class="btn btn-success">Calculate Shipping</button>
 
+        <script>
+          $(document).ready(function(){
+            $("#calcShipping").click(function(){
+              var zip = $("#zipCode").val();
+              console.log(zip);
+
+              // Ajax to php server and fill in shipping cost
+            })
+          });
+        </script>
       </div>
       <div class="modal-footer">
         <p>Subtotal:
         {{ order.totalCost }}</p><!--Subtotal goes here-->
-        <button type="button" class="btn btn-success">Continue to Payment</button>
+        <p id="shippingCost">Shipping cost:</p>
+        <br>
+        <h5 id="totalCost">Total:</h5>
 
         <form action="{% url 'payment' %}" method="POST">{% csrf_token %}
-        <script
-          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="pk_test_uzufHOKwdTefqr8GRf55S7Z4"
-          data-amount= {{ cents }}
-          data-name="Demo Site"
-          data-description= {{ order.totalCost }}
-          data-image="/128x128.png">
-        </script>
-		<!-- temporary ugly way of sending cents -->
-		<input type="hidden" name="amount_in_cents" value = {{ cents }}>
+          <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_uzufHOKwdTefqr8GRf55S7Z4"
+            data-amount= {{ cents }}
+            data-name="Demo Site"
+            data-description= {{ order.totalCost }}
+            data-image="/128x128.png">
+            // rewrite this script element with javascript with the right cents ammount after shipping
+          </script>
+  		    <!-- temporary ugly way of sending cents -->
+  		    <input type="hidden" name="amount_in_cents" value = {{ cents }} id="cents">
 
         </form>
 

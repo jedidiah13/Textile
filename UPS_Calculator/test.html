@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>           
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <style>
+            .center
+            {
+                margin:auto;
+                width:70%;
+            }
+        </style>
+        <title>UPS Calculator - Tektiles</title>
+        <br>
+        <table id = "InfoTable">
+            <tr style="padding:5px">
+                <td>Title</td>
+                <td>:</td>
+                <td>Shipping Calculator</td>
+            </tr><tr style="padding:5px">
+                <td>Class</td>
+                <td>:</td>
+                <td>CSCI 4700 - Software Engineering</td>
+            </tr>
+        </table>
+	</head>
+    <br><hr><hr><br>
+	<body>
+        <form action= "test.php" method = "post">
+            <table id = "InputTable">
+                <tr>
+                    <th colspan="2">Shipping Calculator</th>	
+                </tr><tr>
+            		<th colspan="2" style="font-size:1em; border-bottom: 1px solid black">This calculates a 12x12x6 5lb. package from Smyrna, TN</th>
+            	</tr><tr>
+                    <td><br></td>
+                </tr><tr>
+                    <td align="center">Destination Zip</td>
+                    <td align="center"><input type="text" name="varZip" placeholder="zip code" style="width:90%;"></td>
+                </tr><tr>
+                    <td><br></td>
+                </tr><tr>
+                    <td colspan="2"><hr></td>
+                </tr><tr>
+                    <th colspan="2">UPS Shipping Calculator</th>	
+                </tr><tr>
+                    <td><br></td>
+                </tr><tr>
+                    <td align="center">UPS Shipping Option</td>
+                    <td align="center">
+                        <select name="varShipping" style="width:100%;">
+                            <option value="1DM">Next Day Air Early AM</option>
+                            <option value="1DA">Next Day Air</option>
+                            <option value="1DP">Next Day Air Saver</option>                            
+                            <option value="2DM">2nd Day Air AM</option>
+                            <option value="2DA">2nd Day Air</option>
+                            <option value="3DS">Three Day Select</option>                            
+                            <option selected value="GND">Ground</option>
+                        </select>
+                    </td>
+                </tr><tr>
+                    <td colspan="2"><hr></td>
+                </tr><tr>
+                    <th colspan="2">USPS Shipping Calculator</th>	
+                </tr><tr>
+                    <td><br></td>
+                </tr><tr>
+                    <td align="center">USPS Shipping Option</td>
+                    <td align="center">
+                        <select name="USPSvarShipping" style="width:100%;">
+                            <option value="P" selected>Priority</option>
+                            <option value="O">Overnight</option>
+                        </select>
+                    </td>
+                </tr><tr>
+                    <td colspan="2"><hr></td>
+                </tr><tr>
+                    <td><input type="submit" value="Submit"></td>
+                </tr>
+            </table>
+        </form>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

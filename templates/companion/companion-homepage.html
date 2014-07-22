@@ -1,0 +1,686 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+<link href="{% static 'css/shop-homepage.css' %}" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.5/angular.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-bootpag/1.0.4/jquery.bootpag.js"></script>
+<script src="{% static 'js/ui-bootstrap-tpls-0.10.0.js' %}"></script>
+</head>
+ <style>
+      
+      .modal{
+  animation: animationFrames linear 1s;
+  animation-iteration-count: 1;
+  transform-origin: 50% 0%;
+  -webkit-animation: animationFrames linear 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-transform-origin: 50% 0%;
+  -moz-animation: animationFrames linear 1s;
+  -moz-animation-iteration-count: 1;
+  -moz-transform-origin: 50% 0%;
+  -o-animation: animationFrames linear 1s;
+  -o-animation-iteration-count: 1;
+  -o-transform-origin: 50% 0%;
+  -ms-animation: animationFrames linear 1s;
+  -ms-animation-iteration-count: 1;
+  -ms-transform-origin: 50% 0%;
+}
+
+@keyframes animationFrames{
+  0% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  20% {
+    transform:  rotate(15deg) ;
+  }
+  40% {
+    transform:  rotate(-10deg) ;
+  }
+  60% {
+    transform:  rotate(5deg) ;
+  }
+  80% {
+    transform:  rotate(-5deg) ;
+  }
+  100% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+}
+
+@-moz-keyframes animationFrames{
+  0% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -moz-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  20% {
+    -moz-transform:  rotate(15deg) ;
+  }
+  40% {
+    -moz-transform:  rotate(-10deg) ;
+  }
+  60% {
+    -moz-transform:  rotate(5deg) ;
+  }
+  80% {
+    -moz-transform:  rotate(-5deg) ;
+  }
+  100% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -moz-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+}
+
+@-webkit-keyframes animationFrames {
+  0% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -webkit-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  20% {
+    -webkit-transform:  rotate(15deg) ;
+  }
+  40% {
+    -webkit-transform:  rotate(-10deg) ;
+  }
+  60% {
+    -webkit-transform:  rotate(5deg) ;
+  }
+  80% {
+    -webkit-transform:  rotate(-5deg) ;
+  }
+  100% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -webkit-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+}
+
+@-o-keyframes animationFrames {
+  0% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -o-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  20% {
+    -o-transform:  rotate(15deg) ;
+  }
+  40% {
+    -o-transform:  rotate(-10deg) ;
+  }
+  60% {
+    -o-transform:  rotate(5deg) ;
+  }
+  80% {
+    -o-transform:  rotate(-5deg) ;
+  }
+  100% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -o-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+}
+
+@-ms-keyframes animationFrames {
+  0% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -ms-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  20% {
+    -ms-transform:  rotate(15deg) ;
+  }
+  40% {
+    -ms-transform:  rotate(-10deg) ;
+  }
+  60% {
+    -ms-transform:  rotate(5deg) ;
+  }
+  80% {
+    -ms-transform:  rotate(-5deg) ;
+  }
+  100% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -ms-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+}
+
+
+    </style>
+
+
+<body>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead" align="center">Textile Companion</p>
+               <div class="panel-group" id="accordion">
+  {%for fabCatagory in fab_categories%}
+  <div class="panel panel-primary">
+    <div class="panel-heading"> 
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" data-target="#{{fabCatagory.categoryId}}" id="{{fabCatagory.categoryId}}btn"> 
+          {{fabCatagory}}
+        </a>
+      </h4>
+                <script type="text/javascript">
+                        //$("#{{fabCatagory.categoryId}}btn").on('click', function(event){
+                            $(document).ready(function(){
+                                
+                                                       
+                                            $.ajax({
+                                                 dataType: 'json',
+                                                 type: 'GET',
+                                                 url: '/companion/topic/{{fabCatagory}}/',
+                                                 
+                                                 success: function(result){
+                                                    
+                                                        for(var i=0; i < result.topics.length; i++){
+                                                           $("#{{fabCatagory.categoryId}}topics").append(
+
+                        "<a id='"+result.topics[i].topicId+"' class='list-group-item' ><li>"+result.topics[i].topic+"</li></a>"
+
+                                                            );
+
+                                                }
+                                             },    
+                                            });
+
+
+
+
+                                                //$( this ).off( event ); //prevent function from being launched by the same button
+                                            });
+
+                                            
+
+                </script>
+
+
+
+    </div>
+    <div id="{{fabCatagory.categoryId}}" class="panel-collapse collapse">
+      <div class="panel-body">
+        
+             <div id="{{fabCatagory.categoryId}}topics" class="list-group">
+                    <!--Ajax Data Goes Here-->
+                              
+                                 
+                
+            </div>       
+                         
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+            <!--Event Handler for dynamically created links -->
+     <script type="text/javascript">
+           $(document).ready(function(event){
+            
+            var lastClicked
+            var numItems = 5
+            
+            $(document).on('click', '.list-group-item', function(e){
+                    myTopic = $(this).attr('id') 
+                    
+                    
+                    
+
+                    
+                    $.ajax({
+                                                 dataType: 'json',
+                                                 type: 'GET',
+                                                 url: '/companion/fabric/' + myTopic,
+                                                 
+                                                 success: function(result){
+
+                                                if(lastClicked != myTopic){
+
+                                                    //clear last content
+                                                    $("#blockContent").empty();
+                                                    $('#dynamicModals').empty();
+
+                                                    //create content
+                                                     
+                                                    for(var i = 0; i < result.length;i++){
+                                                    
+                                                    //thumbnail objects dynamic creation.
+                                                     
+                                                    $("#blockContent").append("<div   class='col-sm-4 col-lg-4 col-md-4'>"+
+                                                                                    "<div  class='thumbnail'>"+
+                                                                                        "<img src="+result[i].fields.fabImage+" alt=''>"+
+                                                                                    "<div class='caption'>"+
+                                                                                            "<h4>"+
+                                "<a  data-toggle='modal' data-target='#"+ "modal-target-"+ i +"' >"+ result[i].fields.fabName +"</a>"+
+                                                                                            "</h4>"+
+                                                                                    "</div>"+
+
+                                                                                    "</div>"+"</div>");
+                                                     
+                                                    
+if(result[i].fields.fabVideoURL){                                                                                 
+                                                                                    
+    if(result[i].fields.fabImage_secondary){
+       //modal dynamic Creatation 
+        $("#dynamicModals").append(
+            "<div class='modal ' id='"+ "modal-target-"+ i +"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"+
+                "<div class='modal-dialog'>"+
+                    "<div class='modal-content'>"+
+                        "<div class='modal-header'>"+
+                            "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"+
+                                "<h4 class='modal-title' id='myModalLabel'><span class='label label-success'>"+result[i].fields.fabName+"</span></h4>"+
+                        "</div>"+
+                    "<div class='modal-body row'>"+
+                        "<ul class='nav nav-tabs'>"+
+                          "<li class='active'><a href='#description' data-toggle='tab'>Description</a></li>"+
+                          "<li><a href='#video' data-toggle='tab'>Video</a></li>"+
+                        "</ul>"+
+                        "<div class='tab-content'>"+
+                            "<div class='tab-pane active' id='description' style='margin-top:2%'>"+
+                                "<div class='col-lg-6'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<img data-toggle='magnify' src='"+result[i].fields.fabImage+"' alt=''>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='col-lg-6'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<img data-toggle='magnify' src='"+result[i].fields.fabImage_secondary+"' alt='' width='250px' height='185px'>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='col-lg-8 col-lg-offset-2' id='companion-description'>"+
+                    
+                                    result[i].fields.fabDescription+
+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='tab-pane' id='video' style='margin-top:2%'>"+
+                                "<div class='col-lg-6 col-lg-offset-2'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<iframe width='420' height='315' src='" + result[i].fields.fabVideoURL + "?rel=0&modestbranding=1&showinfo=0' frameborder='0' allowfullscreen></iframe>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"+
+                    "</div>"+
+                    "<div class='modal-footer'>"+
+                        "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
+                    "</div>"+
+                "</div>"+
+            "</div>"+
+        "</div>");
+
+    }
+    else{
+    //modal dynamic Creatation 
+    $("#dynamicModals").append(
+        "<div class='modal ' id='"+ "modal-target-"+ i +"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"+
+            "<div class='modal-dialog'>"+
+                "<div class='modal-content'>"+
+                    "<div class='modal-header'>"+
+                        "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"+
+                            "<h4 class='modal-title' id='myModalLabel'><span class='label label-success'>"+result[i].fields.fabName+"</span></h4>"+
+                    "</div>"+
+                "<div class='modal-body row'>"+
+                    "<ul class='nav nav-tabs'>"+
+                          "<li class='active'><a href='#description' data-toggle='tab'>Description</a></li>"+
+                          "<li><a href='#video' data-toggle='tab'>Video</a></li>"+
+                        "</ul>"+
+                        "<div class='tab-content'>"+
+                            "<div class='tab-pane active' id='description' style='margin-top:2%'>"+
+                                "<div class='col-lg-6'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<img data-toggle='magnify' src='"+result[i].fields.fabImage+"' alt=''>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='col-lg-6'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<img data-toggle='magnify' src='"+result[i].fields.fabImage_secondary+"' alt='' width='250px' height='185px'>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='tab-pane' id='video' style='margin-top:2%'>"+
+                                "<div class='col-lg-6 col-lg-offset-2'>"+
+                                    "<div class='row text-center' id='companion-image'>"+
+                                        "<iframe width='420' height='315' src='" + result[i].fields.fabVideoURL + "?rel=0&modestbranding=1&showinfo=0' frameborder='0' allowfullscreen></iframe>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"+
+                "</div>"+
+                "<div class='modal-footer'>"+
+                    "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
+                "</div>"+
+            "</div>"+
+        "</div>"+
+    "</div>");
+    }
+}
+else{
+        if(result[i].fields.fabImage_secondary){
+       //modal dynamic Creatation 
+        $("#dynamicModals").append(
+            "<div class='modal ' id='"+ "modal-target-"+ i +"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"+
+                "<div class='modal-dialog'>"+
+                    "<div class='modal-content'>"+
+                        "<div class='modal-header'>"+
+                            "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"+
+                                "<h4 class='modal-title' id='myModalLabel'><span class='label label-success'>"+result[i].fields.fabName+"</span></h4>"+
+                        "</div>"+
+                    "<div class='modal-body row'>"+
+                        "<div class='col-lg-6'>"+
+                            "<div class='row text-center' id='companion-image'>"+
+                                "<img data-toggle='magnify' src='"+result[i].fields.fabImage+"' alt=''>"+
+                            "</div>"+
+                        "</div>"+
+                        "<div class='col-lg-6'>"+
+                            "<div class='row text-center' id='companion-image'>"+
+                                "<img data-toggle='magnify' src='"+result[i].fields.fabImage_secondary+"' alt='' width='250px' height='185px'>"+
+                            "</div>"+
+                        "</div>"+
+                        "<div class='col-lg-8 col-lg-offset-2' id='companion-description'>"+
+            
+                            result[i].fields.fabDescription+
+
+                        "</div>"+
+                        "</div>"+
+                    "<div class='modal-footer'>"+
+                        "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
+                    "</div>"+
+                "</div>"+
+            "</div>"+
+        "</div>");
+
+    }
+    else{
+    //modal dynamic Creatation 
+    $("#dynamicModals").append(
+        "<div class='modal' id='"+ "modal-target-"+ i +"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"+
+            "<div class='modal-dialog'>"+
+                "<div class='modal-content'>"+
+                    "<div class='modal-header'>"+
+                        "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"+
+                            "<h4 class='modal-title' id='myModalLabel'><span class='label label-success'>"+result[i].fields.fabName+"</span></h4>"+
+                    "</div>"+
+                "<div class='modal-body row'>"+
+                    "<div class='col-lg-6 col-lg-offset-3'>"+
+                        "<div class='row text-center' id='companion-image'>"+
+                            "<img data-toggle='magnify' src='"+result[i].fields.fabImage+"' alt=''>"+
+                        "</div>"+
+                    "</div>"+
+                    "<div class='col-lg-8 col-lg-offset-2' id='companion-description'>"+
+        
+                        result[i].fields.fabDescription+
+
+                    "</div>"+
+                    "</div>"+
+                "<div class='modal-footer'>"+
+                    "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
+                "</div>"+
+            "</div>"+
+        "</div>"+
+    "</div>");
+    }
+
+}
+
+
+
+                                            
+                                                    
+                                                    }//end for 
+                                                    
+                                                    lastClicked = myTopic
+                                                    }//end if 
+                                                },//end success  
+
+                    });//end ajax
+                                      
+            });//end event handler 
+            
+            });
+     </script>
+
+
+            </div>
+	   	
+            <div class="col-md-9">
+			
+    			
+
+	<form class="autocomplete-me form-inline" role="form" id="searchForm">
+            {% csrf_token %}
+            <!-- Display the search form elements here -->
+           <div class="form-group" style="width:100%">
+            
+                <a  id="searchBtn" class="btn btn-primary" value="search"><span class="glyphicon glyphicon-search"></span></a>
+            
+                  <input type="text" class="form-control" autocomplete="off"  name="q" size="50" id="id_q" placeholder="Search Companion"/>
+                
+            </div>  
+            <br />
+  </form>
+	<script>
+	
+	$('#searchBtn').click(function(){
+                                $.ajax({//begin
+
+
+                                        type: 'GET',
+					data: $("#searchForm").serialize(),
+                                        url:  '.',
+                                        success: function(result){
+					     if(result){
+                                                console.log("searched")
+						$('#carousel-example-generic').hide();
+						$('.row-fluid').hide();
+						
+					     }
+                                               
+
+                                         }//end success
+
+
+
+
+                                        });//end ajax
+
+                                        });
+         </script>		
+
+		
+                <div id="blockContent" class="row-fluid" style="padding-top:3%;">
+		               <!--Thumnails generate here -->
+                </div>
+
+                <!-- Pagenation Still Needs to be taken Care Of -->
+	    
+    <!-- /.container -->
+
+    <div class="container">
+
+       <div id="pagination" class="row text-center">
+           
+        </div>
+            </div>
+
+        </div>
+
+    </div>
+
+        
+
+    </div>
+    <!-- /.container -->
+    <!-- JavaScript -->
+    
+
+</body>
+
+<!-- Modal -->
+<div id="dynamicModals">
+    
+    <!--modals will be dynamically created Here -->
+
+
+</div>
+<script type="text/javascript">
+  
+  /*
+Credits:
+https://github.com/marcaube/bootstrap-magnify
+*/
+
+
+!function ($) {
+
+    "use strict"; // jshint ;_;
+
+
+    /* MAGNIFY PUBLIC CLASS DEFINITION
+     * =============================== */
+
+    var Magnify = function (element, options) {
+        this.init('magnify', element, options)
+    }
+
+    Magnify.prototype = {
+
+        constructor: Magnify
+
+        , init: function (type, element, options) {
+            var event = 'mousemove'
+                , eventOut = 'mouseleave';
+
+            this.type = type
+            this.$element = $(element)
+            this.options = this.getOptions(options)
+            this.nativeWidth = 0
+            this.nativeHeight = 0
+
+            this.$element.wrap('<div class="magnify" \>');
+            this.$element.parent('.magnify').append('<div class="magnify-large" \>');
+            this.$element.siblings(".magnify-large").css("background","url('" + this.$element.attr("src") + "') no-repeat");
+
+            this.$element.parent('.magnify').on(event + '.' + this.type, $.proxy(this.check, this));
+            this.$element.parent('.magnify').on(eventOut + '.' + this.type, $.proxy(this.check, this));
+        }
+
+        , getOptions: function (options) {
+            options = $.extend({}, $.fn[this.type].defaults, options, this.$element.data())
+
+            if (options.delay && typeof options.delay == 'number') {
+                options.delay = {
+                    show: options.delay
+                    , hide: options.delay
+                }
+            }
+
+            return options
+        }
+
+        , check: function (e) {
+            var container = $(e.currentTarget);
+            var self = container.children('img');
+            var mag = container.children(".magnify-large");
+
+            // Get the native dimensions of the image
+            if(!this.nativeWidth && !this.nativeHeight) {
+                var image = new Image();
+                image.src = self.attr("src");
+
+                this.nativeWidth = image.width;
+                this.nativeHeight = image.height;
+
+            } else {
+
+                var magnifyOffset = container.offset();
+                var mx = e.pageX - magnifyOffset.left;
+                var my = e.pageY - magnifyOffset.top;
+
+                if (mx < container.width() && my < container.height() && mx > 0 && my > 0) {
+                    mag.fadeIn(100);
+                } else {
+                    mag.fadeOut(100);
+                }
+
+                if(mag.is(":visible"))
+                {
+                    var rx = Math.round(mx/container.width()*this.nativeWidth - mag.width()/2)*-1;
+                    var ry = Math.round(my/container.height()*this.nativeHeight - mag.height()/2)*-1;
+                    var bgp = rx + "px " + ry + "px";
+
+                    var px = mx - mag.width()/2;
+                    var py = my - mag.height()/2;
+
+                    mag.css({left: px, top: py, backgroundPosition: bgp});
+                }
+            }
+
+        }
+    }
+
+
+    /* MAGNIFY PLUGIN DEFINITION
+     * ========================= */
+
+    $.fn.magnify = function ( option ) {
+        return this.each(function () {
+            var $this = $(this)
+                , data = $this.data('magnify')
+                , options = typeof option == 'object' && option
+            if (!data) $this.data('tooltip', (data = new Magnify(this, options)))
+            if (typeof option == 'string') data[option]()
+        })
+    }
+
+    $.fn.magnify.Constructor = Magnify
+
+    $.fn.magnify.defaults = {
+        delay: 0
+    }
+
+
+    /* MAGNIFY DATA-API
+     * ================ */
+
+    $(window).on('load', function () {
+        $('[data-toggle="magnify"]').each(function () {
+            var $mag = $(this);
+            $mag.magnify()
+        })
+    })
+
+} ( window.jQuery );
+</script>
+</div>
+{% endblock %}
+

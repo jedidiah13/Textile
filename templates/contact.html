@@ -63,9 +63,11 @@
 
 			$(document).ready(function(){
 				var cntFRM = $("#contactForm");
-
+				var clicked = true;
 				$("#contact").on('click',function(e){
 
+
+					if(clicked == true){
 						$.ajax({
 							type: 'POST',
 							url:  '/contact/',
@@ -83,7 +85,8 @@
 
 
 						});
-
+						clicked = false;
+					}
 
 				});
 

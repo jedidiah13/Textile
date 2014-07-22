@@ -39,7 +39,7 @@ def contact(request):
         comments = request.POST.get('comments')
         content = "Name: " + str(last) + "," + str(first)  + "Phone: " + str(phone)  + "Email: " + str(email)  + "Comments: " + str(comments)
         
-        sendemail = [ "textilefc@textilefabric.com" ] 
+        sendemail = [ "pfunk897@gmail.com" ] 
 
         send_mail(title, content, 'no-reply@gsick.com', sendemail, fail_silently=False)
         return render_to_response('contact.html',{'success':True},context)

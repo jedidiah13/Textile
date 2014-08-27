@@ -1,3 +1,45 @@
+#Textile Fabric Consultants Inc.
+This is the in-development website for Textile Fabric Consultants Inc. Built with the Django framework, there are several applications that make up the site:
+1. blog
+2. companion
+3. webstore
+
+##How to load the project
+###Components neeeded
+####Python
+####Django
+#####Plugins
+####Elastic Search
+####PHP / Apache
+####Bootstrap
+####jquery
+###Running
+
+##Layout of source code
+###.idea
+###UPS_Calculator
+###avatars
+The images that are uploaded and processed for the webstore and companion app are stored here.
+###blog
+###companion
+###frontend
+###mysite
+###src
+###static
+###store_images
+###templates
+###webstore
+
+##Database
+###Background
+###Schema
+###Migrations
+
+##Current development
+###Incomplete features
+###Known issues
+
+-----
 Current Development version of the Tektiles App for Textile Fabric Inc
 
 

@@ -86,7 +86,12 @@ http://getbootstrap.com/
 Payments are (or would be) handled by Stripe https://stripe.com/
 It's not very tightly integrated at this point, but we made this choice mainly for security and ease of use reasons.
 
-####jquery / AJAX
+####Javascript, Jquery, and AJAX
+The client side dynamic parts of the site are implemented with Javascript (along with some cool CSS3). Most of that comes from bootstrap.js, such as the modals (panels that popup with content). Some of it is custom javascript though, and it is not very organized. Basically, when we realized we needed to do something client side, it got thrown into javascript in with the html templates. For example, the client side code that handles the [incomplete] shopping cart is mixed in with the webstore template. I think it would be helpful to make that into own javascript file.
+
+In order to give the site a more fluid feeling, each app only has a couple pages and very few refreshes happen. Most of the data is loaded dynamically with AJAX. For example, clicking on the details about a store item does an AJAX Get call to load the additional information - that way the information is loaded into the same page rather than needing to go to a new page just to see details about an item. Another example is updating your account information. When you press save, that does an AJAX Post to save the new information to the database.
+
+Jquery (the javascript library) is used for making the AJAX calls and is also used in some other places since it makes many common javascript tasks simple and easy. Jquery is being loaded from the Google CDN; that tends to be helpful for page load times. Learn more at http://jquery.com/
 ###Running the site
 
 ##Layout of source code
@@ -108,6 +113,9 @@ The images that are uploaded and processed for the webstore and companion app ar
 ###Background
 ###Schema
 ###Migrations
+If you make a change to one of the fields in a model, that effectively changes the database schema. (You can change the functions in the models without issue, just referring to the database fields here). You'll need to "migrate" the database to the new schema. As mentioned earlier, there are some tools that can do this such as the South plugin or newer versions of Django. However, after some change had been made to the database structure a while back, we found that we needed to do migrations manually. You need to "dump" the database to a JSON file, clear the whole db, then rebuild the db from the dump file. This will give you the opportunity to define default values or otherwise handle changes that you wanted to make to the database schema. You can do this with the dumpdata and loaddata commands. Check those out here:
+https://docs.djangoproject.com/en/1.6/ref/django-admin/
+
 
 ##Current development
 ###Incomplete features

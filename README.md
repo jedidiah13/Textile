@@ -7,6 +7,11 @@ This is the code for the in-development website for Textile Fabric Consultants I
 
 ##How to load the project
 ###Components neeeded
+####GitHub
+You are reading this documentation, so you've found GitHub. If Git / GitHub / version control in general is unfamiliar to you, here's a good guide to help you get started http://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1 - GitHub can be used via the command line, through the Windows / Mac client, and through the browser. Here's some tips from my ex
+- Always sync with github before editing code or running the website.
+- After changing code, commit and sync your changes. If you were just running the site, you can discard any binary files that changed. In theory, the .gitignore file should take care of this, but that has not worked consistently with this project.
+- The database is contained in `userdb.sqlite3`. Since the database is synced with github like all of the other files, it's important that two people aren't modifying the database at the same time, otherwise git will git confused about the versions.
 ####Python
 This Django project uses Python 2.7.6 or 2.7.7. It should be compatible with 2.6 as well, and there is Django for Python 3, but this code is written for Python 2.
 So, install Python if not already installed and verify that it is working properly.
@@ -24,6 +29,9 @@ If you are using Windows, this may be easier:
 https://sites.google.com/site/pydatalog/python/pip-for-windows
 
 Install django with `pip install Django`. If on a unix system, you may need to put `sudo` before pip commands.
+
+_Recomendation:_ I found it was very helpful to work through the bit Django tutorial (especially parts 1 through 4) that starts here https://docs.djangoproject.com/en/1.6/intro/tutorial01/ - It takes about a full day to do, but it will give you the needed background to dive into this project.
+
 #####Plugins
 The usefulness of Django really comes from all of its plugins. Or maybe all of its plugins just provide basic functionality that you need to make a website work. Regardless, there's a bunch to install and this may not be a complete list. When you try to run the server, you'll get a sort-of-meaningful error message if you are missing a plugin. Some of these aren't used currently but might be useful. To install each of these, do `pip install` and then the name of the plugin. Most of these will have their documentation at readthedocs https://readthedocs.org/
 - django-bootstrap-toolkit
@@ -92,7 +100,23 @@ The client side dynamic parts of the site are implemented with Javascript (along
 In order to give the site a more fluid feeling, each app only has a couple pages and very few refreshes happen. Most of the data is loaded dynamically with AJAX. For example, clicking on the details about a store item does an AJAX Get call to load the additional information - that way the information is loaded into the same page rather than needing to go to a new page just to see details about an item. Another example is updating your account information. When you press save, that does an AJAX Post to save the new information to the database.
 
 Jquery (the javascript library) is used for making the AJAX calls and is also used in some other places since it makes many common javascript tasks simple and easy. Jquery is being loaded from the Google CDN; that tends to be helpful for page load times. Learn more at http://jquery.com/
-###Running the site
+
+###Running the project
+Assuming everything is all set up as discussed above, there is a good chance that you will be able to start up the site using the development webserver that django provides. For deployment, you'll run Django off of an apache webserver most likely as discussed here https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
+
+Steps to load the site:
+0. Sync with GitHub. That way you can be sure you have the latest version.
+1. Start up your php server if working with the shipping calculator.
+2. Start the elastic search process if wanting to search or are adding things to the database through the admin pages.
+3. Navigate to the main directory for the project with the command line and run `python manage.py runserver`
+4. In the browser, access the site at `127.0.0.1:8000/`
+
+##Database
+###Background
+###Schema
+###Migrations
+If you make a change to one of the fields in a model, that effectively changes the database schema. (You can change the functions in the models without issue, just referring to the database fields here). You'll need to "migrate" the database to the new schema. As mentioned earlier, there are some tools that can do this such as the South plugin or newer versions of Django. However, after some change had been made to the database structure a while back, we found that we needed to do migrations manually. You need to "dump" the database to a JSON file, clear the whole db, then rebuild the db from the dump file. This will give you the opportunity to define default values or otherwise handle changes that you wanted to make to the database schema. You can do this with the dumpdata and loaddata commands. Check those out here:
+https://docs.djangoproject.com/en/1.6/ref/django-admin/
 
 ##Layout of source code
 ###.idea
@@ -109,17 +133,9 @@ The images that are uploaded and processed for the webstore and companion app ar
 ###templates
 ###webstore
 
-##Database
-###Background
-###Schema
-###Migrations
-If you make a change to one of the fields in a model, that effectively changes the database schema. (You can change the functions in the models without issue, just referring to the database fields here). You'll need to "migrate" the database to the new schema. As mentioned earlier, there are some tools that can do this such as the South plugin or newer versions of Django. However, after some change had been made to the database structure a while back, we found that we needed to do migrations manually. You need to "dump" the database to a JSON file, clear the whole db, then rebuild the db from the dump file. This will give you the opportunity to define default values or otherwise handle changes that you wanted to make to the database schema. You can do this with the dumpdata and loaddata commands. Check those out here:
-https://docs.djangoproject.com/en/1.6/ref/django-admin/
-
 
 ##Current development
-###Incomplete features
-###Known issues
+View the **Issues** section on the GitHub page for all of the inprogress or planned development.
 
 -----
 Current Development version of the Tektiles App for Textile Fabric Inc

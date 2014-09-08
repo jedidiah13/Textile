@@ -110,10 +110,13 @@ Steps to load the site:
 2. Start the elastic search process if wanting to search or are adding things to the database through the admin pages.
 3. Navigate to the main directory for the project with the command line and run `python manage.py runserver`
 4. In the browser, access the site at `127.0.0.1:8000/`
+5. You can access the admin pages at `127.0.0.1:8000/admin` - you can log in with "admin" and "password". I recommend changing these before deployment.
 
 ##Database
 ###Background
+Python has built in support for sqlite, and that is the default dbms for django. Because of the abstractions that django's data access layer provides, it really makes little difference what database system you want to use since you won't be writing SQL directly. Django provides wrappers for MySQL among many others. Sqlite is intersting in that you don't need to run a seperate database server like you would for MySQL, thus the database file is right in with the rest of the project. That's simple, but we have had many issues with keeping the database file in-sync through github. Once setup, it might be simpler to have a MySQL database that is on a server that the application connects to - that way you don't have to worry about people having different versions.
 ###Schema
+The schema for the db is defined in each of the models. Although the site is made up of several apps, their tables are in the same databse ("userdb").
 ###Migrations
 If you make a change to one of the fields in a model, that effectively changes the database schema. (You can change the functions in the models without issue, just referring to the database fields here). You'll need to "migrate" the database to the new schema. As mentioned earlier, there are some tools that can do this such as the South plugin or newer versions of Django. However, after some change had been made to the database structure a while back, we found that we needed to do migrations manually. You need to "dump" the database to a JSON file, clear the whole db, then rebuild the db from the dump file. This will give you the opportunity to define default values or otherwise handle changes that you wanted to make to the database schema. You can do this with the dumpdata and loaddata commands. Check those out here:
 https://docs.djangoproject.com/en/1.6/ref/django-admin/
@@ -121,14 +124,23 @@ https://docs.djangoproject.com/en/1.6/ref/django-admin/
 ##Layout of source code
 ###.idea
 ###UPS_Calculator
+This is the php project for calculating shipping costs using the UPS api. There's the php code and an html page to test it out with. The next step is to integrate the calling code into the webstore checkout and handle those ajax requests in php.
 ###avatars
 The images that are uploaded and processed for the webstore and companion app are stored here.
 ###blog
+Django application of the blog.
 ###companion
+Django application for the companion app. Note how this app works in with the user model, requiring authentication to access.
 ###frontend
+Handles some of the home page / about us pages.
+###login
+The user model is defined here. Note that UserProfile has a one to one relationship with the User auth model provided by Django. That provides secure passwords and the basics for managing users.
 ###mysite
+`settings.py` lives here, along with `urls.py` that make up the main configuration for the full site.
 ###src
+ignore
 ###static
+I'm not really sure what this is for. I think this was for protyping and is unused.
 ###store_images
 ###templates
 ###webstore

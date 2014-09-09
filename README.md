@@ -36,7 +36,7 @@ _Recomendation:_ I found it was very helpful to work through the bit Django tuto
 The usefulness of Django really comes from all of its plugins. Or maybe all of its plugins just provide basic functionality that you need to make a website work. Regardless, there's a bunch to install and this may not be a complete list. When you try to run the server, you'll get a sort-of-meaningful error message if you are missing a plugin. Some of these aren't used currently but might be useful. To install each of these, do `pip install` and then the name of the plugin. Most of these will have their documentation at readthedocs https://readthedocs.org/
 - django-bootstrap-toolkit
 	- Bootstrap is the frontend framework for this site, which works in with Django templates through this plugin.
-- django-admin-bootstraped
+- django-admin-bootstrapped
 	- Makes the admin pages look really nice!
 - south
 	- Database migration tool. Not used anymore after we did some structural changes to the db and had to manually rebuild it.
@@ -76,8 +76,35 @@ This provides the search functionality on different parts of the site. It's real
 In addition to the django plugin, you also need to have a standalone program installed on your computer, or the server when it is deployed. This program powers the search, so if you are running the site and want to use the search features, you will also need to run the elasticsearch program. Also, in order for image upload from the admin pages to work, elasticsearch *must* be running.
 Download the client for your system at http://www.elasticsearch.org/overview/elkdownloads/
 
-On Mac / Linux, navigate to its directory and run it with `./elasticsearch -f`
+# On Mac OS X...
+brew install elasticsearch
+
+# On Ubuntu...
+apt-get install elasticsearch
+
+# Then start via:
+elasticsearch -D es.config=<path to YAML config>
+
+# Example:
+elasticsearch -D es.config=/usr/local/Cellar/elasticsearch/0.90.0/config/elasticsearch.yml
+
 On Windows, `.\bin\elasticsearch`
+
+# Testing on localhost
+You will need to make a simple addition to the elasticsearch.yml file for you to test on localhost. Navigate to the elasticsearch.yml file (i.e. /usr/local/etc.../elasticsearch.yml) and add the following at the bottom of the file.
+
+	discovery.zen.ping.multicast.enabled: false
+	discovery.zen.ping.unicast.hosts: ["127.0.0.1"]
+
+	cluster:
+		name: #name it whatever you would like
+	
+	network:
+		host: 127.0.0.1
+	
+	path:
+		logs: /usr/local/var/log
+		data: /usr/local/var/data
 
 ####PHP / Apache
 This is a Django application, so what's this about PHP??

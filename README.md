@@ -76,21 +76,23 @@ This provides the search functionality on different parts of the site. It's real
 In addition to the django plugin, you also need to have a standalone program installed on your computer, or the server when it is deployed. This program powers the search, so if you are running the site and want to use the search features, you will also need to run the elasticsearch program. Also, in order for image upload from the admin pages to work, elasticsearch *must* be running.
 Download the client for your system at http://www.elasticsearch.org/overview/elkdownloads/
 
-##### On Mac OS X...
-brew install elasticsearch
-
-##### On Ubuntu...
-apt-get install elasticsearch
-
-##### Then start via:
-elasticsearch -D es.config=<path to YAML config>
-
-##### Example:
-elasticsearch -D es.config=/usr/local/Cellar/elasticsearch/0.90.0/config/elasticsearch.yml
-
 On Windows, `.\bin\elasticsearch`
 
-##### Testing on localhost
+- On Mac OS X...
+brew install elasticsearch
+
+- On Ubuntu...
+apt-get install elasticsearch
+
+- Then start via:
+elasticsearch -D es.config=<path to YAML config>
+
+- Example:
+elasticsearch -D es.config=/usr/local/Cellar/elasticsearch/0.90.0/config/elasticsearch.yml
+
+
+
+- Testing on localhost
 You will need to make a simple addition to the elasticsearch.yml file for you to test on localhost. Navigate to the elasticsearch.yml file (i.e. /usr/local/etc.../elasticsearch.yml) and add the following at the bottom of the file.
 
 	discovery.zen.ping.multicast.enabled: false

@@ -104,6 +104,8 @@ You will need to make a simple addition to the elasticsearch.yml file for you to
     path:
         logs: /usr/local/var/log
         data: /usr/local/var/data
+        
+Credit: http://django-haystack.readthedocs.org/en/latest/installing_search_engines.html
 
 ####PHP / Apache
 This is a Django application, so what's this about PHP??

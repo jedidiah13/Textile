@@ -38,8 +38,6 @@ The usefulness of Django really comes from all of its plugins. Or maybe all of i
 	- Bootstrap is the frontend framework for this site, which works in with Django templates through this plugin.
 - django-admin-bootstrapped
 	- Makes the admin pages look really nice!
-- south
-	- Database migration tool. Not used anymore after we did some structural changes to the db and had to manually rebuild it.
 - django-endless-pagination
 	- Really great tool for splitting content up over multiple pages or use lazy loading and infinite scrolling. Not sure if anything on the site is using it right now, but it is worth looking into since it makes a typically tricky task very simple.
 - Pillow
@@ -48,11 +46,6 @@ The usefulness of Django really comes from all of its plugins. Or maybe all of i
 - django-imagekit
 	- provides the images resizing and cropping for dynamically adding companion app items and store items.
 	- http://django-imagekit.readthedocs.org/en/latest/index.html
-- haystack
-	- special installation: `pip install -e git+https://github.com/toastdriven/django-haystack.git@master#egg=django-haystack`
-	- Find a needle in a haystack. Provides search for Elasticsearch
-- pyelasticsearch
-	- install the plugin, but there are other steps involved. See the next section.
 - django-crispy-forms
 	- Used for the forms for login / account info.
 	- http://django-crispy-forms.readthedocs.org/en/latest/genindex.html
@@ -63,11 +56,21 @@ The usefulness of Django really comes from all of its plugins. Or maybe all of i
 - django-jsonview
 	- Basically lets django work with json objects similarly to javascript.
 	- https://github.com/jsocol/django-jsonview
+- haystack
+	- special installation: `pip install -e git+https://github.com/toastdriven/django-haystack.git@master#egg=django-haystack`
+	- Find a needle in a haystack. Provides search for Elasticsearch
+- pyelasticsearch
+	- install the plugin, but there are other steps involved. See the next section.
+
 - pytz
 	- Time zones. Date and times are magically localized.
 - requests
 	- It fixes the problems with python's built in HTTP
 	- http://docs.python-requests.org/en/latest/
+ 
+###### No Longer Used
+- south
+	- Database migration tool. Not used anymore after we did some structural changes to the db and had to manually rebuild it.
 
 
 ####Elastic Search

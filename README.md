@@ -40,9 +40,6 @@ The usefulness of Django really comes from all of its plugins. Or maybe all of i
 	- Makes the admin pages look really nice!
 - django-endless-pagination
 	- Really great tool for splitting content up over multiple pages or use lazy loading and infinite scrolling. Not sure if anything on the site is using it right now, but it is worth looking into since it makes a typically tricky task very simple.
-- Pillow
-	- A derivation of PIL, the python imaging library. There's a whole bunch of versions out there, but this one should work.
-	- http://pillow.readthedocs.org/en/latest/installation.html
 - django-imagekit
 	- provides the images resizing and cropping for dynamically adding companion app items and store items.
 	- http://django-imagekit.readthedocs.org/en/latest/index.html
@@ -56,6 +53,9 @@ The usefulness of Django really comes from all of its plugins. Or maybe all of i
 - django-jsonview
 	- Basically lets django work with json objects similarly to javascript.
 	- https://github.com/jsocol/django-jsonview
+- Pillow
+	- A derivation of PIL, the python imaging library. There's a whole bunch of versions out there, but this one should work.
+	- http://pillow.readthedocs.org/en/latest/installation.html
 - haystack
 	- special installation: `pip install -e git+https://github.com/toastdriven/django-haystack.git@master#egg=django-haystack`
 	- Find a needle in a haystack. Provides search for Elasticsearch
@@ -87,10 +87,10 @@ brew install elasticsearch
 - On Ubuntu...
 apt-get install elasticsearch
 
-- Then start via:
-elasticsearch -D es.config=<path to YAML config>
+###### Then start via:
+elasticsearch -D es.config="path to YAML config"
 
-- Example:
+###### Example:
 elasticsearch -D es.config=/usr/local/Cellar/elasticsearch/0.90.0/config/elasticsearch.yml
 
 

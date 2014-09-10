@@ -96,7 +96,7 @@ elasticsearch -D es.config=/usr/local/Cellar/elasticsearch/0.90.0/config/elastic
 
 
 ##### Testing on localhost
-You will need to make a simple addition to the elasticsearch.yml file for you to test on localhost. Navigate to the elasticsearch.yml file (i.e. /usr/local/etc.../elasticsearch.yml) and add the following at the bottom of the file.
+You will need to make a simple addition to the elasticsearch.yml file to test on localhost. Navigate to the elasticsearch.yml file (i.e. /usr/local/etc.../elasticsearch.yml) and add the following to the bottom of the file.
 
     discovery.zen.ping.multicast.enabled: false
     discovery.zen.ping.unicast.hosts: ["127.0.0.1"]

@@ -8,7 +8,7 @@ This is the code for the in-development website for Textile Fabric Consultants I
 ##How to load the project
 ###Components neeeded
 ####GitHub
-You are reading this documentation, so you've found GitHub. If Git / GitHub / version control in general is unfamiliar to you, here's a good guide to help you get started http://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1 - GitHub can be used via the command line, through the Windows / Mac client, and through the browser. Here's some tips from my ex
+You are reading this documentation, so you've found GitHub. If Git / GitHub / version control in general is unfamiliar to you, here's a good guide to help you get started http://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1 - GitHub can be used via the command line, through the Windows / Mac client, and through the browser. Here's some tips from my experience:
 - Always sync with github before editing code or running the website.
 - After changing code, commit and sync your changes. If you were just running the site, you can discard any binary files that changed. In theory, the .gitignore file should take care of this, but that has not worked consistently with this project.
 - The database is contained in `userdb.sqlite3`. Since the database is synced with github like all of the other files, it's important that two people aren't modifying the database at the same time, otherwise git will git confused about the versions.

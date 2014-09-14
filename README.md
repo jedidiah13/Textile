@@ -1,99 +1,137 @@
 #Textile Fabric Consultants Inc.
-This is the code for the in-development website for Textile Fabric Consultants Inc. Built with the Django framework, there are several applications that make up the site:
+This is the code for the in-development website for Textile Fabric Consultants Inc.
+
+Built with the Django framework, there are several applications that make up the site:
+
 1. Blog
 2. Textile Companion app
 3. Webstore
-4. Main page (home page, about us)
+4. Main site (home page, about us)
 
 ##How to load the project
 ###Components neeeded
+
 ####GitHub
-You are reading this documentation, so you've found GitHub. If Git / GitHub / version control in general is unfamiliar to you, here's a good guide to help you get started http://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1 - GitHub can be used via the command line, through the Windows / Mac client, and through the browser. Here's some tips from my experience:
+
+You are reading this documentation, so you've found GitHub. If Git / GitHub / version control in general is unfamiliar to you, [here][id-rw]'s a good guide to help you get started (*readwrite.com*).
+[id-rw]: http://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1 "Understanding GitHub..."
+GitHub can be used via the command line, through the Windows / Mac client, and through the browser. Here are some tips from my experience:
+
 - Always sync with github before editing code or running the website.
-- After changing code, commit and sync your changes. If you were just running the site, you can discard any binary files that changed. In theory, the .gitignore file should take care of this, but that has not worked consistently with this project.
+- After changing code, commit and push your changes. If you were just running the site, you can discard any binary files that changed. In theory, the .gitignore file should take care of this, but that has not worked consistently with this project. Don't add a file you don't want tracked!
 - The database is contained in `userdb.sqlite3`. Since the database is synced with github like all of the other files, it's important that two people aren't modifying the database at the same time, otherwise git will git confused about the versions.
+
 ####Python
-This Django project uses Python 2.7.6 or 2.7.7. It should be compatible with 2.6 as well, and there is Django for Python 3, but this code is written for Python 2.
-So, install Python if not already installed and verify that it is working properly.
+<https://www.python.org>
+
+This Django project is tested with Python 2.7.6 or 2.7.7. It may be compatible with 2.6 as well (and there is now Django for Python 3) but this code is written in Python 2.7. So, install Python if not already installed and verify that it is working properly.
+
+####Pip
+Pip is a package manager for Python. It can be used to install Django and much of what follows.
+
+<https://pip.pypa.io/en/latest/installing.html>
+
+*If you are using Windows, this may be easier:*
+
+<https://sites.google.com/site/pydatalog/python/pip-for-windows>
+
 ####Django
-https://docs.djangoproject.com/en/1.6/
-Using version 1.6, the current version when the project was started. It may be worth considering moving to version 1.7 because it includes some helpful database migration tools. 
+<https://docs.djangoproject.com/en/1.6/>
+
+This project uses version 1.6, the current version when the project was started. It may be worth considering moving to version 1.7 because it includes some helpful database migration tools. *See Issue 18*
 
 Instalation instructions:
-https://docs.djangoproject.com/en/1.6/topics/install/#installing-official-release
-As discussed in the docs, you can install everything inside of a python virtualenv. I didn't, but I think that would be a good idea. That would make the project much more portable. Actually, you could build a virtualenv with everything installed, then just have that on git so that everyone has the same environment.
-
-Before installing Django, you'll need to have pip installed.
-http://www.pip-installer.org/en/latest/installing.html#using-the-installer
-If you are using Windows, this may be easier:
-https://sites.google.com/site/pydatalog/python/pip-for-windows
 
 Install django with `pip install Django`. If on a unix system, you may need to put `sudo` before pip commands.
 
-_Recomendation:_ I found it was very helpful to work through the bit Django tutorial (especially parts 1 through 4) that starts here https://docs.djangoproject.com/en/1.6/intro/tutorial01/ - It takes about a full day to do, but it will give you the needed background to dive into this project.
+<https://docs.djangoproject.com/en/1.6/topics/install/#installing-official-release>
+
+As discussed in the docs, you can install everything inside of a python virtualenv. I didn't, but I think that would be a good idea. That would make the project much more portable. Actually, you could build a virtualenv with everything installed, then just have that on git so that everyone has the same environment.
+
+_Recomendation:_ I found it was very helpful to work through the bit Django tutorial (especially parts 1 through 4) that starts here:
+
+<https://docs.djangoproject.com/en/1.6/intro/tutorial01/>
+
+It takes about a full day to do, but it will give you the needed background to dive into this project.
 
 #####Plugins
-The usefulness of Django really comes from all of its plugins. Or maybe all of its plugins just provide basic functionality that you need to make a website work. Regardless, there's a bunch to install and this may not be a complete list. When you try to run the server, you'll get a sort-of-meaningful error message if you are missing a plugin. Some of these aren't used currently but might be useful. To install each of these, do `pip install` and then the name of the plugin. Most of these will have their documentation at readthedocs https://readthedocs.org/
+The usefulness of Django really comes from all of its plugins. Or maybe all of its plugins just provide basic functionality that you need to make a website work. Regardless, there's a bunch to install and this may not be a complete list. When you try to run the server, you'll get a sort-of-meaningful error message if you are missing a plugin. Some of these aren't used currently but might be useful. To install each of these, do `pip install` name of the plugin. Most of these will have their documentation at [readthedocs][id-rtd].
+
+[id-rtd]: https://readthedocs.org/ "Read them."
+
 - django-bootstrap-toolkit
 	- Bootstrap is the frontend framework for this site, which works in with Django templates through this plugin.
+	
 - django-admin-bootstrapped
 	- Makes the admin pages look really nice!
+	
 - django-endless-pagination
-	- Really great tool for splitting content up over multiple pages or use lazy loading and infinite scrolling. Not sure if anything on the site is using it right now, but it is worth looking into since it makes a typically tricky task very simple.
+	- Really great tool for splitting con tent up over multiple pages or use lazy loading and infinite scrolling. Not sure if anything on the site is using it right now, but it is worth looking into since it makes a typically tricky task very simple.
+	
 - django-imagekit
 	- provides the images resizing and cropping for dynamically adding companion app items and store items.
 	- http://django-imagekit.readthedocs.org/en/latest/index.html
+	
 - django-crispy-forms
 	- Used for the forms for login / account info.
 	- http://django-crispy-forms.readthedocs.org/en/latest/genindex.html
+	
 - django-embed-video
 	- Not used. The idea was for embeding videos for the companion app, but youtube works best for that.
+	
 - django-annoying
 	- Cleans up some "annoying" things in the django framework. https://github.com/skorokithakis/django-annoying
+	
 - django-jsonview
 	- Basically lets django work with json objects similarly to javascript.
 	- https://github.com/jsocol/django-jsonview
+	
 - Pillow
 	- A derivation of PIL, the python imaging library. There's a whole bunch of versions out there, but this one should work.
 	- http://pillow.readthedocs.org/en/latest/installation.html
+	
 - haystack
-	- special installation: `pip install -e git+https://github.com/toastdriven/django-haystack.git@master#egg=django-haystack`
+	- special installation:
+	<pre><code>pip install -e git+https://github.com/toastdriven/django-haystack.git@master#egg=django-haystack</pre></code>
 	- Find a needle in a haystack. Provides search for Elasticsearch
+	
 - pyelasticsearch
 	- install the plugin, but there are other steps involved. See the next section.
 
 - pytz
 	- Time zones. Date and times are magically localized.
+	
 - requests
-	- It fixes the problems with python's built in HTTP
-	- http://docs.python-requests.org/en/latest/
- 
-###### No Longer Used
-- south
-	- Database migration tool. Not used anymore after we did some structural changes to the db and had to manually rebuild it.
-
+	- Fixes the problems with Python's built in HTTP
+	
+		<http://docs.python-requests.org/en/latest/>
 
 ####Elastic Search
-Check out http://www.elasticsearch.org/
+<http://www.elasticsearch.org>
+
 This provides the search functionality on different parts of the site. It's really powerful, and could be used for more (blog searching, description searching on the companion app). Gerenally for search, you would just make database queries (I actually think that would be simpler for the webstore). Elasticsearch however makes it possible to search large amounts of text.
 In addition to the django plugin, you also need to have a standalone program installed on your computer, or the server when it is deployed. This program powers the search, so if you are running the site and want to use the search features, you will also need to run the elasticsearch program. Also, in order for image upload from the admin pages to work, elasticsearch *must* be running.
-Download the client for your system at http://www.elasticsearch.org/overview/elkdownloads/
+Download the client for your system at:
 
-On Windows, `.\bin\elasticsearch`
+<http://www.elasticsearch.org/overview/elkdownloads/>
 
-- On Mac OS X...
-brew install elasticsearch
+Or use one of the following methods:
 
-- On Ubuntu...
-apt-get install elasticsearch
+- OS X:
+	`brew install elasticsearch` *see http://brew.sh*
 
-###### Then start via:
-elasticsearch -D es.config="path to YAML config"
+- Ubuntu & other Debian variants:
+	`apt-get install elasticsearch`
+	also, see: <http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/setup-repositories.html>
+
+- Windows:
+	`.\bin\elasticsearch`
+
+###### Next, run:
+<pre><code>elasticsearch -D es.config="path to YAML config"</code></pre>
 
 ###### Example:
 elasticsearch -D es.config=/usr/local/Cellar/elasticsearch/0.90.0/config/elasticsearch.yml
-
-
 
 ##### Testing on localhost
 You will need to make a simple addition to the elasticsearch.yml file to test on localhost. Navigate to the elasticsearch.yml file (i.e. /usr/local/etc.../elasticsearch.yml) and add the following to the bottom of the file.
@@ -112,7 +150,7 @@ Credit: http://django-haystack.readthedocs.org/en/latest/installing_search_engin
 
 ####PHP / Apache
 This is a Django application, so what's this about PHP??
-In order to calculate shipping for the webstore, you have to get the prices from the shipping companies' api, which is PHP for UPS. FedEx and USPS also have PHP api's, but there are some other options as well. This piece of the project is not fully implemented, but see the UPS_Calculator section for more information.
+In order to calculate shipping for the webstore, you have to get the prices from the shipping companies' api, which is PHP for UPS. FedEx and USPS also have PHP APIs, but there are some other options as well. This piece of the project is not fully implemented, but see the UPS_Calculator section for more information.
 - Install an Apache server and set up PHP. Lots of different ways to do this!
 - MAMP is simple for Mac, WampServer is simple for Windows
 
@@ -175,6 +213,13 @@ I'm not really sure what this is for. I think this was for protyping and is unus
 ###store_images
 ###templates
 ###webstore
+
+
+
+###### Plugins No Longer Used
+- south
+	- Database migration tool. Not used anymore after we did some structural changes to the db and had to manually rebuild it.
+
 
 
 ##Current development

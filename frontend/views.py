@@ -19,12 +19,11 @@ def getImage(request, directory, image_name):
     imagelocation = directory + "/" + image_name
     print imagelocation
     image_data = open(imagelocation, "rb").read()
-    return HttpResponse(image_data, mimetype="image/png")
+    return HttpResponse(image_data, content_type="image/png")
 
 def about(request):
 	context = RequestContext(request)
 	return render_to_response('about.html', {'regform': RegistrationForm(),'loginform': LoginForm()},context)
-
 
 
 @csrf_exempt
@@ -38,11 +37,7 @@ def contact(request):
         email = request.POST.get('email')
         comments = request.POST.get('comments')
         content = "Name: " + str(last) + "," + str(first)  + "Phone: " + str(phone)  + "Email: " + str(email)  + "Comments: " + str(comments)
-        
-        sendemail = [ "pfunk897@gmail.com" ] 
-
+        sendemail = [ "hwtechnicalsolutions@gmail.com" ] 
         send_mail(title, content, 'no-reply@gsick.com', sendemail, fail_silently=False)
         return render_to_response('contact.html',{'success':True},context)
     return render_to_response('contact.html',context)
-
-

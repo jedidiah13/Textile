@@ -9,7 +9,6 @@ from loginRouter import *
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-
     confirmation_code = models.CharField(max_length=128)
     reset_code = models.CharField(max_length=128)
     address_lineOne = models.CharField(max_length=128)

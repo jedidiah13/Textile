@@ -32,7 +32,6 @@ def registration(request):
 	if request.method == 'POST':
 		print "POST request"
 		user_form = RegistrationForm(request.POST)
-		
 
 		# If the two forms are valid...
 		if user_form.is_valid():
@@ -233,4 +232,4 @@ def changeAddress(request):
 
 def orderHistory(request):
 	context = RequestContext(request)
-	return render_to_response('store/orderHistory.html')	
+	return render_to_response('store/orderHistory.html')

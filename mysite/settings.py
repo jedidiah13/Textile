@@ -41,8 +41,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 #Email Settings for account activation
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'pfunk897@gmail.com'
-EMAIL_HOST_PASSWORD = 'Groovy@2'
+EMAIL_HOST_USER = ''  #Do Not Store On GitHub!!!
+EMAIL_HOST_PASSWORD = ''  #No, not this, either.
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

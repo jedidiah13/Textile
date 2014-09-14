@@ -170,16 +170,18 @@ In order to give the site a more fluid feeling, each app only has a couple pages
 
 Jquery (the javascript library) is used for making the AJAX calls and is also used in some other places since it makes many common javascript tasks simple and easy. Jquery is being loaded from the Google CDN; that tends to be helpful for page load times. Learn more at http://jquery.com/
 
-###Running the project
+##Running the project
+
 Assuming everything is all set up as discussed above, there is a good chance that you will be able to start up the site using the development webserver that django provides. For deployment, you'll run Django off of an apache webserver most likely as discussed here https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 
-Steps to load the site:
-0. Sync with GitHub. That way you can be sure you have the latest version.
+####Steps to load the site:
+
+0. Pull from GitHub to be sure you have the latest version.
 1. Start up your php server if working with the shipping calculator.
 2. Start the elastic search process if wanting to search or are adding things to the database through the admin pages.
 3. Navigate to the main directory for the project with the command line and run `python manage.py runserver`
-4. In the browser, access the site at `127.0.0.1:8000/`
-5. You can access the admin pages at `127.0.0.1:8000/admin` - you can log in with "admin" and "password". I recommend changing these before deployment.
+4. In the browser, access the site at `127.0.0.1:8000/'
+5. Access the admin pages at `127.0.0.1:8000/admin` - you can log in with "admin" and "password". *I recommend changing these before deployment.*
 
 ##Database
 ###Background

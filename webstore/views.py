@@ -12,6 +12,8 @@ from django.forms.models import model_to_dict
 from copy import deepcopy
 from django.core import serializers
 from django.utils import timezone
+from django.conf import settings
+import os
 
 #### need to initialize the cart here so it is accesible initially
 def webstore(request,id):
@@ -35,8 +37,7 @@ def featured(request):
 	return render_to_response('index.html',{'success': True, 'items': items}, context)
 
 def getImage(request, id, directory, image_name):
-	imagelocation = directory + "/" + image_name
-	print imagelocation
+	imagelocation = os.path.join(settings.PROJECT_PATH, directory, image_name)
 	image_data = open(imagelocation, "rb").read()
 	return HttpResponse(image_data, mimetype="image/png")
 	

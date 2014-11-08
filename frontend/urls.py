@@ -9,5 +9,4 @@ urlpatterns = patterns('',
         url(r'^about/$', views.about, name='about'),
         url(r'^contact/$', views.contact, name='contact'),
         url(r'^$', 'index', name='index'),
-        url(r'^(?P<directory>[\w]+)/(?P<image_name>[\w]+\.[\w]+)$',views.getImage,name='getImage')
  )

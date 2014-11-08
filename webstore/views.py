@@ -13,7 +13,6 @@ from copy import deepcopy
 from django.core import serializers
 from django.utils import timezone
 from django.conf import settings
-import os
 
 #### need to initialize the cart here so it is accesible initially
 def webstore(request,id):
@@ -36,11 +35,6 @@ def featured(request):
 	items = StoreItem.objects.all()
 	return render_to_response('index.html',{'success': True, 'items': items}, context)
 
-def getImage(request, id, directory, image_name):
-	imagelocation = os.path.join(settings.PROJECT_PATH, directory, image_name)
-	image_data = open(imagelocation, "rb").read()
-	return HttpResponse(image_data, mimetype="image/png")
-	
 def home(request):
 	context = RequestContext(request)
 	return render_to_response('store/shop-homepage.html', {'regform': RegistrationForm(),'loginform': LoginForm()},context )

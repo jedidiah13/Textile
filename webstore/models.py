@@ -18,11 +18,11 @@ class StoreItem(models.Model):
 	price = models.DecimalField(max_digits=16,decimal_places=2)
 	quantity = models.IntegerField(default=0) 
 	#picture = models.ImageField(upload_to='store_images', blank=False)
-	picture = ProcessedImageField(upload_to='avatars',
+	picture = ProcessedImageField(upload_to='media/store/products',
 								processors=[ResizeToFill(250, 185)],
 								format='JPEG',
 								options={'quality': 60})
-	featured_picture = ProcessedImageField(upload_to='avatars',
+	featured_picture = ProcessedImageField(upload_to='media/store/featured',
 								processors=[ResizeToFill(800, 300)],
 								format='JPEG',
 								options={'quality': 60}, blank=True)

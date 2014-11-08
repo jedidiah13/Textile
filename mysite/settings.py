@@ -16,7 +16,7 @@ PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 STATIC_PATH = os.path.join(PROJECT_PATH,'static')
-MEDIA_ROOT = os.path.abspath(BASE_DIR)
+MEDIA_ROOT = os.path.join(PROJECT_PATH,'media')
 MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production

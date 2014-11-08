@@ -23,11 +23,6 @@ def app(request, id):
     fab_categories = Catagories.objects.all()
     return render_to_response('companion/companionSub.html', { 'fab_categories': fab_categories},context)
 
-def getImage(request, id, directory, image_name):
-    imagelocation = directory + "/" + image_name
-    image_data = open(imagelocation, "rb").read()
-    return HttpResponse(image_data, content_type="image/png")  
-
 def topic(request, id):
     id = id.replace("amp; "," ") #This line is needed to remove generated '&' character encoding, "amp;"
     ids = Catagories.objects.get(catagory=id)

@@ -63,6 +63,7 @@ coverage.xml
 
 # Django:
 *.log
+userdb.sqlite3
 
 # Mr Developer
 # Not in use. See: https://pypi.python.org/pypi/mr.developer

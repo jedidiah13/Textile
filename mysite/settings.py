@@ -87,7 +87,7 @@ INSTALLED_APPS = (
     'webstore',
     'frontend',
     'crispy_forms',
-    #'south',
+    'south',
     'endless_pagination',
     'haystack',
     'imagekit',

@@ -52,6 +52,17 @@ class Order(models.Model): # b
 	totalCost = models.DecimalField(max_digits=16,decimal_places=2)
 	# need to have total cost be calculated automatically based on the items in the order
 	# item = models.ForeignKey(OrderItem)
+	# UPS / USPS
+	shippingCarrier = models.CharField(max_length=128)
+	# overnight, 2 day air, etc
+	shippingType = models.CharField(max_length=128)
+	#these two are just for amy to help with viewing orders, may integrate into user's current orders on account page eventually
+	shippedDate = models.DateTimeField('Shipped Date', null=True)
+	deliveredDate = models.DateTimeField('Delivered Date', null=True)
+	#shipping vars
+	shipToAddress = models.CharField(max_length=128)
+	shipToState = models.CharField(max_length=2)
+	shipToZipcode = models.CharField(max_length=5)
 	def __unicode__(self):
 			return  unicode(self.orderDate)
 	

@@ -9,6 +9,7 @@ from django.core.mail import send_mail
 from login.forms import RegistrationForm
 from login.forms import LoginForm
 from webstore.models import StoreItem
+from django.conf import settings
 
 def index(request):
     context = RequestContext(request)
@@ -32,6 +33,6 @@ def contact(request):
         comments = request.POST.get('comments')
         content = "Name: " + str(last) + "," + str(first)  + "Phone: " + str(phone)  + "Email: " + str(email)  + "Comments: " + str(comments)
         sendemail = [ "hwtechnicalsolutions@gmail.com" ] 
-        send_mail(title, content, 'no-reply@gsick.com', sendemail, fail_silently=False)
+        send_mail(title, content, settings.EMAIL_HOST_USER, sendemail, fail_silently=False)
         return render_to_response('contact.html',{'success':True},context)
     return render_to_response('contact.html',context)

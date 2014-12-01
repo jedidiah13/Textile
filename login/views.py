@@ -16,6 +16,7 @@ from crispy_forms.helper import FormHelper, FormHelpersException
 from crispy_forms.layout import Submit, Reset, Hidden, Button
 from login.forms import RegistrationForm, LoginForm, updateFirstName
 from login.models import UserProfile
+from django.conf import settings
 
 @csrf_exempt
 @json_view
@@ -55,7 +56,7 @@ def registration(request):
 				
 			title = "Textile Fabric Consultants, Inc. Account Activation"
 			content = "Someone has recently registered at Textilefabric.com. We hope it was you. If so, please follow the link below. If not please disregard this email.\n" +"theftp.dyndns.org:8000/login/activate/" + str(p.confirmation_code) + "/" + user.username
-			send_mail(title, content, 'no-reply@gsick.com', [user.email], fail_silently=False)
+			send_mail(title, content, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 			 #Update our variable to tell the template registration was successful.
 			registered = True
 			print "sent email"

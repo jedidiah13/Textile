@@ -182,8 +182,9 @@ def checkout(request):
 		weight = getWeight(itemsInOrder) # calculate weight if it can be shipped
 	myOrder.totalCost = subtotal + myOrder.shippingCost # shipping cost is figured out at a later point
 	myOrder.save()
-	cents = myOrder.totalCost * 100
-
+	# need to cast as int for stripe to accept it
+	cents = int(myOrder.totalCost * 100)
+	print cents
 
 	return render_to_response('store/checkout.html',{'weight':weight,'boxW':boxDimensions[0],'boxH':boxDimensions[1],'boxD':boxDimensions[2],'needToEmail':needToEmail,'cents':cents,'order':myOrder, 'items':itemsInOrder, 'success': True},context)
 

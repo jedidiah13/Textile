@@ -17,6 +17,10 @@
 	margin-top:10px;
 	width:200px;
 }
+.selectInfo{
+	margin-top:15px;
+	width:200px;
+}
 </style>
 <!--End Changes 11/15 Brandon-->
 
@@ -226,13 +230,29 @@
 		
 		
 		<hr/>
-		<h4>Shipping Method</h4>
-		<select name="ship_method">
-			<option value="overnight">Next Business Day (Overnight)</option>
-			<option value="2_day">2 Business Days</option>
-			<option value="3_day">3 Business Days</option>
-			<option value="standard" selected="selected">Standard 1-5 Business Days</option>
+		<h4 style="clear:left;">Shipping Details</h4>
+
+		<label class="info_label">Carrier: </label>
+		<select id="ship_carrier" class="selectInfo">
+			<option value="USPS">USPS</option>
+            <option selected value="UPS">UPS</option>
 		</select>
+
+		<br>
+
+		<label class="info_label">Shipping Type: </label>
+		<select id="ship_method" class="selectInfo">
+			<option value="1DM">Next Day Air Early AM</option>
+            <option value="1DA">Next Day Air</option>
+            <option value="1DP">Next Day Air Saver</option>                            
+            <!-- <option value="2DM">2nd Day Air AM</option> // this one not working -->
+            <option value="2DA">2nd Day Air</option>
+            <option value="3DS">Three Day Select</option>                            
+            <option selected value="GND">Ground</option>
+		</select>
+
+		<br>
+		<br>
 		
 		<button id="calcShipping" type="button" class="btn btn-success" style="margin-left:25px;">Calculate Shipping</button>
 		<!-- End Changes 11/15 Brandon -->
@@ -240,28 +260,83 @@
         <script>
           $(document).ready(function(){
             $("#calcShipping").click(function(){
-              var zip = $("#zipCode").val();
+              var zip = $("#ship_zipCode").val();
               console.log(zip);
 
+              var shipping = $("#ship_method").val();
+              console.log(shipping);
+
               // Ajax to php server and fill in shipping cost
+
+              // this is a temporary version that calls the php script from a different domain, the php script should eventually
+              // be rewritten in python and be handled in Django, this just gives a real result in the meantime
+
+              if (zip=="") 
+               {
+			    document.getElementById("ship_cost").value="Please enter a valid zipcode";
+			    return;
+			  } 
+			  if (window.XMLHttpRequest) 
+			  {
+			    // code for IE7+, Firefox, Chrome, Opera, Safari
+			    xmlhttp=new XMLHttpRequest();
+			  } 
+			  else 
+			  { // code for IE6, IE5
+			    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			  xmlhttp.onreadystatechange=function() 
+			  {
+			    if (xmlhttp.readyState==4 && xmlhttp.status==200) 
+			    {
+			    	document.getElementById("ship_cost").value=xmlhttp.responseText;
+			    	
+		    		// recalc total
+			    	var subtotal = parseFloat(document.getElementById("subtotal").value.replace('$', ''));
+			    	var plusShipping = parseFloat(document.getElementById("ship_cost").value.replace('$', ''));
+			    	var newTotal = subtotal + plusShipping;
+			    	if ( isNaN(plusShipping) )
+			    	{
+			    		document.getElementById("total_cost").value=document.getElementById("subtotal").value;
+		    		}
+		    		else
+		    		{
+		    			document.getElementById("total_cost").value="$" + newTotal;
+		    		}
+			    }
+			  }
+			  // the url used is set up by putting the UPS_Calculator folder in your MAMP HTDocs folder, only for local testing
+			  xmlhttp.open("POST","http://127.0.0.1:8888/UPS_Calculator/externalUPS.php?varZip="+zip+"&varShipping="+shipping,true);
+			  xmlhttp.send();
+
             })
           });
         </script>
-      </div>
-      <div class="modal-footer">
-        <p>Subtotal:
-        ${{ order.totalCost }}</p><!--Subtotal goes here-->
-        <p id="shippingCost">Shipping cost: $</p>
-        <br>
-        <h5 id="totalCost">Total: $</h5>
+      <!-- </div> -->
+      <!-- <div class="modal-footer"> -->
+      <!-- <div> -->
+      	<hr>
+      	<h4 style="clear:left;">Totals</h4>
+      	<label class="info_label">Subtotal: </label>
+      	<input type="text" id="subtotal" class="info" value = ${{ order.totalCost }} readonly/> <!--Subtotal goes here-->
+      	<br>
+      	<label class="info_label" id="shippingCost">Shipping Cost: </label>
+      	<input type="text" id="ship_cost" class="info" readonly /> <!--Calculated via shipping calc-->
+      	<br>
+      	<br>
+      	<h5 class="info_label" id="totalCost">Total: </h5>
+      	<input type="text" id="total_cost" class="info" value = ${{ order.totalCost }} readonly /> <!--Subtotal goes here-->
+      	<br>
+      	<br>
 
-        <form action="{% url 'payment' %}" method="POST">{% csrf_token %}
+        <form action="{% url 'payment' %}" method="POST" style="margin-left:25px;" >{% csrf_token %}
           <script
+
             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="pk_test_uzufHOKwdTefqr8GRf55S7Z4"
             data-amount= {{ cents }}
             data-name="Demo Site"
-            data-description= {{ order.totalCost }}
+            data-description= {{ order.totalCost }} 
             data-image="/128x128.png">
             // rewrite this script element with javascript with the right cents ammount after shipping
           </script>

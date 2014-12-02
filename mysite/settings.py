@@ -18,6 +18,7 @@ TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 STATIC_PATH = os.path.join(PROJECT_PATH,'static')
 MEDIA_ROOT = os.path.join(PROJECT_PATH,'media')
 MEDIA_URL = '/media/'
+LOGIN_URL = '/user/login'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -81,11 +82,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'login',
     'companion',
     'blog',
     'webstore',
     'frontend',
+    'user_management',
     'crispy_forms',
     #'south',
     'endless_pagination',
@@ -95,7 +96,7 @@ INSTALLED_APPS = (
     'annoying',
 )
 #User Profile Settings
-AUTH_PROFILE_MODULE = "login.UserProfile"
+AUTH_PROFILE_MODULE = "user_management.UserProfile"
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

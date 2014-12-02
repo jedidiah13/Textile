@@ -1,9 +1,7 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
-from login.forms import RegistrationForm
-from login.forms import LoginForm
 from webstore.models import StoreItem, StoreCategory, Order, OrderItemCorrect
-from login.models import UserProfile
+from user_management.models import UserProfile
 from django.http import HttpResponse
 from webstore.bing_search import run_query
 import simplejson as json
@@ -27,7 +25,7 @@ def webstore(request,id):
 		request.session['cartList'] = []
 	initialcart = buildCartDetail(request.session['cartList'])
 	subtotal = getSubtotal(initialcart)
-	return render_to_response('store/shop-homepage.html', {'initialcart':initialcart, 'subtotal':subtotal, 'items': items, 'item_categories': item_categories, 'regform': RegistrationForm(),'loginform': LoginForm()},context)
+	return render_to_response('store/shop-homepage.html', {'initialcart':initialcart, 'subtotal':subtotal, 'items': items, 'item_categories': item_categories},context)
 
 def featured(request):
 	
@@ -37,7 +35,7 @@ def featured(request):
 
 def home(request):
 	context = RequestContext(request)
-	return render_to_response('store/shop-homepage.html', {'regform': RegistrationForm(),'loginform': LoginForm()},context )
+	return render_to_response('store/shop-homepage.html', {},context )
 
 def searchStore(request):
 	context = RequestContext(request)

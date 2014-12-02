@@ -46,7 +46,7 @@ class StoreItem(models.Model):
 
 class Order(models.Model): # b
 	# Many Orders can be related with a single user
-	purchaser = models.ForeignKey('login.UserProfile', null=True)
+	purchaser = models.ForeignKey('user_management.UserProfile', null=True)
 	orderDate = models.DateTimeField('Order Date')
 	shippingCost = models.DecimalField(max_digits=16,decimal_places=2)
 	totalCost = models.DecimalField(max_digits=16,decimal_places=2)

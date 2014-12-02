@@ -4,21 +4,18 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from login.forms import RegistrationForm
-from login.forms import LoginForm
 from webstore.models import StoreItem
 from django.conf import settings
 
 def index(request):
     context = RequestContext(request)
     items = StoreItem.objects.all()
-    return render_to_response('index.html', {'items': items,'regform': RegistrationForm(),'loginform': LoginForm()},context )
+    return render_to_response('index.html', {'items': items}, context )
 
 def about(request):
 	context = RequestContext(request)
-	return render_to_response('about.html', {'regform': RegistrationForm(),'loginform': LoginForm()},context)
+	return render_to_response('about.html', {}, context)
 
 
 @csrf_exempt

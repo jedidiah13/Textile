@@ -1,8 +1,6 @@
 from django.conf.urls import patterns, url
 from django.contrib import admin 
 from frontend import views
-from login import urls
-
 
 urlpatterns = patterns('',
         url(r'^$', views.index, name='index'),

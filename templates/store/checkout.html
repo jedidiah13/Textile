@@ -276,38 +276,36 @@
 			    document.getElementById("ship_cost").value="Please enter a valid zipcode";
 			    return;
 			  } 
-			  if (window.XMLHttpRequest) 
-			  {
-			    // code for IE7+, Firefox, Chrome, Opera, Safari
-			    xmlhttp=new XMLHttpRequest();
-			  } 
-			  else 
-			  { // code for IE6, IE5
-			    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			  }
-			  xmlhttp.onreadystatechange=function() 
-			  {
-			    if (xmlhttp.readyState==4 && xmlhttp.status==200) 
-			    {
-			    	document.getElementById("ship_cost").value=xmlhttp.responseText;
-			    	
-		    		// recalc total
-			    	var subtotal = parseFloat(document.getElementById("subtotal").value.replace('$', ''));
-			    	var plusShipping = parseFloat(document.getElementById("ship_cost").value.replace('$', ''));
-			    	var newTotal = subtotal + plusShipping;
-			    	if ( isNaN(plusShipping) )
-			    	{
-			    		document.getElementById("total_cost").value=document.getElementById("subtotal").value;
-		    		}
-		    		else
-		    		{
-		    			document.getElementById("total_cost").value="$" + newTotal;
-		    		}
-			    }
-			  }
-			  // the url used is set up by putting the UPS_Calculator folder in your MAMP HTDocs folder, only for local testing
-			  xmlhttp.open("POST","http://127.0.0.1:8888/UPS_Calculator/externalUPS.php?varZip="+zip+"&varShipping="+shipping,true);
-			  xmlhttp.send();
+
+			  $.get("http://127.0.0.1:8888/UPS_Calculator/externalUPS.php", {varZip: zip, varShipping: shipping}, 
+			  	function (cost) {
+			  		$('#ship_cost').val(cost);
+			  		var subtotal = parseFloat($('#subtotal').val().replace('$', ''));
+			  		var plusShipping = parseFloat(cost.replace('$', ''));
+			  		var newTotal = subtotal + plusShipping;
+
+			  		if (isNaN(plusShipping)) 
+			  		{
+			  			$('#total_cost').val($('#subtotal').val());
+			  		}
+			  		else
+			  		{
+			  			$('#total_cost').val('$' + newTotal);
+
+			  			$('<script/>', {
+			  				src: "https://checkout.stripe.com/checkout.js",
+			  				'class': 'stripe-button',
+
+            				'data-key': "pk_test_uzufHOKwdTefqr8GRf55S7Z4",
+            				'data-amount': newTotal * 100,
+            				'data-name': "Demo Site",
+            				'data-description': '$' + newTotal,
+            				'data-image': '/128x128.png'
+			  			}).appendTo($('#checkout-button-container').empty());
+			  		}
+
+
+			  	});
 
             })
           });
@@ -329,10 +327,13 @@
       	<br>
       	<br>
 
-        <form action="{% url 'payment' %}" method="POST" style="margin-left:25px;" >{% csrf_token %}
-          <script
+        <form action="{% url 'payment' %}" method="POST" style="margin-left:25px;" id='checkout-form'>{% csrf_token %}
+        	<div id="checkout-button-container">
+        	</div>
+          <!--<script
 
             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            id="stripe-script"
             data-key="pk_test_uzufHOKwdTefqr8GRf55S7Z4"
             data-amount= {{ cents }}
             data-name="Demo Site"
@@ -340,8 +341,8 @@
             data-image="/128x128.png">
             // rewrite this script element with javascript with the right cents ammount after shipping
           </script>
-  		    <!-- temporary ugly way of sending cents -->
-  		    <input type="hidden" name="amount_in_cents" value = {{ cents }} id="cents">
+  		    <!-- temporary ugly way of sending cents - ->
+  		    <input type="hidden" name="amount_in_cents" value = {{ cents }} id="cents">-->
 
         </form>
 

@@ -246,8 +246,10 @@ def getWeight(itemsInOrder):
 		weight += item.itemID.weightPerItem * item.itemQuantity 
 	return weight
 
+# function call to submit payment information to Strip
 def payment(request):
 	context = RequestContext(request)
+	
 	import stripe
 	# Set your secret key: remember to change this to your live secret key in production
 	# See your keys here https://manage.stripe.com/account
@@ -255,18 +257,22 @@ def payment(request):
 
 	# Get the credit card details submitted by the form
 	token = request.POST['stripeToken']
+	
 	# Slightly ugly, but functional way of getting value from stripe checkout gui
 	cents = int(float(request.POST['amount_in_cents']))
+	
 	try:
 		charge = stripe.Charge.create(
-      	amount=cents, # amount in cents, again
-      	currency="usd",
-      	card=token,
-      	description="payinguser@example.com" #need to deal with this
+			amount = cents, # amount in cents, again
+			currency = "usd",
+			card = token,
+			# obtain email from database or from webform?
+			description = "payinguser@example.com"
   		)
-		pass
 	except stripe.error.CardError, e:
 		# Since it's a decline, stripe.error.CardError will be caught
+		pass
+	
 		body = e.json_body
 		err  = body['error']
 
@@ -276,23 +282,29 @@ def payment(request):
 		# param is '' in this case
 		print "Param is: %s" % err['param']
 		print "Message is: %s" % err['message']
+		
 	except stripe.error.InvalidRequestError, e:
 		# Invalid parameters were supplied to Stripe's API
 		pass
+	
 	except stripe.error.AuthenticationError, e:
 		# Authentication with Stripe's API failed
 		# (maybe you changed API keys recently)
 		pass
+	
 	except stripe.error.APIConnectionError, e:
 		# Network communication with Stripe failed
 		pass
+	
 	except stripe.error.StripeError, e:
 		# Display a very generic error to the user, and maybe send
 		# yourself an email
 		pass
+	
 	except Exception, e:
 		# Something else happened, completely unrelated to Stripe
 		pass
+	
 	request.session.flush()
 	#return render_to_response('store/shop-homepage.html',{'success' : True},context)
 	#return webstore(request, "Fiber Arts")

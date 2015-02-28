@@ -305,6 +305,7 @@ def payment(request):
 		# Something else happened, completely unrelated to Stripe
 		pass
 	
+	
 	request.session.flush()
 	#return render_to_response('store/shop-homepage.html',{'success' : True},context)
 	#return webstore(request, "Fiber Arts")

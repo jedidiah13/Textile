@@ -271,8 +271,6 @@ def payment(request):
   		)
 	except stripe.error.CardError, e:
 		# Since it's a decline, stripe.error.CardError will be caught
-		pass
-	
 		body = e.json_body
 		err  = body['error']
 

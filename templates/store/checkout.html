@@ -330,17 +330,17 @@
         <form action="{% url 'payment' %}" method="POST" style="margin-left:25px;" id='checkout-form'>{% csrf_token %}
         	<div id="checkout-button-container">
         	</div>
-          <!--<script
-
-            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            id="stripe-script"
-            data-key="pk_test_uzufHOKwdTefqr8GRf55S7Z4"
-            data-amount= {{ cents }}
-            data-name="Demo Site"
-            data-description= {{ order.totalCost }} 
-            data-image="/128x128.png">
-            // rewrite this script element with javascript with the right cents ammount after shipping
-          </script>
+        	
+        	<script
+        		src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            		id="stripe-script"
+            		data-key="pk_test_uzufHOKwdTefqr8GRf55S7Z4"
+            		data-amount= {{ cents }}
+            		data-name="Textile Fabric Consultants Online Store"
+            		data-description= {{ order.totalCost }} 
+            		data-image="/128x128.png">
+            		// rewrite this script element with javascript with the right cents ammount after shipping
+        	 </script>
   		    <!-- temporary ugly way of sending cents - ->
   		    <input type="hidden" name="amount_in_cents" value = {{ cents }} id="cents">-->
 

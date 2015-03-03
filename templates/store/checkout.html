@@ -336,9 +336,9 @@
         		src = "https://checkout.stripe.com/checkout.js" class="stripe-button"
             		id = "stripe-script"
             		data-key = "pk_test_uzufHOKwdTefqr8GRf55S7Z4"
-            		data-amount = cents
+            		data-amount = {{ cents }}
             		data-name = "Textile Fabric Consultants"
-            		data-description = "Total Cost: "
+            		data-description = "Total Cost: " {{ order.totalCost }}
             		data-image = "/128x128.png"	>
             		// rewrite this script element with javascript with the right cents ammount after shipping
             	</script>

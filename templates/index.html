@@ -42,7 +42,9 @@
     <div class="intro-header">
         <div id="id-carousel" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
             <div class="item"> <img src="{% static 'logo.jpg' %}"> </div>
-            <div class="item"> <img src="{% static 'testImage.jpg' %}"> </div>
+            <div class="item"> <img src="{% static 'images/carousel/classy-living-room-interior-design-styles.jpg' %}"> </div>
+            <div class="item"> <img src="{% static 'images/carousel/classic-interior-design-style.jpg' %}"> </div>
+            <div class="item"> <img src="{% static 'images/carousel/sewing.jpg' %}"> </div>
             {%for category in items%} 
                 
                 {%if category.isFeatured%}  
@@ -190,6 +192,7 @@
     </script>
 
 
+<!--
     <div class="content-section-b">
 
         <div class="container">
@@ -216,10 +219,11 @@
     </div>
     <!-- /.container -->
 
-    </div>
+    <!--</div>-->
     <!-- /.content-section-b -->
+    
 
-    <div class="content-section-a">
+    <div class="content-section-b">
 
         <div class="container">
 
@@ -240,7 +244,7 @@
 			    
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" style="border-radius: 8px; width: 350px; height: auto;" src="{% static 'highschoolkit.jpg' %}" alt="">
+                    <img class="img-responsive" style="border-radius: 8px; width: 350px; height: auto;" src="{% static 'BasicSwatchKit.jpg' %}" alt="">
                 </div>
             </div>
 
@@ -248,5 +252,5 @@
         <!-- /.container -->
 
     </div>
-    <!-- /.content-section-a -->
+    <!-- /.content-section-b -->
 {% endblock %}

@@ -16,7 +16,8 @@
     <script src="{% static 'owl-carousel/owl.carousel.js' %}"></script>
     <style type="text/css">
      #id-carousel .owl-item div{
-         background: #3fbf79;
+         /* background: #3fbf79; /* debug green */
+		 background: #FFF;
          padding: 1px 0px;
          margin-left: 250px;
          margin-right: 250px;
@@ -41,10 +42,10 @@
     </style>
     <div class="intro-header">
         <div id="id-carousel" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
-            <div class="item"> <img src="{% static 'logo.jpg' %}"> </div>
+            <div class="item"> <img src="{% static 'images/carousel/LOGOTFFLAT.jpg' %}"> </div> <!-- 900 x 500 pixels, other images optimal at this res. -->
             <div class="item"> <img src="{% static 'images/carousel/classy-living-room-interior-design-styles.jpg' %}"> </div>
             <div class="item"> <img src="{% static 'images/carousel/classic-interior-design-style.jpg' %}"> </div>
-            <div class="item"> <img src="{% static 'images/carousel/sewing.jpg' %}"> </div>
+            
             {%for category in items%} 
                 
                 {%if category.isFeatured%}  

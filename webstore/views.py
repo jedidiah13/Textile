@@ -267,7 +267,9 @@ def payment(request):
 			currency = "usd",
 			card = token,
 			# obtain email from database or from webform?
-			description = "payinguser@example.com"
+			# obtaining email from stripe input interface, use to generate stripe receipt
+			receipt_email = stripeEmail,
+			description = stripeEmail
   		)
 	except stripe.error.CardError, e:
 		# Since it's a decline, stripe.error.CardError will be caught

@@ -444,7 +444,7 @@
                         <h4><a data-toggle="modal" data-target="#{{ category.itemNameid }}" style="cursor: pointer;">{{ category.itemName }} </a>
                                 </h4>
 
-                            <img src="/media/{{ category.picture }}" alt="" data-toggle="modal" data-target="#{{ category.itemNameid }}" style="cursor: pointer;">
+                            <img src="{{ category.picture }}" alt="" data-toggle="modal" data-target="#{{ category.itemNameid }}" style="cursor: pointer;">
                            
 
                                 <div class="caption">
@@ -538,7 +538,7 @@
        
    		<div class="row text-center">
             <div class="mag col-sm-3 col-sm-offset-3">
-        		<img src="/media/{{ category.picture }}" alt=""><br/>	<!-- removed magnify from img tag   data-toggle="magnify"   -->
+        		<img src="{{ category.picture }}" alt=""><br/>	<!-- removed magnify from img tag   data-toggle="magnify"   -->
             </div>
             <script type="text/javascript">
 $(document).ready(function () {

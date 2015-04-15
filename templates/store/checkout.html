@@ -91,6 +91,8 @@
         <hr />
         
 		<!-- Begin Changes 11/13 Brandon -->
+		
+	<form>
 		<h4>Billing Information</h4>
 		<label class="info_label" >First Name: </label>
         <input type="text" id="bill_Fname" class="info"/>
@@ -102,7 +104,7 @@
         <input type="text" id="bill_addr" class="info"/>
 		<br>
 		<label class="info_label">State: </label>
-        <select class="info">
+        <select id="bill_State" class="info">
 			<option value="AL">Alabama</option>
 			<option value="AK">Alaska</option>
 			<option value="AZ">Arizona</option>
@@ -158,6 +160,26 @@
 		<br>
 		<label class="info_label">Zip code: </label>
         <input type="text" id="bill_zipCode" class="info"/>
+        
+        <!-- Check box and Function to copy Billing information to Shipping information -->
+	<br><br>
+
+	<input type="checkbox" name="copybilling" onclick="CopyShipping(this.form)">
+	<em>Check this box if your Billing Address and Shipping Address are the same.</em>
+	
+	<script>	
+	function CopyShipping(f) 
+	{
+		if(f.copybilling.checked == true)
+  		{
+    			f.ship_Fname.value = f.bill_Fname.value;
+    			f.ship_Lname.value = f.bill_Lname.value;
+    			f.ship_addr.value = f.bill_addr.value;
+    			f.ship_State.value = f.bill_State.value;
+    			f.ship_zipCode.value = f.bill_zipCode.value;
+  		}
+	}
+	</script>
 		
 		<hr>
 		
@@ -173,7 +195,7 @@
         <input type="text" id="ship_addr" class="info"/>
 		<br>
 		<label class="info_label">State: </label>
-        <select class="info">
+        <select id="ship_State" class="info">
 			<option value="AL">Alabama</option>
 			<option value="AK">Alaska</option>
 			<option value="AZ">Arizona</option>
@@ -229,7 +251,8 @@
 		<br>
 		<label class="info_label">Zip code: </label>
         <input type="text" id="ship_zipCode" class="info"/>
-		
+        
+        </form>
 		
 		<hr/>
 		<h4 style="clear:left;">Shipping Details</h4>

@@ -271,6 +271,38 @@ def payment(request):
 			receipt_email = stripeEmail,
 			description = stripeEmail
   		)
+  		
+  		''' optional way to create and save user token for later charging from database
+  	
+  		# Create a Customer
+  		customer = stripe.Customer.create(
+    		source = token,
+    		description = "Example customer" #replace with our database customer id or email?
+		)
+		
+		# Charge the Customer instead of the card
+		stripe.Charge.create(
+		amount = cents,
+		currency = "usd",
+		customer=customer.id
+		)
+		
+		# Save the customer ID in your database so you can use it later
+		save_stripe_customer_id(user, customer.id)
+		
+		# Later... possibly implement through admin so admin can charge using saved info
+		customer_id = get_stripe_customer_id(user)
+
+		stripe.Charge.create(
+		# (admin can enter desired amount to charge client in a form submission?)
+    		amount=1500, # $15.00 this time (replace with variable captured with form
+    		currency="usd",
+    		customer=customer_id
+		)
+		
+		'''
+  		
+  		
 	except stripe.error.CardError, e:
 		# Since it's a decline, stripe.error.CardError will be caught
 		body = e.json_body

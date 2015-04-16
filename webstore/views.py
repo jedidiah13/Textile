@@ -266,10 +266,7 @@ def payment(request):
 			amount = cents, # amount in cents, again
 			currency = "usd",
 			card = token,
-			# obtain email from database or from webform?
-			# obtaining email from stripe input interface, use to generate stripe receipt
-			receipt_email = stripeEmail,
-			description = stripeEmail
+			description = "payinguser@example.com"
   		)
   		
   		''' optional way to create and save user token for later charging from database
